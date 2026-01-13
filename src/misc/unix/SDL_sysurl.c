@@ -46,9 +46,15 @@ int SDL_SYS_OpenURL(const char *url)
 #else
         pid_t pid2;
         /* Clear LD_PRELOAD so Chrome opens correctly when this application is launched by Steam */
+#if defined(HAVE_UNSETENV)        
         unsetenv("LD_PRELOAD");
+#endif        
         /* Notice this is vfork and not fork! */
+#ifdef __sgi
+        pid2 = fork();  /* IRIX doesn't have vfork */
+#else
         pid2 = vfork();
+#endif
         if (pid2 == 0) { /* Grandchild process will try to launch the url */
             execlp("xdg-open", "xdg-open", url, NULL);
             _exit(EXIT_FAILURE);

@@ -1075,10 +1075,16 @@ static int SetDrawState(GL_RenderData *data, const SDL_RenderCommand *cmd, const
             data->glDisable(GL_BLEND);
         } else {
             data->glEnable(GL_BLEND);
+#ifdef __sgi
+            /* IRIX OpenGL 1.2 doesn't have glBlendFuncSeparate, use old glBlendFunc */
+            data->glBlendFunc(GetBlendFunc(SDL_GetBlendModeSrcColorFactor(blend)),
+                             GetBlendFunc(SDL_GetBlendModeDstColorFactor(blend)));
+#else
             data->glBlendFuncSeparate(GetBlendFunc(SDL_GetBlendModeSrcColorFactor(blend)),
                                       GetBlendFunc(SDL_GetBlendModeDstColorFactor(blend)),
                                       GetBlendFunc(SDL_GetBlendModeSrcAlphaFactor(blend)),
                                       GetBlendFunc(SDL_GetBlendModeDstAlphaFactor(blend)));
+#endif
             data->glBlendEquation(GetBlendEquation(SDL_GetBlendModeColorOperation(blend)));
         }
         data->drawstate.blend = blend;

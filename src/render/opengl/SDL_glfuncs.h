@@ -36,8 +36,13 @@ SDL_PROC_UNUSED(void, glBitmap,
                 (GLsizei, GLsizei, GLfloat, GLfloat, GLfloat, GLfloat,
                  const GLubyte *))
 SDL_PROC(void, glBlendEquation, (GLenum))
+#ifdef __sgi
+SDL_PROC(void, glBlendFunc, (GLenum, GLenum))
+SDL_PROC_UNUSED(void, glBlendFuncSeparate, (GLenum, GLenum, GLenum, GLenum))
+#else
 SDL_PROC_UNUSED(void, glBlendFunc, (GLenum, GLenum))
 SDL_PROC(void, glBlendFuncSeparate, (GLenum, GLenum, GLenum, GLenum))
+#endif
 SDL_PROC_UNUSED(void, glCallList, (GLuint))
 SDL_PROC_UNUSED(void, glCallLists, (GLsizei, GLenum, const GLvoid *))
 SDL_PROC(void, glClear, (GLbitfield))

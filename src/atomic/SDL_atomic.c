@@ -35,6 +35,16 @@
 #include <atomic.h>
 #endif
 
+#if !defined(HAVE_GCC_ATOMICS) && defined(__sgi)
+/* For MIPSPro 7.0+, use compiler intrinsics directly */
+#if defined(_COMPILER_VERSION) && (_COMPILER_VERSION>=700)
+/* Intrinsics are built-in, no header needed */
+#else
+/* For older compilers, we need the atomic functions header */
+#include <sys/atomic_ops.h>
+#endif
+#endif
+
 /* The __atomic_load_n() intrinsic showed up in different times for different compilers. */
 #if defined(__clang__)
 #if __has_builtin(__atomic_load_n) || defined(HAVE_GCC_ATOMICS)
@@ -102,7 +112,7 @@ extern __inline int _SDL_xadd_watcom(volatile int *a, int v);
   Contributed by Bob Pendleton, bob@pendleton.com
 */
 
-#if !defined(HAVE_MSC_ATOMICS) && !defined(HAVE_GCC_ATOMICS) && !defined(__MACOSX__) && !defined(__SOLARIS__) && !defined(HAVE_WATCOM_ATOMICS)
+#if !defined(HAVE_MSC_ATOMICS) && !defined(HAVE_GCC_ATOMICS) && !defined(__MACOSX__) && !defined(__SOLARIS__) && !defined(HAVE_WATCOM_ATOMICS) && !defined(__sgi)
 #define EMULATE_CAS
 #endif
 
@@ -137,6 +147,12 @@ SDL_bool SDL_AtomicCAS(SDL_atomic_t *a, int oldval, int newval)
     return (SDL_bool) OSAtomicCompareAndSwap32Barrier(oldval, newval, &a->value);
 #elif defined(__SOLARIS__)
     return (SDL_bool)((int)atomic_cas_uint((volatile uint_t *)&a->value, (uint_t)oldval, (uint_t)newval) == oldval);
+#elif defined(__sgi)
+#if defined(_COMPILER_VERSION) && (_COMPILER_VERSION>=700)
+    return (SDL_bool)__compare_and_swap((int *)&a->value, oldval, newval);
+#else
+    return (SDL_bool)(compare_and_swap_int((int *)&a->value, oldval, newval) != 0);
+#endif
 #elif defined(EMULATE_CAS)
     SDL_bool retval = SDL_FALSE;
 
@@ -167,6 +183,12 @@ SDL_bool SDL_AtomicCASPtr(void **a, void *oldval, void *newval)
     return (SDL_bool) OSAtomicCompareAndSwap32Barrier((int32_t)oldval, (int32_t)newval, (int32_t*) a);
 #elif defined(__SOLARIS__)
     return (SDL_bool)(atomic_cas_ptr(a, oldval, newval) == oldval);
+#elif defined(__sgi)
+#if defined(_COMPILER_VERSION) && (_COMPILER_VERSION>=700)
+    return (SDL_bool)__compare_and_swap((long *)a, (long)oldval, (long)newval);
+#else
+    return (SDL_bool)(compare_and_swap_ptr(a, oldval, newval) != 0);
+#endif
 #elif defined(EMULATE_CAS)
     SDL_bool retval = SDL_FALSE;
 
@@ -194,6 +216,12 @@ int SDL_AtomicSet(SDL_atomic_t *a, int v)
     return __sync_lock_test_and_set(&a->value, v);
 #elif defined(__SOLARIS__)
     return (int)atomic_swap_uint((volatile uint_t *)&a->value, v);
+#elif defined(__sgi)
+#if defined(_COMPILER_VERSION) && (_COMPILER_VERSION>=700)
+    return (int)__lock_test_and_set((int *)&a->value, v);
+#else
+    return swap_int((int *)&a->value, v);
+#endif
 #else
     int value;
     do {
@@ -213,6 +241,12 @@ void *SDL_AtomicSetPtr(void **a, void *v)
     return __sync_lock_test_and_set(a, v);
 #elif defined(__SOLARIS__)
     return atomic_swap_ptr(a, v);
+#elif defined(__sgi)
+#if defined(_COMPILER_VERSION) && (_COMPILER_VERSION>=700)
+    return (void *)__lock_test_and_set((long *)a, (long)v);
+#else
+    return swap_ptr(a, v);
+#endif
 #else
     void *value;
     do {
@@ -236,6 +270,17 @@ int SDL_AtomicAdd(SDL_atomic_t *a, int v)
     membar_consumer();
     atomic_add_int((volatile uint_t *)&a->value, v);
     return pv;
+#elif defined(__sgi)
+#if defined(_COMPILER_VERSION) && (_COMPILER_VERSION>=700)
+    return (int)__fetch_and_add((int *)&a->value, v);
+#else
+    /* Fallback: use CAS loop */
+    int value;
+    do {
+        value = a->value;
+    } while (!SDL_AtomicCAS(a, value, (value + v)));
+    return value;
+#endif
 #else
     int value;
     do {
@@ -260,6 +305,17 @@ int SDL_AtomicGet(SDL_atomic_t *a)
     return sizeof(a->value) == sizeof(uint32_t) ? OSAtomicOr32Barrier(0, (volatile uint32_t *)&a->value) : OSAtomicAdd64Barrier(0, (volatile int64_t *)&a->value);
 #elif defined(__SOLARIS__)
     return atomic_or_uint_nv((volatile uint_t *)&a->value, 0);
+#elif defined(__sgi)
+#if defined(_COMPILER_VERSION) && (_COMPILER_VERSION>=700)
+    return (int)__add_and_fetch((int *)&a->value, 0);
+#else
+    /* Fallback: use CAS loop */
+    int value;
+    do {
+        value = a->value;
+    } while (!SDL_AtomicCAS(a, value, value));
+    return value;
+#endif
 #else
     int value;
     do {
@@ -279,6 +335,20 @@ void *SDL_AtomicGetPtr(void **a)
     return __sync_val_compare_and_swap(a, (void *)0, (void *)0);
 #elif defined(__SOLARIS__)
     return atomic_cas_ptr(a, (void *)0, (void *)0);
+#elif defined(__sgi)
+#if defined(_COMPILER_VERSION) && (_COMPILER_VERSION>=700)
+    void *value;
+    do {
+        value = *a;
+    } while (!__compare_and_swap((long *)a, (long)value, (long)value));
+    return value;
+#else
+    void *value;
+    do {
+        value = *a;
+    } while (compare_and_swap_ptr(a, value, value) == 0);
+    return value;
+#endif
 #else
     void *value;
     do {

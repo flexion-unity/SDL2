@@ -85,7 +85,9 @@ int SDL_setenv(const char *name, const char *value, int overwrite)
 
     if (getenv(name) != NULL) {
         if (overwrite) {
+#if defined(HAVE_UNSETENV)
             unsetenv(name);
+#endif            
         } else {
             return 0; /* leave the existing one there. */
         }

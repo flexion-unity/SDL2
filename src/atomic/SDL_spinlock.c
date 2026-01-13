@@ -32,6 +32,16 @@
 #include <atomic.h>
 #endif
 
+#if !defined(HAVE_GCC_ATOMICS) && defined(__sgi)
+/* For MIPSPro 7.0+, use compiler intrinsics directly */
+#if defined(_COMPILER_VERSION) && (_COMPILER_VERSION>=700)
+/* Intrinsics are built-in, no header needed */
+#else
+/* For older compilers, we need the atomic functions header */
+#include <sys/atomic_ops.h>
+#endif
+#endif
+
 #if !defined(HAVE_GCC_ATOMICS) && defined(__RISCOS__)
 #include <unixlib/local.h>
 #endif
@@ -148,6 +158,16 @@ SDL_bool SDL_AtomicTryLock(SDL_SpinLock *lock)
 #elif defined(__SOLARIS__) && !defined(_LP64)
     /* Used for Solaris with non-gcc compilers. */
     return (SDL_bool)((int)atomic_cas_32((volatile uint32_t *)lock, 0, 1) == 0);
+
+#elif defined(__sgi)
+#if defined(_COMPILER_VERSION) && (_COMPILER_VERSION>=700)
+    /* Use MIPSPro 7.0+ compiler intrinsic with acquire barrier */
+    return (SDL_bool)(__lock_test_and_set(lock, 1) == 0);
+#else
+    /* Fallback to atomic function */
+    return (SDL_bool)(test_and_set_int((int *)lock, 1) == 0);
+#endif
+
 #elif defined(PS2)
     uint32_t oldintr;
     SDL_bool res = SDL_FALSE;
@@ -204,6 +224,15 @@ void SDL_AtomicUnlock(SDL_SpinLock *lock)
     /* Used for Solaris when not using gcc. */
     *lock = 0;
     membar_producer();
+
+#elif defined(__sgi)
+#if defined(_COMPILER_VERSION) && (_COMPILER_VERSION>=700)
+    /* Use MIPSPro 7.0+ compiler intrinsic with release barrier */
+    __lock_release(lock);
+#else
+    /* Simple store for release */
+    *lock = 0;
+#endif
 
 #else
     *lock = 0;

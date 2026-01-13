@@ -145,6 +145,9 @@ void _ReadWriteBarrier(void);
 #elif defined(__WATCOMC__)
 extern __inline void SDL_CompilerBarrier(void);
 #pragma aux SDL_CompilerBarrier = "" parm [] modify exact [];
+#elif defined(__sgi) && defined(_COMPILER_VERSION) && (_COMPILER_VERSION>=700)
+/* MIPSPro 7.0+ compiler intrinsic for preventing compiler reordering */
+#define SDL_CompilerBarrier()   __synchronize()
 #else
 #define SDL_CompilerBarrier()   \
 { SDL_SpinLock _tmp = 0; SDL_AtomicLock(&_tmp); SDL_AtomicUnlock(&_tmp); }
@@ -221,6 +224,20 @@ typedef void (*SDL_KernelMemoryBarrierFunc)();
 #include <mbarrier.h>
 #define SDL_MemoryBarrierRelease()  __machine_rel_barrier()
 #define SDL_MemoryBarrierAcquire()  __machine_acq_barrier()
+#elif defined(__sgi)
+/* MIPS sync instruction provides full memory barrier */
+#if defined(__GNUC__)
+#define SDL_MemoryBarrierRelease()   __asm__ __volatile__ ("sync" : : : "memory")
+#define SDL_MemoryBarrierAcquire()   __asm__ __volatile__ ("sync" : : : "memory")
+#elif defined(_COMPILER_VERSION) && (_COMPILER_VERSION>=700)
+/* Use MIPSPro compiler intrinsic */
+#define SDL_MemoryBarrierRelease()   __synchronize()
+#define SDL_MemoryBarrierAcquire()   __synchronize()
+#else
+/* Fallback to compiler barrier */
+#define SDL_MemoryBarrierRelease()   SDL_CompilerBarrier()
+#define SDL_MemoryBarrierAcquire()   SDL_CompilerBarrier()
+#endif
 #else
 /* This is correct for the x86 and x64 CPUs, and we'll expand this over time. */
 #define SDL_MemoryBarrierRelease()  SDL_CompilerBarrier()
