@@ -37,7 +37,6 @@ static SDL_bool has_cycle_counter = SDL_FALSE;
 
 /* SGI cycle counter specifics */
 static int sgi_counter_bits = 0;
-static Uint64 sgi_start_tick_nsec = 0;
 static Uint64 sgi_total_ticks_nsec = 0; /* 64-bit accumulator for 32-bit counters */
 static Uint64 sgi_cycle_wrap_nsec = 0;
 static Uint64 sgi_last_cycle_nsec = 0;
@@ -78,10 +77,8 @@ SDL_TicksInit(void)
             sgi_last_cycle_nsec = (Uint64)now.tv_sec * 1000000000ULL + now.tv_nsec;
             sgi_total_ticks_nsec = 0;
         } else {
-            /* Assume 64-bit, or that tv_sec helps extend it */
-            sgi_start_tick_nsec = (Uint64)now.tv_sec * 1000000000 + now.tv_nsec;
-            /* 64-bit counter: we don't need the complex hybrid logic, 
-               but we reuse the same variables for simplicity, just treating 
+            /* 64-bit counter: we don't need the complex hybrid logic,
+               but we reuse the same variables for simplicity, just treating
                wrap as impossible/huge. */
             sgi_cycle_wrap_nsec = 0; /* 0 indicates no wrapping handling needed */
             sgi_last_cycle_nsec = (Uint64)now.tv_sec * 1000000000ULL + now.tv_nsec;

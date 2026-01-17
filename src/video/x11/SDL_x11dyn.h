@@ -67,6 +67,9 @@
 #ifdef SDL_VIDEO_DRIVER_X11_XSHAPE
 #include <X11/extensions/shape.h>
 #endif
+#ifdef SDL_VIDEO_DRIVER_X11_SGI
+#include <X11/extensions/XSGIvc.h>
+#endif
 
 #ifdef __cplusplus
 extern "C" {

@@ -12,6 +12,7 @@ TESTS = \
 	loopwave \
 	testaudioinfo \
 	testcustomcursor \
+	testdisplayinfo \
 	testdraw2 \
 	testdrawchessboard \
 	testdropfile \
@@ -53,7 +54,8 @@ TESTS = \
 	testviewport \
 	testwm2 \
 	testyuv \
-	torturethread
+	torturethread \
+	testautomation
 
 SDLTEST_OBJS = \
 	SDL_test_assert.o \
@@ -122,6 +124,9 @@ testaudioinfo: libSDL2_test.a testutils.o
 
 testcustomcursor: libSDL2_test.a testutils.o
 	$(CC) $(CFLAGS) -o $@ ../test/testcustomcursor.c testutils.o $(LDFLAGS) $(TEST_LIBS)
+
+testdisplayinfo: libSDL2_test.a testutils.o
+	$(CC) $(CFLAGS) -o $@ ../test/testdisplayinfo.c testutils.o $(LDFLAGS) $(TEST_LIBS)
 
 testdraw2: libSDL2_test.a testutils.o
 	$(CC) $(CFLAGS) -o $@ ../test/testdraw2.c testutils.o $(LDFLAGS) $(TEST_LIBS)

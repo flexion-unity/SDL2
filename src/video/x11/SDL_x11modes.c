@@ -518,6 +518,164 @@ static int X11_InitModes_XRandR(_THIS)
 }
 #endif /* SDL_VIDEO_DRIVER_X11_XRANDR */
 
+#ifdef SDL_VIDEO_DRIVER_X11_SGI
+static SDL_bool CheckSGIvc(Display *display, int *major, int *minor)
+{
+    /* Default the extension not available */
+    *major = *minor = 0;
+
+    /* Query the extension version */
+    if (!X11_XSGIvcQueryVersion(display, major, minor)) {
+#ifdef X11MODES_DEBUG
+        printf("XSGIvc not active on the display\n");
+#endif
+        *major = *minor = 0;
+        return SDL_FALSE;
+    }
+
+#ifdef X11MODES_DEBUG
+    printf("XSGIvc available at version %d.%d!\n", *major, *minor);
+#endif
+    return SDL_TRUE;
+}
+
+static int X11_InitModes_SGIvc(_THIS)
+{
+    SDL_VideoData *data = (SDL_VideoData *)_this->driverdata;
+    Display *dpy = data->display;
+    const int default_screen = DefaultScreen(dpy);
+    XSGIvcScreenInfo screeninfo;
+    XSGIvcChannelInfo *channelinfo = NULL;
+    XVisualInfo vinfo;
+    Uint32 pixelformat;
+    XPixmapFormatValues *pixmapformats;
+    int scanline_pad;
+    int n, i;
+    int channel;
+
+    if (get_visualinfo(dpy, default_screen, &vinfo) < 0) {
+        return SDL_SetError("Failed to find an X11 visual for the primary display");
+    }
+
+    pixelformat = X11_GetPixelFormatFromVisualInfo(dpy, &vinfo);
+    if (SDL_ISPIXELFORMAT_INDEXED(pixelformat)) {
+        return SDL_SetError("Palettized video modes are no longer supported");
+    }
+
+    scanline_pad = SDL_BYTESPERPIXEL(pixelformat) * 8;
+    pixmapformats = X11_XListPixmapFormats(dpy, &n);
+    if (pixmapformats) {
+        for (i = 0; i < n; ++i) {
+            if (pixmapformats[i].depth == vinfo.depth) {
+                scanline_pad = pixmapformats[i].scanline_pad;
+                break;
+            }
+        }
+        X11_XFree(pixmapformats);
+    }
+
+    /* Query the screen info to find out how many channels we have */
+    if (!X11_XSGIvcQueryVideoScreenInfo(dpy, default_screen, &screeninfo)) {
+#ifdef X11MODES_DEBUG
+        printf("XSGIvcQueryVideoScreenInfo failed\n");
+#endif
+        return -1;
+    }
+
+#ifdef X11MODES_DEBUG
+    printf("XSGIvc: %d channels, graphics type: %s\n",
+           screeninfo.numChannels, screeninfo.graphicsType);
+#endif
+
+    /* For now, we just use channel 0 (primary output) */
+    channel = 0;
+
+    /* Query the current channel info to get the active video format */
+    if (!X11_XSGIvcQueryChannelInfo(dpy, default_screen, channel, &channelinfo)) {
+#ifdef X11MODES_DEBUG
+        printf("XSGIvcQueryChannelInfo failed for channel %d\n", channel);
+#endif
+        return -1;
+    }
+
+    if (channelinfo && channelinfo->active) {
+        SDL_DisplayData *displaydata;
+        SDL_DisplayModeData *modedata;
+        SDL_DisplayMode mode;
+        SDL_VideoDisplay display;
+        Screen *screen = ScreenOfDisplay(dpy, default_screen);
+        int display_mm_width, display_mm_height;
+
+        SDL_zero(mode);
+        mode.w = channelinfo->vfinfo.width;
+        mode.h = channelinfo->vfinfo.height;
+        mode.format = pixelformat;
+        mode.refresh_rate = (int)(channelinfo->vfinfo.verticalRetraceRate + 0.5f);
+
+#ifdef X11MODES_DEBUG
+        printf("XSGIvc: Current format: %s (%dx%d @ %.2f Hz)\n",
+               channelinfo->vfinfo.name, mode.w, mode.h,
+               channelinfo->vfinfo.verticalRetraceRate);
+#endif
+
+        displaydata = (SDL_DisplayData *)SDL_calloc(1, sizeof(*displaydata));
+        if (!displaydata) {
+            X11_XFree(channelinfo);
+            return SDL_OutOfMemory();
+        }
+
+        modedata = (SDL_DisplayModeData *)SDL_calloc(1, sizeof(SDL_DisplayModeData));
+        if (!modedata) {
+            SDL_free(displaydata);
+            X11_XFree(channelinfo);
+            return SDL_OutOfMemory();
+        }
+
+        /* Store the format name for mode switching */
+        SDL_strlcpy(modedata->sgivc_format_name, channelinfo->vfinfo.name,
+                    sizeof(modedata->sgivc_format_name));
+        mode.driverdata = modedata;
+
+        display_mm_width = WidthMMOfScreen(screen);
+        display_mm_height = HeightMMOfScreen(screen);
+
+        displaydata->screen = default_screen;
+        displaydata->visual = vinfo.visual;
+        displaydata->depth = vinfo.depth;
+        displaydata->hdpi = display_mm_width ? (((float)mode.w) * 25.4f / display_mm_width) : 0.0f;
+        displaydata->vdpi = display_mm_height ? (((float)mode.h) * 25.4f / display_mm_height) : 0.0f;
+        displaydata->ddpi = SDL_ComputeDiagonalDPI(mode.w, mode.h,
+                                                   ((float)display_mm_width) / 25.4f,
+                                                   ((float)display_mm_height) / 25.4f);
+        displaydata->scanline_pad = scanline_pad;
+        displaydata->x = 0;
+        displaydata->y = 0;
+        displaydata->use_xrandr = SDL_FALSE;
+        displaydata->use_sgivc = SDL_TRUE;
+        displaydata->sgivc_channel = channel;
+
+        /* Store the original format name for restoration on exit */
+        SDL_strlcpy(displaydata->sgivc_original_format, channelinfo->vfinfo.name,
+                    sizeof(displaydata->sgivc_original_format));
+
+        SDL_zero(display);
+        display.name = (char *)screeninfo.graphicsType;
+        display.desktop_mode = mode;
+        display.current_mode = mode;
+        display.driverdata = displaydata;
+        SDL_AddVideoDisplay(&display, SDL_FALSE);
+
+        X11_XFree(channelinfo);
+        return 0;
+    }
+
+    if (channelinfo) {
+        X11_XFree(channelinfo);
+    }
+    return -1;
+}
+#endif /* SDL_VIDEO_DRIVER_X11_SGI */
+
 static int GetXftDPI(Display *dpy)
 {
     char *xdefault_resource;
@@ -650,6 +808,18 @@ int X11_InitModes(_THIS)
     }
 #endif /* SDL_VIDEO_DRIVER_X11_XRANDR */
 
+#ifdef SDL_VIDEO_DRIVER_X11_SGI
+    /* On IRIX, try SGI Video Control extension for mode switching */
+    {
+        SDL_VideoData *data = (SDL_VideoData *)_this->driverdata;
+        int sgivc_major, sgivc_minor;
+        if (CheckSGIvc(data->display, &sgivc_major, &sgivc_minor) &&
+            X11_InitModes_SGIvc(_this) == 0) {
+            return 0;
+        }
+    }
+#endif /* SDL_VIDEO_DRIVER_X11_SGI */
+
     /* still here? Just set up an extremely basic display. */
     return X11_InitModes_StdXlib(_this);
 }
@@ -701,7 +871,63 @@ void X11_GetDisplayModes(_THIS, SDL_VideoDisplay *sdl_display)
     }
 #endif /* SDL_VIDEO_DRIVER_X11_XRANDR */
 
-    if (!data->use_xrandr) {
+#ifdef SDL_VIDEO_DRIVER_X11_SGI
+    if (data->use_sgivc) {
+        Display *display = ((SDL_VideoData *)_this->driverdata)->display;
+        XSGIvcVideoFormatInfo *formats;
+        XSGIvcVideoFormatInfo pattern;
+        int num_formats = 0;
+        int i;
+
+        SDL_zero(pattern);
+
+        /* List all available video formats for this channel that match the monitor */
+        formats = X11_XSGIvcListVideoFormats(display, data->screen, data->sgivc_channel,
+                                             &pattern, 0, True, 1000, &num_formats);
+
+#ifdef X11MODES_DEBUG
+        printf("XSGIvc: Found %d video formats\n", num_formats);
+#endif
+        if (formats && num_formats > 0) {
+            for (i = 0; i < num_formats; ++i) {
+                SDL_DisplayModeData *modedata;
+
+                modedata = (SDL_DisplayModeData *)SDL_calloc(1, sizeof(SDL_DisplayModeData));
+                if (!modedata) {
+                    continue;
+                }
+
+                mode.w = formats[i].width;
+                mode.h = formats[i].height;
+                mode.refresh_rate = (int)(formats[i].verticalRetraceRate + 0.5f);
+
+                if (mode.refresh_rate < 55) {
+                    SDL_free(modedata);
+                    continue;
+                }
+
+                SDL_strlcpy(modedata->sgivc_format_name, formats[i].name,
+                            sizeof(modedata->sgivc_format_name));
+                mode.driverdata = modedata;
+
+#ifdef X11MODES_DEBUG
+                printf("XSGIvc: Mode %d: %s (%dx%d @ %.2f Hz)\n",
+                       i, formats[i].name, mode.w, mode.h,
+                       formats[i].verticalRetraceRate);
+#endif
+
+                if (!SDL_AddDisplayMode(sdl_display, &mode)) {
+                    SDL_free(modedata);
+                }
+            }
+            X11_XSGIvcFreeVideoFormatInfo(formats);
+        }
+        return;
+    }
+#endif /* SDL_VIDEO_DRIVER_X11_SGI */
+
+    /* Fallback: just add the desktop mode */
+    {
         SDL_DisplayModeData *modedata;
         /* Add the desktop mode */
         mode = sdl_display->desktop_mode;
@@ -814,15 +1040,87 @@ int X11_SetDisplayMode(_THIS, SDL_VideoDisplay *sdl_display, SDL_DisplayMode *mo
             return SDL_SetError("X11_XRRSetCrtcConfig failed");
         }
     }
-#else
-    (void)data;
 #endif /* SDL_VIDEO_DRIVER_X11_XRANDR */
+
+#ifdef SDL_VIDEO_DRIVER_X11_SGI
+    if (data->use_sgivc) {
+        Display *display = viddata->display;
+        SDL_DisplayModeData *modedata = (SDL_DisplayModeData *)mode->driverdata;
+        Status status;
+
+#ifdef X11MODES_DEBUG
+        printf("XSGIvc: Switching to format: %s (%dx%d)\n",
+               modedata->sgivc_format_name, mode->w, mode->h);
+#endif
+
+        X11_XGrabServer(display);
+        status = X11_XSGIvcLoadVideoFormatByName(display, data->screen, data->sgivc_channel,
+                                                 modedata->sgivc_format_name);
+        X11_XUngrabServer(display);
+        X11_XSync(display, False);
+
+        if (!status) {
+            return SDL_SetError("XSGIvcLoadVideoFormatByName failed for format: %s",
+                                modedata->sgivc_format_name);
+        }
+
+#ifdef X11MODES_DEBUG
+        printf("XSGIvc: Successfully switched to format: %s\n",
+               modedata->sgivc_format_name);
+#endif
+    }
+#endif /* SDL_VIDEO_DRIVER_X11_SGI */
 
     return 0;
 }
 
 void X11_QuitModes(_THIS)
 {
+#ifdef SDL_VIDEO_DRIVER_X11_SGI
+    /* Restore original video format on all SGI displays when quitting */
+    SDL_VideoData *viddata = (SDL_VideoData *)_this->driverdata;
+    int i;
+
+    for (i = 0; i < _this->num_displays; ++i) {
+        SDL_VideoDisplay *sdl_display = &_this->displays[i];
+        SDL_DisplayData *data = (SDL_DisplayData *)sdl_display->driverdata;
+
+        if (data && data->use_sgivc && data->sgivc_original_format[0] != '\0') {
+            Display *display = viddata->display;
+            Status status;
+
+            /* Only restore if we're not already at the original format */
+            if (sdl_display->current_mode.driverdata) {
+                SDL_DisplayModeData *current_modedata =
+                    (SDL_DisplayModeData *)sdl_display->current_mode.driverdata;
+                if (SDL_strcmp(current_modedata->sgivc_format_name,
+                               data->sgivc_original_format) == 0) {
+                    /* Already at original format, no need to restore */
+                    continue;
+                }
+            }
+
+#ifdef X11MODES_DEBUG
+            printf("XSGIvc: Restoring original format: %s on channel %d\n",
+                   data->sgivc_original_format, data->sgivc_channel);
+#endif
+            status = X11_XSGIvcLoadVideoFormatByName(display, data->screen, data->sgivc_channel,
+                                                     data->sgivc_original_format);
+
+            if (status) {
+#ifdef X11MODES_DEBUG
+                printf("XSGIvc: Successfully restored format: %s\n",
+                       data->sgivc_original_format);
+#endif
+            } else {
+#ifdef X11MODES_DEBUG
+                printf("XSGIvc: Failed to restore format: %s\n",
+                       data->sgivc_original_format);
+#endif
+            }
+        }
+    }
+#endif /* SDL_VIDEO_DRIVER_X11_SGI */
 }
 
 int X11_GetDisplayBounds(_THIS, SDL_VideoDisplay *sdl_display, SDL_Rect *rect)

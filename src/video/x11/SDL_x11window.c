@@ -408,7 +408,6 @@ int X11_CreateWindow(_THIS, SDL_Window *window)
     SDL_DisplayData *displaydata =
         (SDL_DisplayData *)SDL_GetDisplayForWindow(window)->driverdata;
     const SDL_bool force_override_redirect = SDL_GetHintBoolean(SDL_HINT_X11_FORCE_OVERRIDE_REDIRECT, SDL_FALSE);
-    SDL_WindowData *windowdata;
     Display *display = data->display;
     int screen = displaydata->screen;
     Visual *visual;
@@ -668,10 +667,10 @@ int X11_CreateWindow(_THIS, SDL_Window *window)
         X11_XDestroyWindow(display, w);
         return -1;
     }
-    windowdata = (SDL_WindowData *)window->driverdata;
 
 #ifdef X_HAVE_UTF8_STRING
-    if (SDL_X11_HAVE_UTF8 && windowdata->ic) {
+    if (SDL_X11_HAVE_UTF8 && ((SDL_WindowData *)window->driverdata)->ic) {
+        SDL_WindowData *windowdata = (SDL_WindowData *)window->driverdata;
         X11_XGetICValues(windowdata->ic, XNFilterEvents, &fevent, NULL);
     }
 #endif
@@ -1526,6 +1525,36 @@ static void X11_SetWindowFullscreenViaWM(_THIS, SDL_Window *window, SDL_VideoDis
 void X11_SetWindowFullscreen(_THIS, SDL_Window *window, SDL_VideoDisplay *_display, SDL_bool fullscreen)
 {
     X11_SetWindowFullscreenViaWM(_this, window, _display, fullscreen);
+
+#ifdef SDL_VIDEO_DRIVER_X11_SGI
+    /* On SGI, the window manager might not handle fullscreen correctly,
+       so we force the window to be borderless and positioned at 0,0. */
+    {
+        SDL_DisplayData *displaydata = (SDL_DisplayData *)_display->driverdata;
+        if (displaydata->use_sgivc) {
+            SDL_WindowData *data = (SDL_WindowData *)window->driverdata;
+            Display *display = data->videodata->display;
+            int (*prev_handler)(Display *, XErrorEvent *) = NULL;
+
+            /* Catch any X11 errors to prevent the safety net from reverting the mode */
+            X11_XSync(display, False);
+            prev_handler = X11_XSetErrorHandler(X11_CatchAnyError);
+            caught_x11_error = SDL_FALSE;
+
+            if (fullscreen) {
+                X11_SetWindowBordered(_this, window, SDL_FALSE);
+                X11_XMoveWindow(display, data->xwindow, 0, 0);
+                X11_XResizeWindow(display, data->xwindow, _display->current_mode.w, _display->current_mode.h);
+                X11_XRaiseWindow(display, data->xwindow);
+            } else {
+                X11_SetWindowBordered(_this, window, (window->flags & SDL_WINDOW_BORDERLESS) == 0);
+            }
+
+            X11_XSync(display, False);
+            X11_XSetErrorHandler(prev_handler);
+        }
+    }
+#endif
 }
 
 int X11_SetWindowGammaRamp(_THIS, SDL_Window * window, const Uint16 * ramp)
@@ -1904,7 +1933,6 @@ int SDL_X11_SetWindowTitle(Display *display, Window xwindow, char *title)
     Atom _NET_WM_NAME = X11_XInternAtom(display, "_NET_WM_NAME", False);
     XTextProperty titleprop;
     int conv = X11_XmbTextListToTextProperty(display, &title, 1, XTextStyle, &titleprop);
-    Status status;
 
     if (X11_XSupportsLocale() != True) {
         return SDL_SetError("Current locale not supported by X server, cannot continue.");
@@ -1922,6 +1950,7 @@ int SDL_X11_SetWindowTitle(Display *display, Window xwindow, char *title)
     }
 
 #ifdef X_HAVE_UTF8_STRING
+    Status status;
     status = X11_Xutf8TextListToTextProperty(display, &title, 1, XUTF8StringStyle, &titleprop);
     if (status == Success) {
         X11_XSetTextProperty(display, xwindow, &titleprop, _NET_WM_NAME);

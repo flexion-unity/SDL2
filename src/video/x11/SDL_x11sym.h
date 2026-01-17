@@ -326,6 +326,17 @@ SDL_X11_MODULE(XSHAPE)
 SDL_X11_SYM(void,XShapeCombineMask,(Display *dpy,Window dest,int dest_kind,int x_off,int y_off,Pixmap src,int op),(dpy,dest,dest_kind,x_off,y_off,src,op),)
 #endif
 
+/* SGI Video Control extension for IRIX */
+#ifdef SDL_VIDEO_DRIVER_X11_SGI
+SDL_X11_SYM(Status,XSGIvcQueryVersion,(Display *dpy,int *major,int *minor),(dpy,major,minor),return)
+SDL_X11_SYM(Status,XSGIvcQueryVideoScreenInfo,(Display *dpy,int screen,XSGIvcScreenInfo *sinfo_return),(dpy,screen,sinfo_return),return)
+SDL_X11_SYM(XSGIvcVideoFormatInfo*,XSGIvcListVideoFormats,(Display *dpy,int screen,int channel,const XSGIvcVideoFormatInfo *pattern,unsigned long querymask,Bool matchMonitor,int maxformats,int *actual_count_return),(dpy,screen,channel,pattern,querymask,matchMonitor,maxformats,actual_count_return),return)
+SDL_X11_SYM(Status,XSGIvcLoadVideoFormat,(Display *dpy,int screen,int channel,const XSGIvcVideoFormatInfo *pattern,unsigned long querymask,Bool matchMonitor),(dpy,screen,channel,pattern,querymask,matchMonitor),return)
+SDL_X11_SYM(Status,XSGIvcLoadVideoFormatByName,(Display *dpy,int screen,int channel,const char *format_name),(dpy,screen,channel,format_name),return)
+SDL_X11_SYM(Status,XSGIvcQueryChannelInfo,(Display *dpy,int screen,int channel,XSGIvcChannelInfo **cinfo_return),(dpy,screen,channel,cinfo_return),return)
+SDL_X11_SYM(void,XSGIvcFreeVideoFormatInfo,(XSGIvcVideoFormatInfo *info),(info),)
+#endif
+
 #undef SDL_X11_MODULE
 #undef SDL_X11_SYM
 

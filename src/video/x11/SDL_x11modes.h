@@ -40,13 +40,23 @@ typedef struct
 #ifdef SDL_VIDEO_DRIVER_X11_XRANDR
     RROutput xrandr_output;
 #endif
+
+#ifdef SDL_VIDEO_DRIVER_X11_SGI
+    SDL_bool use_sgivc;
+    int sgivc_channel;
+    char sgivc_original_format[256];  /* Store original format name for restoration */
+#endif
 } SDL_DisplayData;
 
 typedef struct
 {
 #ifdef SDL_VIDEO_DRIVER_X11_XRANDR
     RRMode xrandr_mode;
-#else
+#endif
+#ifdef SDL_VIDEO_DRIVER_X11_SGI
+    char sgivc_format_name[256];  /* XSGIvc video format name */
+#endif
+#if !defined(SDL_VIDEO_DRIVER_X11_XRANDR) && !defined(SDL_VIDEO_DRIVER_X11_SGI)
     int unused; /* just so struct isn't empty. */
 #endif
 } SDL_DisplayModeData;
