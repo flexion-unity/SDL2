@@ -39,8 +39,8 @@ int SDL_SetError(SDL_PRINTF_FORMAT_STRING const char *fmt, ...)
         result = SDL_vsnprintf(error->str, error->len, fmt, ap);
         va_end(ap);
 
-        if (result >= 0 && (size_t)result >= error->len && error->realloc_func) {
-            size_t len = (size_t)result + 1;
+        if ((result < 0 || (size_t)result >= error->len) && error->realloc_func) {
+            size_t len = (result >= 0) ? ((size_t)result + 1) : SDL_MAX_LOG_MESSAGE;
             char *str = (char *)error->realloc_func(error->str, len);
             if (str) {
                 error->str = str;
@@ -53,7 +53,9 @@ int SDL_SetError(SDL_PRINTF_FORMAT_STRING const char *fmt, ...)
 
         if (SDL_LogGetPriority(SDL_LOG_CATEGORY_ERROR) <= SDL_LOG_PRIORITY_DEBUG) {
             /* If we are in debug mode, print out the error message */
-            SDL_LogDebug(SDL_LOG_CATEGORY_ERROR, "%s", error->str);
+            if (error->str) {
+                SDL_LogDebug(SDL_LOG_CATEGORY_ERROR, "%s", error->str);
+            }
         }
     }
 
@@ -64,7 +66,10 @@ int SDL_SetError(SDL_PRINTF_FORMAT_STRING const char *fmt, ...)
 const char *SDL_GetError(void)
 {
     const SDL_error *error = SDL_GetErrBuf();
-    return error->error ? error->str : "";
+    if (!error) {
+        return "";
+    }
+    return (error->error && error->str) ? error->str : "";
 }
 
 void SDL_ClearError(void)
