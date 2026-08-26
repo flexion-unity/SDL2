@@ -81,25 +81,29 @@ static void DMEDIA_CloseDevice(_THIS)
 
 static int DMEDIA_GetDefaultAudioInfo(char **name, SDL_AudioSpec *spec, int iscapture)
 {
+    char devname[128];
+    ALpv pv[2];
+
     if (iscapture) {
         return SDL_SetError("No capture support");
-    }
-
-    if (name != NULL) {
-        *name = SDL_strdup(DEFAULT_OUTPUT_DEVNAME);
-        if (*name == NULL) {
-            return SDL_OutOfMemory();
-        }
     }
 
     /* Query actual hardware capabilities */
     SDL_zerop(spec);
 
-    {
-        ALpv audio_param;
-        audio_param.param = AL_RATE;
-        if (alGetParams(AL_DEFAULT_OUTPUT, &audio_param, 1) >= 0) {
-            spec->freq = audio_param.value.i;
+    pv[0].param = AL_RATE;
+    pv[1].param = AL_NAME;
+    pv[1].value.ptr = devname;
+    pv[1].sizeIn = sizeof(devname);
+
+    if (alGetParams(AL_DEFAULT_OUTPUT, pv, 2) >= 0) {
+        spec->freq = (int) alFixedToDouble(pv[0].value.ll);
+        if (name != NULL) {
+            *name = SDL_strdup((pv[1].sizeOut > 0) ? devname : DEFAULT_OUTPUT_DEVNAME);
+        }
+    } else {
+        if (name != NULL) {
+            *name = SDL_strdup(DEFAULT_OUTPUT_DEVNAME);
         }
     }
 
@@ -107,12 +111,26 @@ static int DMEDIA_GetDefaultAudioInfo(char **name, SDL_AudioSpec *spec, int isca
     if (spec->freq == 0) {
         spec->freq = 44100;
     }
+    
+    if (name != NULL && *name == NULL) {
+        return SDL_OutOfMemory();
+    }
 
     spec->format = AUDIO_S16SYS;
     spec->channels = 2;
     spec->samples = 512;
 
     return 0;
+}
+
+static void DMEDIA_DetectDevices(void)
+{
+    SDL_AudioSpec spec;
+    char *name = NULL;
+    if (DMEDIA_GetDefaultAudioInfo(&name, &spec, 0) == 0) {
+        SDL_AddAudioDevice(SDL_FALSE, name, &spec, (void *)((size_t)0x1));
+        SDL_free(name);
+    }
 }
 
 static int DMEDIA_OpenDevice(_THIS, const char *devname)
@@ -143,8 +161,10 @@ static int DMEDIA_OpenDevice(_THIS, const char *devname)
     {
         ALpv audio_param;
         audio_param.param = AL_RATE;
-        audio_param.value.i = this->spec.freq;
-        valid = (alSetParams(AL_DEFAULT_OUTPUT, &audio_param, 1) < 0);
+        audio_param.value.ll = alDoubleToFixed((double) this->spec.freq);
+        if (alSetParams(AL_DEFAULT_OUTPUT, &audio_param, 1) < 0) {
+            return SDL_SetError("alSetParams failed: %s", alGetErrorString(oserror()));
+        }
     }
 
     while ((!valid) && (test_format)) {
@@ -234,6 +254,7 @@ DMEDIA_init(SDL_AudioDriverImpl * impl)
     impl->GetDeviceBuf = DMEDIA_GetDeviceBuf;
     impl->CloseDevice = DMEDIA_CloseDevice;
     impl->GetDefaultAudioInfo = DMEDIA_GetDefaultAudioInfo;
+    impl->DetectDevices = DMEDIA_DetectDevices;
 
     impl->OnlyHasDefaultOutputDevice = SDL_TRUE;
     impl->HasCaptureSupport = SDL_FALSE;

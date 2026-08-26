@@ -1,487 +1,1982 @@
-OBJS = \
-SDL.o \
-SDL_assert.o \
-SDL_dataqueue.o \
-SDL_error.o \
-SDL_guid.o \
-SDL_hints.o \
-SDL_list.o \
-SDL_log.o \
-SDL_utils.o \
-SDL_atomic.o \
-SDL_spinlock.o \
-SDL_audio.o \
-SDL_audiocvt.o \
-SDL_audiodev.o \
-SDL_audiotypecvt.o \
-SDL_mixer.o \
-SDL_wave.o \
-SDL_diskaudio.o \
-SDL_dmediaaudio.o \
-SDL_dummyaudio.o \
-SDL_poll.o \
-SDL_cpuinfo_irix.o \
-SDL_dynapi.o \
-SDL_clipboardevents.o \
-SDL_displayevents.o \
-SDL_dropevents.o \
-SDL_events.o \
-SDL_gesture.o \
-SDL_keyboard.o \
-SDL_mouse.o \
-SDL_quit.o \
-SDL_touch.o \
-SDL_windowevents.o \
-SDL_keysym_to_scancode.o \
-SDL_scancode_tables.o \
-imKStoUCS.o \
-SDL_rwops.o \
-SDL_sysfilesystem.o \
-SDL_haptic.o \
-SDL_syshaptic.o \
-SDL_hidapi.o \
-SDL_gamecontroller.o \
-SDL_joystick.o \
-SDL_steam_virtual_gamepad.o \
-controller_type.o \
-SDL_sysjoystick.o \
-SDL_sysloadso.o \
-SDL_locale.o \
-SDL_syslocale.o \
-SDL_url.o \
-SDL_sysurl.o \
-SDL_power.o \
-SDL_render.o \
-SDL_yuv_sw.o \
-SDL_render_gl.o \
-SDL_shaders_gl.o \
-SDL_blendfillrect.o \
-SDL_blendline.o \
-SDL_blendpoint.o \
-SDL_drawline.o \
-SDL_drawpoint.o \
-SDL_render_sw.o \
-SDL_rotate.o \
-SDL_triangle.o \
-SDL_sensor.o \
-SDL_dummysensor.o \
-SDL_crc16.o \
-SDL_crc32.o \
-SDL_getenv.o \
-SDL_iconv.o \
-SDL_malloc.o \
-SDL_qsort.o \
-SDL_stdlib.o \
-SDL_string.o \
-SDL_strtokr.o \
-SDL_thread.o \
-SDL_syscond.o \
-SDL_sysmutex.o \
-SDL_syssem.o \
-SDL_systhread.o \
-SDL_systls.o \
-SDL_timer.o \
-SDL_systimer.o \
-SDL_RLEaccel.o \
-SDL_blit.o \
-SDL_blit_0.o \
-SDL_blit_1.o \
-SDL_blit_A.o \
-SDL_blit_N.o \
-SDL_blit_auto.o \
-SDL_blit_copy.o \
-SDL_blit_slow.o \
-SDL_bmp.o \
-SDL_clipboard.o \
-SDL_fillrect.o \
-SDL_pixels.o \
-SDL_rect.o \
-SDL_shape.o \
-SDL_stretch.o \
-SDL_surface.o \
-SDL_video.o \
-SDL_yuv.o \
-yuv_rgb_std.o \
-SDL_nullevents.o \
-SDL_nullframebuffer.o \
-SDL_nullvideo.o \
-SDL_x11clipboard.o \
-SDL_x11dyn.o \
-SDL_x11events.o \
-SDL_x11framebuffer.o \
-SDL_x11keyboard.o \
-SDL_x11messagebox.o \
-SDL_x11modes.o \
-SDL_x11mouse.o \
-SDL_x11opengl.o \
-SDL_x11shape.o \
-SDL_x11touch.o \
-SDL_x11video.o \
-SDL_x11window.o \
-SDL_x11xfixes.o \
-SDL_x11xinput2.o
-
-
-SDL.o: ../src/SDL.c
-	$(CC) $(CFLAGS) -c ../src/SDL.c -o SDL.o
-
-SDL_assert.o: ../src/SDL_assert.c
-	$(CC) $(CFLAGS) -c ../src/SDL_assert.c -o SDL_assert.o
-
-SDL_dataqueue.o: ../src/SDL_dataqueue.c
-	$(CC) $(CFLAGS) -c ../src/SDL_dataqueue.c -o SDL_dataqueue.o
-
-SDL_error.o: ../src/SDL_error.c
-	$(CC) $(CFLAGS) -c ../src/SDL_error.c -o SDL_error.o
-
-SDL_guid.o: ../src/SDL_guid.c
-	$(CC) $(CFLAGS) -c ../src/SDL_guid.c -o SDL_guid.o
-
-SDL_hints.o: ../src/SDL_hints.c
-	$(CC) $(CFLAGS) -c ../src/SDL_hints.c -o SDL_hints.o
-
-SDL_list.o: ../src/SDL_list.c
-	$(CC) $(CFLAGS) -c ../src/SDL_list.c -o SDL_list.o
-
-SDL_log.o: ../src/SDL_log.c
-	$(CC) $(CFLAGS) -c ../src/SDL_log.c -o SDL_log.o
-
-SDL_utils.o: ../src/SDL_utils.c
-	$(CC) $(CFLAGS) -c ../src/SDL_utils.c -o SDL_utils.o
-
-SDL_atomic.o: ../src/atomic/SDL_atomic.c
-	$(CC) $(CFLAGS) -c ../src/atomic/SDL_atomic.c -o SDL_atomic.o
-
-SDL_spinlock.o: ../src/atomic/SDL_spinlock.c
-	$(CC) $(CFLAGS) -c ../src/atomic/SDL_spinlock.c -o SDL_spinlock.o
-
-SDL_audio.o: ../src/audio/SDL_audio.c
-	$(CC) $(CFLAGS) -c ../src/audio/SDL_audio.c -o SDL_audio.o
-
-SDL_audiocvt.o: ../src/audio/SDL_audiocvt.c
-	$(CC) $(CFLAGS) -c ../src/audio/SDL_audiocvt.c -o SDL_audiocvt.o
-
-SDL_audiodev.o: ../src/audio/SDL_audiodev.c
-	$(CC) $(CFLAGS) -c ../src/audio/SDL_audiodev.c -o SDL_audiodev.o
-
-SDL_audiotypecvt.o: ../src/audio/SDL_audiotypecvt.c
-	$(CC) $(CFLAGS) -c ../src/audio/SDL_audiotypecvt.c -o SDL_audiotypecvt.o
-
-SDL_mixer.o: ../src/audio/SDL_mixer.c
-	$(CC) $(CFLAGS) -c ../src/audio/SDL_mixer.c -o SDL_mixer.o
-
-SDL_wave.o: ../src/audio/SDL_wave.c
-	$(CC) $(CFLAGS) -c ../src/audio/SDL_wave.c -o SDL_wave.o
-
-SDL_diskaudio.o: ../src/audio/disk/SDL_diskaudio.c
-	$(CC) $(CFLAGS) -c ../src/audio/disk/SDL_diskaudio.c -o SDL_diskaudio.o
-
-SDL_dmediaaudio.o: ../src/audio/dmedia/SDL_dmediaaudio.c
-	$(CC) $(CFLAGS) -c ../src/audio/dmedia/SDL_dmediaaudio.c -o SDL_dmediaaudio.o
-
-SDL_dummyaudio.o: ../src/audio/dummy/SDL_dummyaudio.c
-	$(CC) $(CFLAGS) -c ../src/audio/dummy/SDL_dummyaudio.c -o SDL_dummyaudio.o
-
-SDL_poll.o: ../src/core/unix/SDL_poll.c
-	$(CC) $(CFLAGS) -c ../src/core/unix/SDL_poll.c -o SDL_poll.o
-
-SDL_cpuinfo_irix.o: ../src/cpuinfo/SDL_cpuinfo_irix.c
-	$(CC) $(CFLAGS) -c ../src/cpuinfo/SDL_cpuinfo_irix.c -o SDL_cpuinfo_irix.o
-
-SDL_dynapi.o: ../src/dynapi/SDL_dynapi.c
-	$(CC) $(CFLAGS) -c ../src/dynapi/SDL_dynapi.c -o SDL_dynapi.o
-
-SDL_clipboardevents.o: ../src/events/SDL_clipboardevents.c
-	$(CC) $(CFLAGS) -c ../src/events/SDL_clipboardevents.c -o SDL_clipboardevents.o
-
-SDL_displayevents.o: ../src/events/SDL_displayevents.c
-	$(CC) $(CFLAGS) -c ../src/events/SDL_displayevents.c -o SDL_displayevents.o
-
-SDL_dropevents.o: ../src/events/SDL_dropevents.c
-	$(CC) $(CFLAGS) -c ../src/events/SDL_dropevents.c -o SDL_dropevents.o
-
-SDL_events.o: ../src/events/SDL_events.c
-	$(CC) $(CFLAGS) -c ../src/events/SDL_events.c -o SDL_events.o
-
-SDL_gesture.o: ../src/events/SDL_gesture.c
-	$(CC) $(CFLAGS) -c ../src/events/SDL_gesture.c -o SDL_gesture.o
-
-SDL_keyboard.o: ../src/events/SDL_keyboard.c
-	$(CC) $(CFLAGS) -c ../src/events/SDL_keyboard.c -o SDL_keyboard.o
-
-SDL_mouse.o: ../src/events/SDL_mouse.c
-	$(CC) $(CFLAGS) -c ../src/events/SDL_mouse.c -o SDL_mouse.o
-
-SDL_quit.o: ../src/events/SDL_quit.c
-	$(CC) $(CFLAGS) -c ../src/events/SDL_quit.c -o SDL_quit.o
-
-SDL_touch.o: ../src/events/SDL_touch.c
-	$(CC) $(CFLAGS) -c ../src/events/SDL_touch.c -o SDL_touch.o
-
-SDL_windowevents.o: ../src/events/SDL_windowevents.c
-	$(CC) $(CFLAGS) -c ../src/events/SDL_windowevents.c -o SDL_windowevents.o
-
-SDL_keysym_to_scancode.o: ../src/events/SDL_keysym_to_scancode.c
-	$(CC) $(CFLAGS) -c ../src/events/SDL_keysym_to_scancode.c -o SDL_keysym_to_scancode.o
-
-SDL_scancode_tables.o: ../src/events/SDL_scancode_tables.c
-	$(CC) $(CFLAGS) -c ../src/events/SDL_scancode_tables.c -o SDL_scancode_tables.o
-
-imKStoUCS.o: ../src/events/imKStoUCS.c
-	$(CC) $(CFLAGS) -c ../src/events/imKStoUCS.c -o imKStoUCS.o
-
-SDL_rwops.o: ../src/file/SDL_rwops.c
-	$(CC) $(CFLAGS) -c ../src/file/SDL_rwops.c -o SDL_rwops.o
-
-SDL_sysfilesystem.o: ../src/filesystem/unix/SDL_sysfilesystem.c
-	$(CC) $(CFLAGS) -c ../src/filesystem/unix/SDL_sysfilesystem.c -o SDL_sysfilesystem.o
-
-SDL_haptic.o: ../src/haptic/SDL_haptic.c
-	$(CC) $(CFLAGS) -c ../src/haptic/SDL_haptic.c -o SDL_haptic.o
-
-SDL_syshaptic.o: ../src/haptic/dummy/SDL_syshaptic.c
-	$(CC) $(CFLAGS) -c ../src/haptic/dummy/SDL_syshaptic.c -o SDL_syshaptic.o
-
-SDL_hidapi.o: ../src/hidapi/SDL_hidapi.c
-	$(CC) $(CFLAGS) -c ../src/hidapi/SDL_hidapi.c -o SDL_hidapi.o
-
-SDL_gamecontroller.o: ../src/joystick/SDL_gamecontroller.c
-	$(CC) $(CFLAGS) -c ../src/joystick/SDL_gamecontroller.c -o SDL_gamecontroller.o
-
-SDL_joystick.o: ../src/joystick/SDL_joystick.c
-	$(CC) $(CFLAGS) -c ../src/joystick/SDL_joystick.c -o SDL_joystick.o
-
-SDL_steam_virtual_gamepad.o: ../src/joystick/SDL_steam_virtual_gamepad.c
-	$(CC) $(CFLAGS) -c ../src/joystick/SDL_steam_virtual_gamepad.c -o SDL_steam_virtual_gamepad.o
-
-controller_type.o: ../src/joystick/controller_type.c
-	$(CC) $(CFLAGS) -c ../src/joystick/controller_type.c -o controller_type.o
-
-SDL_sysjoystick.o: ../src/joystick/dummy/SDL_sysjoystick.c
-	$(CC) $(CFLAGS) -c ../src/joystick/dummy/SDL_sysjoystick.c -o SDL_sysjoystick.o
-
-SDL_sysloadso.o: ../src/loadso/dlopen/SDL_sysloadso.c
-	$(CC) $(CFLAGS) -c ../src/loadso/dlopen/SDL_sysloadso.c -o SDL_sysloadso.o
-
-SDL_locale.o: ../src/locale/SDL_locale.c
-	$(CC) $(CFLAGS) -c ../src/locale/SDL_locale.c -o SDL_locale.o
-
-SDL_syslocale.o: ../src/locale/unix/SDL_syslocale.c
-	$(CC) $(CFLAGS) -c ../src/locale/unix/SDL_syslocale.c -o SDL_syslocale.o
-
-SDL_url.o: ../src/misc/SDL_url.c
-	$(CC) $(CFLAGS) -c ../src/misc/SDL_url.c -o SDL_url.o
-
-SDL_sysurl.o: ../src/misc/unix/SDL_sysurl.c
-	$(CC) $(CFLAGS) -c ../src/misc/unix/SDL_sysurl.c -o SDL_sysurl.o
-
-SDL_power.o: ../src/power/SDL_power.c
-	$(CC) $(CFLAGS) -c ../src/power/SDL_power.c -o SDL_power.o
-
-SDL_render.o: ../src/render/SDL_render.c
-	$(CC) $(CFLAGS) -c ../src/render/SDL_render.c -o SDL_render.o
-
-SDL_yuv_sw.o: ../src/render/SDL_yuv_sw.c
-	$(CC) $(CFLAGS) -c ../src/render/SDL_yuv_sw.c -o SDL_yuv_sw.o
-
-SDL_render_gl.o: ../src/render/opengl/SDL_render_gl.c
-	$(CC) $(CFLAGS) -c ../src/render/opengl/SDL_render_gl.c -o SDL_render_gl.o
-
-SDL_shaders_gl.o: ../src/render/opengl/SDL_shaders_gl.c
-	$(CC) $(CFLAGS) -c ../src/render/opengl/SDL_shaders_gl.c -o SDL_shaders_gl.o
-
-SDL_blendfillrect.o: ../src/render/software/SDL_blendfillrect.c
-	$(CC) $(CFLAGS) -c ../src/render/software/SDL_blendfillrect.c -o SDL_blendfillrect.o
-
-SDL_blendline.o: ../src/render/software/SDL_blendline.c
-	$(CC) $(CFLAGS) -c ../src/render/software/SDL_blendline.c -o SDL_blendline.o
-
-SDL_blendpoint.o: ../src/render/software/SDL_blendpoint.c
-	$(CC) $(CFLAGS) -c ../src/render/software/SDL_blendpoint.c -o SDL_blendpoint.o
-
-SDL_drawline.o: ../src/render/software/SDL_drawline.c
-	$(CC) $(CFLAGS) -c ../src/render/software/SDL_drawline.c -o SDL_drawline.o
-
-SDL_drawpoint.o: ../src/render/software/SDL_drawpoint.c
-	$(CC) $(CFLAGS) -c ../src/render/software/SDL_drawpoint.c -o SDL_drawpoint.o
-
-SDL_render_sw.o: ../src/render/software/SDL_render_sw.c
-	$(CC) $(CFLAGS) -c ../src/render/software/SDL_render_sw.c -o SDL_render_sw.o
-
-SDL_rotate.o: ../src/render/software/SDL_rotate.c
-	$(CC) $(CFLAGS) -c ../src/render/software/SDL_rotate.c -o SDL_rotate.o
-
-SDL_triangle.o: ../src/render/software/SDL_triangle.c
-	$(CC) $(CFLAGS) -c ../src/render/software/SDL_triangle.c -o SDL_triangle.o
-
-SDL_sensor.o: ../src/sensor/SDL_sensor.c
-	$(CC) $(CFLAGS) -c ../src/sensor/SDL_sensor.c -o SDL_sensor.o
-
-SDL_dummysensor.o: ../src/sensor/dummy/SDL_dummysensor.c
-	$(CC) $(CFLAGS) -c ../src/sensor/dummy/SDL_dummysensor.c -o SDL_dummysensor.o
-
-SDL_crc16.o: ../src/stdlib/SDL_crc16.c
-	$(CC) $(CFLAGS) -c ../src/stdlib/SDL_crc16.c -o SDL_crc16.o
-
-SDL_crc32.o: ../src/stdlib/SDL_crc32.c
-	$(CC) $(CFLAGS) -c ../src/stdlib/SDL_crc32.c -o SDL_crc32.o
-
-SDL_getenv.o: ../src/stdlib/SDL_getenv.c
-	$(CC) $(CFLAGS) -c ../src/stdlib/SDL_getenv.c -o SDL_getenv.o
-
-SDL_iconv.o: ../src/stdlib/SDL_iconv.c
-	$(CC) $(CFLAGS) -c ../src/stdlib/SDL_iconv.c -o SDL_iconv.o
-
-SDL_malloc.o: ../src/stdlib/SDL_malloc.c
-	$(CC) $(CFLAGS) -c ../src/stdlib/SDL_malloc.c -o SDL_malloc.o
-
-SDL_qsort.o: ../src/stdlib/SDL_qsort.c
-	$(CC) $(CFLAGS) -c ../src/stdlib/SDL_qsort.c -o SDL_qsort.o
-
-SDL_stdlib.o: ../src/stdlib/SDL_stdlib.c
-	$(CC) $(CFLAGS) -c ../src/stdlib/SDL_stdlib.c -o SDL_stdlib.o
-
-SDL_string.o: ../src/stdlib/SDL_string.c
-	$(CC) $(CFLAGS) -c ../src/stdlib/SDL_string.c -o SDL_string.o
-
-SDL_strtokr.o: ../src/stdlib/SDL_strtokr.c
-	$(CC) $(CFLAGS) -c ../src/stdlib/SDL_strtokr.c -o SDL_strtokr.o
-
-SDL_thread.o: ../src/thread/SDL_thread.c
-	$(CC) $(CFLAGS) -c ../src/thread/SDL_thread.c -o SDL_thread.o
-
-SDL_syscond.o: ../src/thread/pthread/SDL_syscond.c
-	$(CC) $(CFLAGS) -c ../src/thread/pthread/SDL_syscond.c -o SDL_syscond.o
-
-SDL_sysmutex.o: ../src/thread/pthread/SDL_sysmutex.c
-	$(CC) $(CFLAGS) -c ../src/thread/pthread/SDL_sysmutex.c -o SDL_sysmutex.o
-
-SDL_syssem.o: ../src/thread/pthread/SDL_syssem.c
-	$(CC) $(CFLAGS) -c ../src/thread/pthread/SDL_syssem.c -o SDL_syssem.o
-
-SDL_systhread.o: ../src/thread/pthread/SDL_systhread.c
-	$(CC) $(CFLAGS) -c ../src/thread/pthread/SDL_systhread.c -o SDL_systhread.o
-
-SDL_systls.o: ../src/thread/pthread/SDL_systls.c
-	$(CC) $(CFLAGS) -c ../src/thread/pthread/SDL_systls.c -o SDL_systls.o
-
-SDL_timer.o: ../src/timer/SDL_timer.c
-	$(CC) $(CFLAGS) -c ../src/timer/SDL_timer.c -o SDL_timer.o
-
-SDL_systimer.o: ../src/timer/irix/SDL_systimer.c
-	$(CC) $(CFLAGS) -c ../src/timer/irix/SDL_systimer.c -o SDL_systimer.o
-
-SDL_RLEaccel.o: ../src/video/SDL_RLEaccel.c
-	$(CC) $(CFLAGS) -c ../src/video/SDL_RLEaccel.c -o SDL_RLEaccel.o
-
-SDL_blit.o: ../src/video/SDL_blit.c
-	$(CC) $(CFLAGS) -c ../src/video/SDL_blit.c -o SDL_blit.o
-
-SDL_blit_0.o: ../src/video/SDL_blit_0.c
-	$(CC) $(CFLAGS) -c ../src/video/SDL_blit_0.c -o SDL_blit_0.o
-
-SDL_blit_1.o: ../src/video/SDL_blit_1.c
-	$(CC) $(CFLAGS) -c ../src/video/SDL_blit_1.c -o SDL_blit_1.o
-
-SDL_blit_A.o: ../src/video/SDL_blit_A.c
-	$(CC) $(CFLAGS) -c ../src/video/SDL_blit_A.c -o SDL_blit_A.o
-
-SDL_blit_N.o: ../src/video/SDL_blit_N.c
-	$(CC) $(CFLAGS) -c ../src/video/SDL_blit_N.c -o SDL_blit_N.o
-
-SDL_blit_auto.o: ../src/video/SDL_blit_auto.c
-	$(CC) $(CFLAGS) -c ../src/video/SDL_blit_auto.c -o SDL_blit_auto.o
-
-SDL_blit_copy.o: ../src/video/SDL_blit_copy.c
-	$(CC) $(CFLAGS) -c ../src/video/SDL_blit_copy.c -o SDL_blit_copy.o
-
-SDL_blit_slow.o: ../src/video/SDL_blit_slow.c
-	$(CC) $(CFLAGS) -c ../src/video/SDL_blit_slow.c -o SDL_blit_slow.o
-
-SDL_bmp.o: ../src/video/SDL_bmp.c
-	$(CC) $(CFLAGS) -c ../src/video/SDL_bmp.c -o SDL_bmp.o
-
-SDL_clipboard.o: ../src/video/SDL_clipboard.c
-	$(CC) $(CFLAGS) -c ../src/video/SDL_clipboard.c -o SDL_clipboard.o
-
-SDL_fillrect.o: ../src/video/SDL_fillrect.c
-	$(CC) $(CFLAGS) -c ../src/video/SDL_fillrect.c -o SDL_fillrect.o
-
-SDL_pixels.o: ../src/video/SDL_pixels.c
-	$(CC) $(CFLAGS) -c ../src/video/SDL_pixels.c -o SDL_pixels.o
-
-SDL_rect.o: ../src/video/SDL_rect.c
-	$(CC) $(CFLAGS) -c ../src/video/SDL_rect.c -o SDL_rect.o
-
-SDL_shape.o: ../src/video/SDL_shape.c
-	$(CC) $(CFLAGS) -c ../src/video/SDL_shape.c -o SDL_shape.o
-
-SDL_stretch.o: ../src/video/SDL_stretch.c
-	$(CC) $(CFLAGS) -c ../src/video/SDL_stretch.c -o SDL_stretch.o
-
-SDL_surface.o: ../src/video/SDL_surface.c
-	$(CC) $(CFLAGS) -c ../src/video/SDL_surface.c -o SDL_surface.o
-
-SDL_video.o: ../src/video/SDL_video.c
-	$(CC) $(CFLAGS) -c ../src/video/SDL_video.c -o SDL_video.o
-
-SDL_yuv.o: ../src/video/SDL_yuv.c
-	$(CC) $(CFLAGS) -c ../src/video/SDL_yuv.c -o SDL_yuv.o
-
-yuv_rgb_std.o: ../src/video/yuv2rgb/yuv_rgb_std.c
-	$(CC) $(CFLAGS) -c ../src/video/yuv2rgb/yuv_rgb_std.c -o yuv_rgb_std.o
-
-SDL_nullevents.o: ../src/video/dummy/SDL_nullevents.c
-	$(CC) $(CFLAGS) -c ../src/video/dummy/SDL_nullevents.c -o SDL_nullevents.o
-
-SDL_nullframebuffer.o: ../src/video/dummy/SDL_nullframebuffer.c
-	$(CC) $(CFLAGS) -c ../src/video/dummy/SDL_nullframebuffer.c -o SDL_nullframebuffer.o
-
-SDL_nullvideo.o: ../src/video/dummy/SDL_nullvideo.c
-	$(CC) $(CFLAGS) -c ../src/video/dummy/SDL_nullvideo.c -o SDL_nullvideo.o
-
-SDL_x11clipboard.o: ../src/video/x11/SDL_x11clipboard.c
-	$(CC) $(CFLAGS) -c ../src/video/x11/SDL_x11clipboard.c -o SDL_x11clipboard.o
-
-SDL_x11dyn.o: ../src/video/x11/SDL_x11dyn.c
-	$(CC) $(CFLAGS) -c ../src/video/x11/SDL_x11dyn.c -o SDL_x11dyn.o
-
-SDL_x11events.o: ../src/video/x11/SDL_x11events.c
-	$(CC) $(CFLAGS) -c ../src/video/x11/SDL_x11events.c -o SDL_x11events.o
-
-SDL_x11framebuffer.o: ../src/video/x11/SDL_x11framebuffer.c
-	$(CC) $(CFLAGS) -c ../src/video/x11/SDL_x11framebuffer.c -o SDL_x11framebuffer.o
-
-SDL_x11keyboard.o: ../src/video/x11/SDL_x11keyboard.c
-	$(CC) $(CFLAGS) -c ../src/video/x11/SDL_x11keyboard.c -o SDL_x11keyboard.o
-
-SDL_x11messagebox.o: ../src/video/x11/SDL_x11messagebox.c
-	$(CC) $(CFLAGS) -c ../src/video/x11/SDL_x11messagebox.c -o SDL_x11messagebox.o
-
-SDL_x11modes.o: ../src/video/x11/SDL_x11modes.c
-	$(CC) $(CFLAGS) -c ../src/video/x11/SDL_x11modes.c -o SDL_x11modes.o
-
-SDL_x11mouse.o: ../src/video/x11/SDL_x11mouse.c
-	$(CC) $(CFLAGS) -c ../src/video/x11/SDL_x11mouse.c -o SDL_x11mouse.o
-
-SDL_x11opengl.o: ../src/video/x11/SDL_x11opengl.c
-	$(CC) $(CFLAGS) -c ../src/video/x11/SDL_x11opengl.c -o SDL_x11opengl.o
-
-SDL_x11shape.o: ../src/video/x11/SDL_x11shape.c
-	$(CC) $(CFLAGS) -c ../src/video/x11/SDL_x11shape.c -o SDL_x11shape.o
-
-SDL_x11touch.o: ../src/video/x11/SDL_x11touch.c
-	$(CC) $(CFLAGS) -c ../src/video/x11/SDL_x11touch.c -o SDL_x11touch.o
-
-SDL_x11video.o: ../src/video/x11/SDL_x11video.c
-	$(CC) $(CFLAGS) -c ../src/video/x11/SDL_x11video.c -o SDL_x11video.o
-
-SDL_x11window.o: ../src/video/x11/SDL_x11window.c
-	$(CC) $(CFLAGS) -c ../src/video/x11/SDL_x11window.c -o SDL_x11window.o
-
-SDL_x11xfixes.o: ../src/video/x11/SDL_x11xfixes.c
-	$(CC) $(CFLAGS) -c ../src/video/x11/SDL_x11xfixes.c -o SDL_x11xfixes.o
-
-SDL_x11xinput2.o: ../src/video/x11/SDL_x11xinput2.c
-	$(CC) $(CFLAGS) -c ../src/video/x11/SDL_x11xinput2.c -o SDL_x11xinput2.o
+# Generated by gen.sh on Tue Jan 20 02:54:51 PM PST 2026
+
+# --- Directory: SRC (../src) ---
+objs/SRC/SDL_assert.o: ../src/SDL_assert.c
+	@mkdir -p objs/SRC
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src  $(DIR_SRC_CPPFLAGS) $(DIR_SRC_CFLAGS) -c ../src/SDL_assert.c -o objs/SRC/SDL_assert.o
+
+objs/SRC/SDL.o: ../src/SDL.c
+	@mkdir -p objs/SRC
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src  $(DIR_SRC_CPPFLAGS) $(DIR_SRC_CFLAGS) -c ../src/SDL.c -o objs/SRC/SDL.o
+
+objs/SRC/SDL_dataqueue.o: ../src/SDL_dataqueue.c
+	@mkdir -p objs/SRC
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src  $(DIR_SRC_CPPFLAGS) $(DIR_SRC_CFLAGS) -c ../src/SDL_dataqueue.c -o objs/SRC/SDL_dataqueue.o
+
+objs/SRC/SDL_error.o: ../src/SDL_error.c
+	@mkdir -p objs/SRC
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src  $(DIR_SRC_CPPFLAGS) $(DIR_SRC_CFLAGS) -c ../src/SDL_error.c -o objs/SRC/SDL_error.o
+
+objs/SRC/SDL_guid.o: ../src/SDL_guid.c
+	@mkdir -p objs/SRC
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src  $(DIR_SRC_CPPFLAGS) $(DIR_SRC_CFLAGS) -c ../src/SDL_guid.c -o objs/SRC/SDL_guid.o
+
+objs/SRC/SDL_hints.o: ../src/SDL_hints.c
+	@mkdir -p objs/SRC
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src  $(DIR_SRC_CPPFLAGS) $(DIR_SRC_CFLAGS) -c ../src/SDL_hints.c -o objs/SRC/SDL_hints.o
+
+objs/SRC/SDL_list.o: ../src/SDL_list.c
+	@mkdir -p objs/SRC
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src  $(DIR_SRC_CPPFLAGS) $(DIR_SRC_CFLAGS) -c ../src/SDL_list.c -o objs/SRC/SDL_list.o
+
+objs/SRC/SDL_log.o: ../src/SDL_log.c
+	@mkdir -p objs/SRC
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src  $(DIR_SRC_CPPFLAGS) $(DIR_SRC_CFLAGS) -c ../src/SDL_log.c -o objs/SRC/SDL_log.o
+
+objs/SRC/SDL_utils.o: ../src/SDL_utils.c
+	@mkdir -p objs/SRC
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src  $(DIR_SRC_CPPFLAGS) $(DIR_SRC_CFLAGS) -c ../src/SDL_utils.c -o objs/SRC/SDL_utils.o
+
+DIR_SRC_OBJS = \
+    objs/SRC/SDL_assert.o \
+    objs/SRC/SDL.o \
+    objs/SRC/SDL_dataqueue.o \
+    objs/SRC/SDL_error.o \
+    objs/SRC/SDL_guid.o \
+    objs/SRC/SDL_hints.o \
+    objs/SRC/SDL_list.o \
+    objs/SRC/SDL_log.o \
+    objs/SRC/SDL_utils.o
+
+# --- Directory: ATOMIC (../src/atomic) ---
+objs/ATOMIC/SDL_atomic.o: ../src/atomic/SDL_atomic.c
+	@mkdir -p objs/ATOMIC
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/atomic  $(DIR_ATOMIC_CPPFLAGS) $(DIR_ATOMIC_CFLAGS) -c ../src/atomic/SDL_atomic.c -o objs/ATOMIC/SDL_atomic.o
+
+objs/ATOMIC/SDL_spinlock.o: ../src/atomic/SDL_spinlock.c
+	@mkdir -p objs/ATOMIC
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/atomic  $(DIR_ATOMIC_CPPFLAGS) $(DIR_ATOMIC_CFLAGS) -c ../src/atomic/SDL_spinlock.c -o objs/ATOMIC/SDL_spinlock.o
+
+DIR_ATOMIC_OBJS = \
+    objs/ATOMIC/SDL_atomic.o \
+    objs/ATOMIC/SDL_spinlock.o
+
+# --- Directory: AUDIO (../src/audio) ---
+objs/AUDIO/SDL_audio.o: ../src/audio/SDL_audio.c
+	@mkdir -p objs/AUDIO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/audio  $(DIR_AUDIO_CPPFLAGS) $(DIR_AUDIO_CFLAGS) -c ../src/audio/SDL_audio.c -o objs/AUDIO/SDL_audio.o
+
+objs/AUDIO/SDL_audiocvt.o: ../src/audio/SDL_audiocvt.c
+	@mkdir -p objs/AUDIO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/audio  $(DIR_AUDIO_CPPFLAGS) $(DIR_AUDIO_CFLAGS) -c ../src/audio/SDL_audiocvt.c -o objs/AUDIO/SDL_audiocvt.o
+
+objs/AUDIO/SDL_audiodev.o: ../src/audio/SDL_audiodev.c
+	@mkdir -p objs/AUDIO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/audio  $(DIR_AUDIO_CPPFLAGS) $(DIR_AUDIO_CFLAGS) -c ../src/audio/SDL_audiodev.c -o objs/AUDIO/SDL_audiodev.o
+
+objs/AUDIO/SDL_audiotypecvt.o: ../src/audio/SDL_audiotypecvt.c
+	@mkdir -p objs/AUDIO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/audio  $(DIR_AUDIO_CPPFLAGS) $(DIR_AUDIO_CFLAGS) -c ../src/audio/SDL_audiotypecvt.c -o objs/AUDIO/SDL_audiotypecvt.o
+
+objs/AUDIO/SDL_mixer.o: ../src/audio/SDL_mixer.c
+	@mkdir -p objs/AUDIO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/audio  $(DIR_AUDIO_CPPFLAGS) $(DIR_AUDIO_CFLAGS) -c ../src/audio/SDL_mixer.c -o objs/AUDIO/SDL_mixer.o
+
+objs/AUDIO/SDL_wave.o: ../src/audio/SDL_wave.c
+	@mkdir -p objs/AUDIO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/audio  $(DIR_AUDIO_CPPFLAGS) $(DIR_AUDIO_CFLAGS) -c ../src/audio/SDL_wave.c -o objs/AUDIO/SDL_wave.o
+
+DIR_AUDIO_OBJS = \
+    objs/AUDIO/SDL_audio.o \
+    objs/AUDIO/SDL_audiocvt.o \
+    objs/AUDIO/SDL_audiodev.o \
+    objs/AUDIO/SDL_audiotypecvt.o \
+    objs/AUDIO/SDL_mixer.o \
+    objs/AUDIO/SDL_wave.o
+
+# --- Directory: AUDIO_DISK (../src/audio/disk) ---
+objs/AUDIO_DISK/SDL_diskaudio.o: ../src/audio/disk/SDL_diskaudio.c
+	@mkdir -p objs/AUDIO_DISK
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/audio/disk  $(DIR_AUDIO_DISK_CPPFLAGS) $(DIR_AUDIO_DISK_CFLAGS) -c ../src/audio/disk/SDL_diskaudio.c -o objs/AUDIO_DISK/SDL_diskaudio.o
+
+DIR_AUDIO_DISK_OBJS = \
+    objs/AUDIO_DISK/SDL_diskaudio.o
+
+# --- Directory: AUDIO_DMEDIA (../src/audio/dmedia) ---
+objs/AUDIO_DMEDIA/SDL_dmediaaudio.o: ../src/audio/dmedia/SDL_dmediaaudio.c
+	@mkdir -p objs/AUDIO_DMEDIA
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/audio/dmedia  $(DIR_AUDIO_DMEDIA_CPPFLAGS) $(DIR_AUDIO_DMEDIA_CFLAGS) -c ../src/audio/dmedia/SDL_dmediaaudio.c -o objs/AUDIO_DMEDIA/SDL_dmediaaudio.o
+
+DIR_AUDIO_DMEDIA_OBJS = \
+    objs/AUDIO_DMEDIA/SDL_dmediaaudio.o
+
+# --- Directory: AUDIO_DM (../src/audio/dummy) ---
+objs/AUDIO_DM/SDL_dummyaudio.o: ../src/audio/dummy/SDL_dummyaudio.c
+	@mkdir -p objs/AUDIO_DM
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/audio/dummy  $(DIR_AUDIO_DM_CPPFLAGS) $(DIR_AUDIO_DM_CFLAGS) -c ../src/audio/dummy/SDL_dummyaudio.c -o objs/AUDIO_DM/SDL_dummyaudio.o
+
+DIR_AUDIO_DM_OBJS = \
+    objs/AUDIO_DM/SDL_dummyaudio.o
+
+# --- Directory: UNIX (../src/core/unix) ---
+objs/UNIX/SDL_poll.o: ../src/core/unix/SDL_poll.c
+	@mkdir -p objs/UNIX
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/core/unix  $(DIR_UNIX_CPPFLAGS) $(DIR_UNIX_CFLAGS) -c ../src/core/unix/SDL_poll.c -o objs/UNIX/SDL_poll.o
+
+DIR_UNIX_OBJS = \
+    objs/UNIX/SDL_poll.o
+
+# --- Directory: CPUINFO (../src/cpuinfo) ---
+objs/CPUINFO/SDL_cpuinfo_irix.o: ../src/cpuinfo/SDL_cpuinfo_irix.c
+	@mkdir -p objs/CPUINFO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/cpuinfo  $(DIR_CPUINFO_CPPFLAGS) $(DIR_CPUINFO_CFLAGS) -c ../src/cpuinfo/SDL_cpuinfo_irix.c -o objs/CPUINFO/SDL_cpuinfo_irix.o
+
+DIR_CPUINFO_OBJS = \
+    objs/CPUINFO/SDL_cpuinfo_irix.o
+
+# --- Directory: DYNAPI (../src/dynapi) ---
+objs/DYNAPI/SDL_dynapi.o: ../src/dynapi/SDL_dynapi.c
+	@mkdir -p objs/DYNAPI
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/dynapi  $(DIR_DYNAPI_CPPFLAGS) $(DIR_DYNAPI_CFLAGS) -c ../src/dynapi/SDL_dynapi.c -o objs/DYNAPI/SDL_dynapi.o
+
+DIR_DYNAPI_OBJS = \
+    objs/DYNAPI/SDL_dynapi.o
+
+# --- Directory: EVENTS (../src/events) ---
+objs/EVENTS/imKStoUCS.o: ../src/events/imKStoUCS.c
+	@mkdir -p objs/EVENTS
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/events  $(DIR_EVENTS_CPPFLAGS) $(DIR_EVENTS_CFLAGS) -c ../src/events/imKStoUCS.c -o objs/EVENTS/imKStoUCS.o
+
+objs/EVENTS/SDL_clipboardevents.o: ../src/events/SDL_clipboardevents.c
+	@mkdir -p objs/EVENTS
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/events  $(DIR_EVENTS_CPPFLAGS) $(DIR_EVENTS_CFLAGS) -c ../src/events/SDL_clipboardevents.c -o objs/EVENTS/SDL_clipboardevents.o
+
+objs/EVENTS/SDL_displayevents.o: ../src/events/SDL_displayevents.c
+	@mkdir -p objs/EVENTS
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/events  $(DIR_EVENTS_CPPFLAGS) $(DIR_EVENTS_CFLAGS) -c ../src/events/SDL_displayevents.c -o objs/EVENTS/SDL_displayevents.o
+
+objs/EVENTS/SDL_dropevents.o: ../src/events/SDL_dropevents.c
+	@mkdir -p objs/EVENTS
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/events  $(DIR_EVENTS_CPPFLAGS) $(DIR_EVENTS_CFLAGS) -c ../src/events/SDL_dropevents.c -o objs/EVENTS/SDL_dropevents.o
+
+objs/EVENTS/SDL_events.o: ../src/events/SDL_events.c
+	@mkdir -p objs/EVENTS
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/events  $(DIR_EVENTS_CPPFLAGS) $(DIR_EVENTS_CFLAGS) -c ../src/events/SDL_events.c -o objs/EVENTS/SDL_events.o
+
+objs/EVENTS/SDL_gesture.o: ../src/events/SDL_gesture.c
+	@mkdir -p objs/EVENTS
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/events  $(DIR_EVENTS_CPPFLAGS) $(DIR_EVENTS_CFLAGS) -c ../src/events/SDL_gesture.c -o objs/EVENTS/SDL_gesture.o
+
+objs/EVENTS/SDL_keyboard.o: ../src/events/SDL_keyboard.c
+	@mkdir -p objs/EVENTS
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/events  $(DIR_EVENTS_CPPFLAGS) $(DIR_EVENTS_CFLAGS) -c ../src/events/SDL_keyboard.c -o objs/EVENTS/SDL_keyboard.o
+
+objs/EVENTS/SDL_keysym_to_scancode.o: ../src/events/SDL_keysym_to_scancode.c
+	@mkdir -p objs/EVENTS
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/events  $(DIR_EVENTS_CPPFLAGS) $(DIR_EVENTS_CFLAGS) -c ../src/events/SDL_keysym_to_scancode.c -o objs/EVENTS/SDL_keysym_to_scancode.o
+
+objs/EVENTS/SDL_mouse.o: ../src/events/SDL_mouse.c
+	@mkdir -p objs/EVENTS
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/events  $(DIR_EVENTS_CPPFLAGS) $(DIR_EVENTS_CFLAGS) -c ../src/events/SDL_mouse.c -o objs/EVENTS/SDL_mouse.o
+
+objs/EVENTS/SDL_quit.o: ../src/events/SDL_quit.c
+	@mkdir -p objs/EVENTS
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/events  $(DIR_EVENTS_CPPFLAGS) $(DIR_EVENTS_CFLAGS) -c ../src/events/SDL_quit.c -o objs/EVENTS/SDL_quit.o
+
+objs/EVENTS/SDL_scancode_tables.o: ../src/events/SDL_scancode_tables.c
+	@mkdir -p objs/EVENTS
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/events  $(DIR_EVENTS_CPPFLAGS) $(DIR_EVENTS_CFLAGS) -c ../src/events/SDL_scancode_tables.c -o objs/EVENTS/SDL_scancode_tables.o
+
+objs/EVENTS/SDL_touch.o: ../src/events/SDL_touch.c
+	@mkdir -p objs/EVENTS
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/events  $(DIR_EVENTS_CPPFLAGS) $(DIR_EVENTS_CFLAGS) -c ../src/events/SDL_touch.c -o objs/EVENTS/SDL_touch.o
+
+objs/EVENTS/SDL_windowevents.o: ../src/events/SDL_windowevents.c
+	@mkdir -p objs/EVENTS
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/events  $(DIR_EVENTS_CPPFLAGS) $(DIR_EVENTS_CFLAGS) -c ../src/events/SDL_windowevents.c -o objs/EVENTS/SDL_windowevents.o
+
+DIR_EVENTS_OBJS = \
+    objs/EVENTS/imKStoUCS.o \
+    objs/EVENTS/SDL_clipboardevents.o \
+    objs/EVENTS/SDL_displayevents.o \
+    objs/EVENTS/SDL_dropevents.o \
+    objs/EVENTS/SDL_events.o \
+    objs/EVENTS/SDL_gesture.o \
+    objs/EVENTS/SDL_keyboard.o \
+    objs/EVENTS/SDL_keysym_to_scancode.o \
+    objs/EVENTS/SDL_mouse.o \
+    objs/EVENTS/SDL_quit.o \
+    objs/EVENTS/SDL_scancode_tables.o \
+    objs/EVENTS/SDL_touch.o \
+    objs/EVENTS/SDL_windowevents.o
+
+# --- Directory: FILE (../src/file) ---
+objs/FILE/SDL_rwops.o: ../src/file/SDL_rwops.c
+	@mkdir -p objs/FILE
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/file  $(DIR_FILE_CPPFLAGS) $(DIR_FILE_CFLAGS) -c ../src/file/SDL_rwops.c -o objs/FILE/SDL_rwops.o
+
+DIR_FILE_OBJS = \
+    objs/FILE/SDL_rwops.o
+
+# --- Directory: FS (../src/filesystem/unix) ---
+objs/FS/SDL_sysfilesystem.o: ../src/filesystem/unix/SDL_sysfilesystem.c
+	@mkdir -p objs/FS
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/filesystem/unix  $(DIR_FS_CPPFLAGS) $(DIR_FS_CFLAGS) -c ../src/filesystem/unix/SDL_sysfilesystem.c -o objs/FS/SDL_sysfilesystem.o
+
+DIR_FS_OBJS = \
+    objs/FS/SDL_sysfilesystem.o
+
+# --- Directory: HAPTIC (../src/haptic) ---
+objs/HAPTIC/SDL_haptic.o: ../src/haptic/SDL_haptic.c
+	@mkdir -p objs/HAPTIC
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/haptic  $(DIR_HAPTIC_CPPFLAGS) $(DIR_HAPTIC_CFLAGS) -c ../src/haptic/SDL_haptic.c -o objs/HAPTIC/SDL_haptic.o
+
+DIR_HAPTIC_OBJS = \
+    objs/HAPTIC/SDL_haptic.o
+
+# --- Directory: HAPTIC_DM (../src/haptic/dummy) ---
+objs/HAPTIC_DM/SDL_syshaptic.o: ../src/haptic/dummy/SDL_syshaptic.c
+	@mkdir -p objs/HAPTIC_DM
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/haptic/dummy  $(DIR_HAPTIC_DM_CPPFLAGS) $(DIR_HAPTIC_DM_CFLAGS) -c ../src/haptic/dummy/SDL_syshaptic.c -o objs/HAPTIC_DM/SDL_syshaptic.o
+
+DIR_HAPTIC_DM_OBJS = \
+    objs/HAPTIC_DM/SDL_syshaptic.o
+
+# --- Directory: HIDAPI (../src/hidapi) ---
+objs/HIDAPI/SDL_hidapi.o: ../src/hidapi/SDL_hidapi.c
+	@mkdir -p objs/HIDAPI
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/hidapi  $(DIR_HIDAPI_CPPFLAGS) $(DIR_HIDAPI_CFLAGS) -c ../src/hidapi/SDL_hidapi.c -o objs/HIDAPI/SDL_hidapi.o
+
+DIR_HIDAPI_OBJS = \
+    objs/HIDAPI/SDL_hidapi.o
+
+# --- Directory: JOY (../src/joystick) ---
+objs/JOY/controller_type.o: ../src/joystick/controller_type.c
+	@mkdir -p objs/JOY
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/joystick  $(DIR_JOY_CPPFLAGS) $(DIR_JOY_CFLAGS) -c ../src/joystick/controller_type.c -o objs/JOY/controller_type.o
+
+objs/JOY/SDL_gamecontroller.o: ../src/joystick/SDL_gamecontroller.c
+	@mkdir -p objs/JOY
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/joystick  $(DIR_JOY_CPPFLAGS) $(DIR_JOY_CFLAGS) -c ../src/joystick/SDL_gamecontroller.c -o objs/JOY/SDL_gamecontroller.o
+
+objs/JOY/SDL_joystick.o: ../src/joystick/SDL_joystick.c
+	@mkdir -p objs/JOY
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/joystick  $(DIR_JOY_CPPFLAGS) $(DIR_JOY_CFLAGS) -c ../src/joystick/SDL_joystick.c -o objs/JOY/SDL_joystick.o
+
+objs/JOY/SDL_steam_virtual_gamepad.o: ../src/joystick/SDL_steam_virtual_gamepad.c
+	@mkdir -p objs/JOY
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/joystick  $(DIR_JOY_CPPFLAGS) $(DIR_JOY_CFLAGS) -c ../src/joystick/SDL_steam_virtual_gamepad.c -o objs/JOY/SDL_steam_virtual_gamepad.o
+
+DIR_JOY_OBJS = \
+    objs/JOY/controller_type.o \
+    objs/JOY/SDL_gamecontroller.o \
+    objs/JOY/SDL_joystick.o \
+    objs/JOY/SDL_steam_virtual_gamepad.o
+
+# --- Directory: JOY_DM (../src/joystick/dummy) ---
+objs/JOY_DM/SDL_sysjoystick.o: ../src/joystick/dummy/SDL_sysjoystick.c
+	@mkdir -p objs/JOY_DM
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/joystick/dummy  $(DIR_JOY_DM_CPPFLAGS) $(DIR_JOY_DM_CFLAGS) -c ../src/joystick/dummy/SDL_sysjoystick.c -o objs/JOY_DM/SDL_sysjoystick.o
+
+DIR_JOY_DM_OBJS = \
+    objs/JOY_DM/SDL_sysjoystick.o
+
+# --- Directory: LOADSO (../src/loadso/dlopen) ---
+objs/LOADSO/SDL_sysloadso.o: ../src/loadso/dlopen/SDL_sysloadso.c
+	@mkdir -p objs/LOADSO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/loadso/dlopen  $(DIR_LOADSO_CPPFLAGS) $(DIR_LOADSO_CFLAGS) -c ../src/loadso/dlopen/SDL_sysloadso.c -o objs/LOADSO/SDL_sysloadso.o
+
+DIR_LOADSO_OBJS = \
+    objs/LOADSO/SDL_sysloadso.o
+
+# --- Directory: LOCALE (../src/locale) ---
+objs/LOCALE/SDL_locale.o: ../src/locale/SDL_locale.c
+	@mkdir -p objs/LOCALE
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/locale  $(DIR_LOCALE_CPPFLAGS) $(DIR_LOCALE_CFLAGS) -c ../src/locale/SDL_locale.c -o objs/LOCALE/SDL_locale.o
+
+DIR_LOCALE_OBJS = \
+    objs/LOCALE/SDL_locale.o
+
+# --- Directory: LOCALE_UX (../src/locale/unix) ---
+objs/LOCALE_UX/SDL_syslocale.o: ../src/locale/unix/SDL_syslocale.c
+	@mkdir -p objs/LOCALE_UX
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/locale/unix  $(DIR_LOCALE_UX_CPPFLAGS) $(DIR_LOCALE_UX_CFLAGS) -c ../src/locale/unix/SDL_syslocale.c -o objs/LOCALE_UX/SDL_syslocale.o
+
+DIR_LOCALE_UX_OBJS = \
+    objs/LOCALE_UX/SDL_syslocale.o
+
+# --- Directory: MISC (../src/misc) ---
+objs/MISC/SDL_url.o: ../src/misc/SDL_url.c
+	@mkdir -p objs/MISC
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/misc  $(DIR_MISC_CPPFLAGS) $(DIR_MISC_CFLAGS) -c ../src/misc/SDL_url.c -o objs/MISC/SDL_url.o
+
+DIR_MISC_OBJS = \
+    objs/MISC/SDL_url.o
+
+# --- Directory: MISC_UX (../src/misc/unix) ---
+objs/MISC_UX/SDL_sysurl.o: ../src/misc/unix/SDL_sysurl.c
+	@mkdir -p objs/MISC_UX
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/misc/unix  $(DIR_MISC_UX_CPPFLAGS) $(DIR_MISC_UX_CFLAGS) -c ../src/misc/unix/SDL_sysurl.c -o objs/MISC_UX/SDL_sysurl.o
+
+DIR_MISC_UX_OBJS = \
+    objs/MISC_UX/SDL_sysurl.o
+
+# --- Directory: POWER (../src/power) ---
+objs/POWER/SDL_power.o: ../src/power/SDL_power.c
+	@mkdir -p objs/POWER
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/power  $(DIR_POWER_CPPFLAGS) $(DIR_POWER_CFLAGS) -c ../src/power/SDL_power.c -o objs/POWER/SDL_power.o
+
+DIR_POWER_OBJS = \
+    objs/POWER/SDL_power.o
+
+# --- Directory: RENDER (../src/render) ---
+objs/RENDER/SDL_d3dmath.o: ../src/render/SDL_d3dmath.c
+	@mkdir -p objs/RENDER
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/render  $(DIR_RENDER_CPPFLAGS) $(DIR_RENDER_CFLAGS) -c ../src/render/SDL_d3dmath.c -o objs/RENDER/SDL_d3dmath.o
+
+objs/RENDER/SDL_render.o: ../src/render/SDL_render.c
+	@mkdir -p objs/RENDER
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/render  $(DIR_RENDER_CPPFLAGS) $(DIR_RENDER_CFLAGS) -c ../src/render/SDL_render.c -o objs/RENDER/SDL_render.o
+
+objs/RENDER/SDL_yuv_sw.o: ../src/render/SDL_yuv_sw.c
+	@mkdir -p objs/RENDER
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/render  $(DIR_RENDER_CPPFLAGS) $(DIR_RENDER_CFLAGS) -c ../src/render/SDL_yuv_sw.c -o objs/RENDER/SDL_yuv_sw.o
+
+DIR_RENDER_OBJS = \
+    objs/RENDER/SDL_d3dmath.o \
+    objs/RENDER/SDL_render.o \
+    objs/RENDER/SDL_yuv_sw.o
+
+# --- Directory: RENDER_OGL (../src/render/opengl) ---
+objs/RENDER_OGL/SDL_render_gl.o: ../src/render/opengl/SDL_render_gl.c
+	@mkdir -p objs/RENDER_OGL
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/render/opengl  $(DIR_RENDER_OGL_CPPFLAGS) $(DIR_RENDER_OGL_CFLAGS) -c ../src/render/opengl/SDL_render_gl.c -o objs/RENDER_OGL/SDL_render_gl.o
+
+objs/RENDER_OGL/SDL_shaders_gl.o: ../src/render/opengl/SDL_shaders_gl.c
+	@mkdir -p objs/RENDER_OGL
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/render/opengl  $(DIR_RENDER_OGL_CPPFLAGS) $(DIR_RENDER_OGL_CFLAGS) -c ../src/render/opengl/SDL_shaders_gl.c -o objs/RENDER_OGL/SDL_shaders_gl.o
+
+DIR_RENDER_OGL_OBJS = \
+    objs/RENDER_OGL/SDL_render_gl.o \
+    objs/RENDER_OGL/SDL_shaders_gl.o
+
+# --- Directory: RENDER_SW (../src/render/software) ---
+objs/RENDER_SW/SDL_blendfillrect.o: ../src/render/software/SDL_blendfillrect.c
+	@mkdir -p objs/RENDER_SW
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/render/software  $(DIR_RENDER_SW_CPPFLAGS) $(DIR_RENDER_SW_CFLAGS) -c ../src/render/software/SDL_blendfillrect.c -o objs/RENDER_SW/SDL_blendfillrect.o
+
+objs/RENDER_SW/SDL_blendline.o: ../src/render/software/SDL_blendline.c
+	@mkdir -p objs/RENDER_SW
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/render/software  $(DIR_RENDER_SW_CPPFLAGS) $(DIR_RENDER_SW_CFLAGS) -c ../src/render/software/SDL_blendline.c -o objs/RENDER_SW/SDL_blendline.o
+
+objs/RENDER_SW/SDL_blendpoint.o: ../src/render/software/SDL_blendpoint.c
+	@mkdir -p objs/RENDER_SW
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/render/software  $(DIR_RENDER_SW_CPPFLAGS) $(DIR_RENDER_SW_CFLAGS) -c ../src/render/software/SDL_blendpoint.c -o objs/RENDER_SW/SDL_blendpoint.o
+
+objs/RENDER_SW/SDL_drawline.o: ../src/render/software/SDL_drawline.c
+	@mkdir -p objs/RENDER_SW
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/render/software  $(DIR_RENDER_SW_CPPFLAGS) $(DIR_RENDER_SW_CFLAGS) -c ../src/render/software/SDL_drawline.c -o objs/RENDER_SW/SDL_drawline.o
+
+objs/RENDER_SW/SDL_drawpoint.o: ../src/render/software/SDL_drawpoint.c
+	@mkdir -p objs/RENDER_SW
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/render/software  $(DIR_RENDER_SW_CPPFLAGS) $(DIR_RENDER_SW_CFLAGS) -c ../src/render/software/SDL_drawpoint.c -o objs/RENDER_SW/SDL_drawpoint.o
+
+objs/RENDER_SW/SDL_render_sw.o: ../src/render/software/SDL_render_sw.c
+	@mkdir -p objs/RENDER_SW
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/render/software  $(DIR_RENDER_SW_CPPFLAGS) $(DIR_RENDER_SW_CFLAGS) -c ../src/render/software/SDL_render_sw.c -o objs/RENDER_SW/SDL_render_sw.o
+
+objs/RENDER_SW/SDL_rotate.o: ../src/render/software/SDL_rotate.c
+	@mkdir -p objs/RENDER_SW
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/render/software  $(DIR_RENDER_SW_CPPFLAGS) $(DIR_RENDER_SW_CFLAGS) -c ../src/render/software/SDL_rotate.c -o objs/RENDER_SW/SDL_rotate.o
+
+objs/RENDER_SW/SDL_triangle.o: ../src/render/software/SDL_triangle.c
+	@mkdir -p objs/RENDER_SW
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/render/software  $(DIR_RENDER_SW_CPPFLAGS) $(DIR_RENDER_SW_CFLAGS) -c ../src/render/software/SDL_triangle.c -o objs/RENDER_SW/SDL_triangle.o
+
+DIR_RENDER_SW_OBJS = \
+    objs/RENDER_SW/SDL_blendfillrect.o \
+    objs/RENDER_SW/SDL_blendline.o \
+    objs/RENDER_SW/SDL_blendpoint.o \
+    objs/RENDER_SW/SDL_drawline.o \
+    objs/RENDER_SW/SDL_drawpoint.o \
+    objs/RENDER_SW/SDL_render_sw.o \
+    objs/RENDER_SW/SDL_rotate.o \
+    objs/RENDER_SW/SDL_triangle.o
+
+# --- Directory: SENSOR (../src/sensor) ---
+objs/SENSOR/SDL_sensor.o: ../src/sensor/SDL_sensor.c
+	@mkdir -p objs/SENSOR
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/sensor  $(DIR_SENSOR_CPPFLAGS) $(DIR_SENSOR_CFLAGS) -c ../src/sensor/SDL_sensor.c -o objs/SENSOR/SDL_sensor.o
+
+DIR_SENSOR_OBJS = \
+    objs/SENSOR/SDL_sensor.o
+
+# --- Directory: SENSOR_DM (../src/sensor/dummy) ---
+objs/SENSOR_DM/SDL_dummysensor.o: ../src/sensor/dummy/SDL_dummysensor.c
+	@mkdir -p objs/SENSOR_DM
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/sensor/dummy  $(DIR_SENSOR_DM_CPPFLAGS) $(DIR_SENSOR_DM_CFLAGS) -c ../src/sensor/dummy/SDL_dummysensor.c -o objs/SENSOR_DM/SDL_dummysensor.o
+
+DIR_SENSOR_DM_OBJS = \
+    objs/SENSOR_DM/SDL_dummysensor.o
+
+# --- Directory: STDLIB (../src/stdlib) ---
+objs/STDLIB/SDL_crc16.o: ../src/stdlib/SDL_crc16.c
+	@mkdir -p objs/STDLIB
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/stdlib  $(DIR_STDLIB_CPPFLAGS) $(DIR_STDLIB_CFLAGS) -c ../src/stdlib/SDL_crc16.c -o objs/STDLIB/SDL_crc16.o
+
+objs/STDLIB/SDL_crc32.o: ../src/stdlib/SDL_crc32.c
+	@mkdir -p objs/STDLIB
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/stdlib  $(DIR_STDLIB_CPPFLAGS) $(DIR_STDLIB_CFLAGS) -c ../src/stdlib/SDL_crc32.c -o objs/STDLIB/SDL_crc32.o
+
+objs/STDLIB/SDL_getenv.o: ../src/stdlib/SDL_getenv.c
+	@mkdir -p objs/STDLIB
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/stdlib  $(DIR_STDLIB_CPPFLAGS) $(DIR_STDLIB_CFLAGS) -c ../src/stdlib/SDL_getenv.c -o objs/STDLIB/SDL_getenv.o
+
+objs/STDLIB/SDL_iconv.o: ../src/stdlib/SDL_iconv.c
+	@mkdir -p objs/STDLIB
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/stdlib  $(DIR_STDLIB_CPPFLAGS) $(DIR_STDLIB_CFLAGS) -c ../src/stdlib/SDL_iconv.c -o objs/STDLIB/SDL_iconv.o
+
+objs/STDLIB/SDL_malloc.o: ../src/stdlib/SDL_malloc.c
+	@mkdir -p objs/STDLIB
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/stdlib  $(DIR_STDLIB_CPPFLAGS) $(DIR_STDLIB_CFLAGS) -c ../src/stdlib/SDL_malloc.c -o objs/STDLIB/SDL_malloc.o
+
+objs/STDLIB/SDL_mslibc.o: ../src/stdlib/SDL_mslibc.c
+	@mkdir -p objs/STDLIB
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/stdlib  $(DIR_STDLIB_CPPFLAGS) $(DIR_STDLIB_CFLAGS) -c ../src/stdlib/SDL_mslibc.c -o objs/STDLIB/SDL_mslibc.o
+
+objs/STDLIB/SDL_qsort.o: ../src/stdlib/SDL_qsort.c
+	@mkdir -p objs/STDLIB
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/stdlib  $(DIR_STDLIB_CPPFLAGS) $(DIR_STDLIB_CFLAGS) -c ../src/stdlib/SDL_qsort.c -o objs/STDLIB/SDL_qsort.o
+
+objs/STDLIB/SDL_stdlib.o: ../src/stdlib/SDL_stdlib.c
+	@mkdir -p objs/STDLIB
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/stdlib  $(DIR_STDLIB_CPPFLAGS) $(DIR_STDLIB_CFLAGS) -c ../src/stdlib/SDL_stdlib.c -o objs/STDLIB/SDL_stdlib.o
+
+objs/STDLIB/SDL_string.o: ../src/stdlib/SDL_string.c
+	@mkdir -p objs/STDLIB
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/stdlib  $(DIR_STDLIB_CPPFLAGS) $(DIR_STDLIB_CFLAGS) -c ../src/stdlib/SDL_string.c -o objs/STDLIB/SDL_string.o
+
+objs/STDLIB/SDL_strtokr.o: ../src/stdlib/SDL_strtokr.c
+	@mkdir -p objs/STDLIB
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/stdlib  $(DIR_STDLIB_CPPFLAGS) $(DIR_STDLIB_CFLAGS) -c ../src/stdlib/SDL_strtokr.c -o objs/STDLIB/SDL_strtokr.o
+
+DIR_STDLIB_OBJS = \
+    objs/STDLIB/SDL_crc16.o \
+    objs/STDLIB/SDL_crc32.o \
+    objs/STDLIB/SDL_getenv.o \
+    objs/STDLIB/SDL_iconv.o \
+    objs/STDLIB/SDL_malloc.o \
+    objs/STDLIB/SDL_mslibc.o \
+    objs/STDLIB/SDL_qsort.o \
+    objs/STDLIB/SDL_stdlib.o \
+    objs/STDLIB/SDL_string.o \
+    objs/STDLIB/SDL_strtokr.o
+
+# --- Directory: THREAD (../src/thread) ---
+objs/THREAD/SDL_thread.o: ../src/thread/SDL_thread.c
+	@mkdir -p objs/THREAD
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/thread  $(DIR_THREAD_CPPFLAGS) $(DIR_THREAD_CFLAGS) -c ../src/thread/SDL_thread.c -o objs/THREAD/SDL_thread.o
+
+DIR_THREAD_OBJS = \
+    objs/THREAD/SDL_thread.o
+
+# --- Directory: PTHREAD (../src/thread/pthread) ---
+objs/PTHREAD/SDL_syscond.o: ../src/thread/pthread/SDL_syscond.c
+	@mkdir -p objs/PTHREAD
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/thread/pthread  $(DIR_PTHREAD_CPPFLAGS) $(DIR_PTHREAD_CFLAGS) -c ../src/thread/pthread/SDL_syscond.c -o objs/PTHREAD/SDL_syscond.o
+
+objs/PTHREAD/SDL_sysmutex.o: ../src/thread/pthread/SDL_sysmutex.c
+	@mkdir -p objs/PTHREAD
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/thread/pthread  $(DIR_PTHREAD_CPPFLAGS) $(DIR_PTHREAD_CFLAGS) -c ../src/thread/pthread/SDL_sysmutex.c -o objs/PTHREAD/SDL_sysmutex.o
+
+objs/PTHREAD/SDL_syssem.o: ../src/thread/pthread/SDL_syssem.c
+	@mkdir -p objs/PTHREAD
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/thread/pthread  $(DIR_PTHREAD_CPPFLAGS) $(DIR_PTHREAD_CFLAGS) -c ../src/thread/pthread/SDL_syssem.c -o objs/PTHREAD/SDL_syssem.o
+
+objs/PTHREAD/SDL_systhread.o: ../src/thread/pthread/SDL_systhread.c
+	@mkdir -p objs/PTHREAD
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/thread/pthread  $(DIR_PTHREAD_CPPFLAGS) $(DIR_PTHREAD_CFLAGS) -c ../src/thread/pthread/SDL_systhread.c -o objs/PTHREAD/SDL_systhread.o
+
+objs/PTHREAD/SDL_systls.o: ../src/thread/pthread/SDL_systls.c
+	@mkdir -p objs/PTHREAD
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/thread/pthread  $(DIR_PTHREAD_CPPFLAGS) $(DIR_PTHREAD_CFLAGS) -c ../src/thread/pthread/SDL_systls.c -o objs/PTHREAD/SDL_systls.o
+
+DIR_PTHREAD_OBJS = \
+    objs/PTHREAD/SDL_syscond.o \
+    objs/PTHREAD/SDL_sysmutex.o \
+    objs/PTHREAD/SDL_syssem.o \
+    objs/PTHREAD/SDL_systhread.o \
+    objs/PTHREAD/SDL_systls.o
+
+# --- Directory: TIMER (../src/timer) ---
+objs/TIMER/SDL_timer.o: ../src/timer/SDL_timer.c
+	@mkdir -p objs/TIMER
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/timer  $(DIR_TIMER_CPPFLAGS) $(DIR_TIMER_CFLAGS) -c ../src/timer/SDL_timer.c -o objs/TIMER/SDL_timer.o
+
+DIR_TIMER_OBJS = \
+    objs/TIMER/SDL_timer.o
+
+# --- Directory: TIMER_IRIX (../src/timer/irix) ---
+objs/TIMER_IRIX/SDL_systimer.o: ../src/timer/irix/SDL_systimer.c
+	@mkdir -p objs/TIMER_IRIX
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/timer/irix  $(DIR_TIMER_IRIX_CPPFLAGS) $(DIR_TIMER_IRIX_CFLAGS) -c ../src/timer/irix/SDL_systimer.c -o objs/TIMER_IRIX/SDL_systimer.o
+
+DIR_TIMER_IRIX_OBJS = \
+    objs/TIMER_IRIX/SDL_systimer.o
+
+# --- Directory: VIDEO (../src/video) ---
+objs/VIDEO/SDL_blit_0.o: ../src/video/SDL_blit_0.c
+	@mkdir -p objs/VIDEO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video  $(DIR_VIDEO_CPPFLAGS) $(DIR_VIDEO_CFLAGS) -c ../src/video/SDL_blit_0.c -o objs/VIDEO/SDL_blit_0.o
+
+objs/VIDEO/SDL_blit_1.o: ../src/video/SDL_blit_1.c
+	@mkdir -p objs/VIDEO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video  $(DIR_VIDEO_CPPFLAGS) $(DIR_VIDEO_CFLAGS) -c ../src/video/SDL_blit_1.c -o objs/VIDEO/SDL_blit_1.o
+
+objs/VIDEO/SDL_blit_A.o: ../src/video/SDL_blit_A.c
+	@mkdir -p objs/VIDEO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video  $(DIR_VIDEO_CPPFLAGS) $(DIR_VIDEO_CFLAGS) -c ../src/video/SDL_blit_A.c -o objs/VIDEO/SDL_blit_A.o
+
+objs/VIDEO/SDL_blit_auto.o: ../src/video/SDL_blit_auto.c
+	@mkdir -p objs/VIDEO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video  $(DIR_VIDEO_CPPFLAGS) $(DIR_VIDEO_CFLAGS) -c ../src/video/SDL_blit_auto.c -o objs/VIDEO/SDL_blit_auto.o
+
+objs/VIDEO/SDL_blit.o: ../src/video/SDL_blit.c
+	@mkdir -p objs/VIDEO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video  $(DIR_VIDEO_CPPFLAGS) $(DIR_VIDEO_CFLAGS) -c ../src/video/SDL_blit.c -o objs/VIDEO/SDL_blit.o
+
+objs/VIDEO/SDL_blit_copy.o: ../src/video/SDL_blit_copy.c
+	@mkdir -p objs/VIDEO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video  $(DIR_VIDEO_CPPFLAGS) $(DIR_VIDEO_CFLAGS) -c ../src/video/SDL_blit_copy.c -o objs/VIDEO/SDL_blit_copy.o
+
+objs/VIDEO/SDL_blit_N.o: ../src/video/SDL_blit_N.c
+	@mkdir -p objs/VIDEO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video  $(DIR_VIDEO_CPPFLAGS) $(DIR_VIDEO_CFLAGS) -c ../src/video/SDL_blit_N.c -o objs/VIDEO/SDL_blit_N.o
+
+objs/VIDEO/SDL_blit_slow.o: ../src/video/SDL_blit_slow.c
+	@mkdir -p objs/VIDEO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video  $(DIR_VIDEO_CPPFLAGS) $(DIR_VIDEO_CFLAGS) -c ../src/video/SDL_blit_slow.c -o objs/VIDEO/SDL_blit_slow.o
+
+objs/VIDEO/SDL_bmp.o: ../src/video/SDL_bmp.c
+	@mkdir -p objs/VIDEO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video  $(DIR_VIDEO_CPPFLAGS) $(DIR_VIDEO_CFLAGS) -c ../src/video/SDL_bmp.c -o objs/VIDEO/SDL_bmp.o
+
+objs/VIDEO/SDL_clipboard.o: ../src/video/SDL_clipboard.c
+	@mkdir -p objs/VIDEO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video  $(DIR_VIDEO_CPPFLAGS) $(DIR_VIDEO_CFLAGS) -c ../src/video/SDL_clipboard.c -o objs/VIDEO/SDL_clipboard.o
+
+objs/VIDEO/SDL_egl.o: ../src/video/SDL_egl.c
+	@mkdir -p objs/VIDEO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video  $(DIR_VIDEO_CPPFLAGS) $(DIR_VIDEO_CFLAGS) -c ../src/video/SDL_egl.c -o objs/VIDEO/SDL_egl.o
+
+objs/VIDEO/SDL_fillrect.o: ../src/video/SDL_fillrect.c
+	@mkdir -p objs/VIDEO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video  $(DIR_VIDEO_CPPFLAGS) $(DIR_VIDEO_CFLAGS) -c ../src/video/SDL_fillrect.c -o objs/VIDEO/SDL_fillrect.o
+
+objs/VIDEO/SDL_pixels.o: ../src/video/SDL_pixels.c
+	@mkdir -p objs/VIDEO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video  $(DIR_VIDEO_CPPFLAGS) $(DIR_VIDEO_CFLAGS) -c ../src/video/SDL_pixels.c -o objs/VIDEO/SDL_pixels.o
+
+objs/VIDEO/SDL_rect.o: ../src/video/SDL_rect.c
+	@mkdir -p objs/VIDEO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video  $(DIR_VIDEO_CPPFLAGS) $(DIR_VIDEO_CFLAGS) -c ../src/video/SDL_rect.c -o objs/VIDEO/SDL_rect.o
+
+objs/VIDEO/SDL_RLEaccel.o: ../src/video/SDL_RLEaccel.c
+	@mkdir -p objs/VIDEO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video  $(DIR_VIDEO_CPPFLAGS) $(DIR_VIDEO_CFLAGS) -c ../src/video/SDL_RLEaccel.c -o objs/VIDEO/SDL_RLEaccel.o
+
+objs/VIDEO/SDL_shape.o: ../src/video/SDL_shape.c
+	@mkdir -p objs/VIDEO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video  $(DIR_VIDEO_CPPFLAGS) $(DIR_VIDEO_CFLAGS) -c ../src/video/SDL_shape.c -o objs/VIDEO/SDL_shape.o
+
+objs/VIDEO/SDL_stretch.o: ../src/video/SDL_stretch.c
+	@mkdir -p objs/VIDEO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video  $(DIR_VIDEO_CPPFLAGS) $(DIR_VIDEO_CFLAGS) -c ../src/video/SDL_stretch.c -o objs/VIDEO/SDL_stretch.o
+
+objs/VIDEO/SDL_surface.o: ../src/video/SDL_surface.c
+	@mkdir -p objs/VIDEO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video  $(DIR_VIDEO_CPPFLAGS) $(DIR_VIDEO_CFLAGS) -c ../src/video/SDL_surface.c -o objs/VIDEO/SDL_surface.o
+
+objs/VIDEO/SDL_video.o: ../src/video/SDL_video.c
+	@mkdir -p objs/VIDEO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video  $(DIR_VIDEO_CPPFLAGS) $(DIR_VIDEO_CFLAGS) -c ../src/video/SDL_video.c -o objs/VIDEO/SDL_video.o
+
+objs/VIDEO/SDL_vulkan_utils.o: ../src/video/SDL_vulkan_utils.c
+	@mkdir -p objs/VIDEO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video  $(DIR_VIDEO_CPPFLAGS) $(DIR_VIDEO_CFLAGS) -c ../src/video/SDL_vulkan_utils.c -o objs/VIDEO/SDL_vulkan_utils.o
+
+objs/VIDEO/SDL_yuv.o: ../src/video/SDL_yuv.c
+	@mkdir -p objs/VIDEO
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video  $(DIR_VIDEO_CPPFLAGS) $(DIR_VIDEO_CFLAGS) -c ../src/video/SDL_yuv.c -o objs/VIDEO/SDL_yuv.o
+
+DIR_VIDEO_OBJS = \
+    objs/VIDEO/SDL_blit_0.o \
+    objs/VIDEO/SDL_blit_1.o \
+    objs/VIDEO/SDL_blit_A.o \
+    objs/VIDEO/SDL_blit_auto.o \
+    objs/VIDEO/SDL_blit.o \
+    objs/VIDEO/SDL_blit_copy.o \
+    objs/VIDEO/SDL_blit_N.o \
+    objs/VIDEO/SDL_blit_slow.o \
+    objs/VIDEO/SDL_bmp.o \
+    objs/VIDEO/SDL_clipboard.o \
+    objs/VIDEO/SDL_egl.o \
+    objs/VIDEO/SDL_fillrect.o \
+    objs/VIDEO/SDL_pixels.o \
+    objs/VIDEO/SDL_rect.o \
+    objs/VIDEO/SDL_RLEaccel.o \
+    objs/VIDEO/SDL_shape.o \
+    objs/VIDEO/SDL_stretch.o \
+    objs/VIDEO/SDL_surface.o \
+    objs/VIDEO/SDL_video.o \
+    objs/VIDEO/SDL_vulkan_utils.o \
+    objs/VIDEO/SDL_yuv.o
+
+# --- Directory: VIDEO_YUV (../src/video/yuv2rgb) ---
+objs/VIDEO_YUV/yuv_rgb_std.o: ../src/video/yuv2rgb/yuv_rgb_std.c
+	@mkdir -p objs/VIDEO_YUV
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video/yuv2rgb  $(DIR_VIDEO_YUV_CPPFLAGS) $(DIR_VIDEO_YUV_CFLAGS) -c ../src/video/yuv2rgb/yuv_rgb_std.c -o objs/VIDEO_YUV/yuv_rgb_std.o
+
+DIR_VIDEO_YUV_OBJS = \
+    objs/VIDEO_YUV/yuv_rgb_std.o
+
+# --- Directory: VIDEO_DM (../src/video/dummy) ---
+objs/VIDEO_DM/SDL_nullevents.o: ../src/video/dummy/SDL_nullevents.c
+	@mkdir -p objs/VIDEO_DM
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video/dummy  $(DIR_VIDEO_DM_CPPFLAGS) $(DIR_VIDEO_DM_CFLAGS) -c ../src/video/dummy/SDL_nullevents.c -o objs/VIDEO_DM/SDL_nullevents.o
+
+objs/VIDEO_DM/SDL_nullframebuffer.o: ../src/video/dummy/SDL_nullframebuffer.c
+	@mkdir -p objs/VIDEO_DM
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video/dummy  $(DIR_VIDEO_DM_CPPFLAGS) $(DIR_VIDEO_DM_CFLAGS) -c ../src/video/dummy/SDL_nullframebuffer.c -o objs/VIDEO_DM/SDL_nullframebuffer.o
+
+objs/VIDEO_DM/SDL_nullvideo.o: ../src/video/dummy/SDL_nullvideo.c
+	@mkdir -p objs/VIDEO_DM
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video/dummy  $(DIR_VIDEO_DM_CPPFLAGS) $(DIR_VIDEO_DM_CFLAGS) -c ../src/video/dummy/SDL_nullvideo.c -o objs/VIDEO_DM/SDL_nullvideo.o
+
+DIR_VIDEO_DM_OBJS = \
+    objs/VIDEO_DM/SDL_nullevents.o \
+    objs/VIDEO_DM/SDL_nullframebuffer.o \
+    objs/VIDEO_DM/SDL_nullvideo.o
+
+# --- Directory: VIDEO_X11 (../src/video/x11) ---
+objs/VIDEO_X11/edid-parse.o: ../src/video/x11/edid-parse.c
+	@mkdir -p objs/VIDEO_X11
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video/x11  $(DIR_VIDEO_X11_CPPFLAGS) $(DIR_VIDEO_X11_CFLAGS) -c ../src/video/x11/edid-parse.c -o objs/VIDEO_X11/edid-parse.o
+
+objs/VIDEO_X11/SDL_x11clipboard.o: ../src/video/x11/SDL_x11clipboard.c
+	@mkdir -p objs/VIDEO_X11
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video/x11  $(DIR_VIDEO_X11_CPPFLAGS) $(DIR_VIDEO_X11_CFLAGS) -c ../src/video/x11/SDL_x11clipboard.c -o objs/VIDEO_X11/SDL_x11clipboard.o
+
+objs/VIDEO_X11/SDL_x11dyn.o: ../src/video/x11/SDL_x11dyn.c
+	@mkdir -p objs/VIDEO_X11
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video/x11  $(DIR_VIDEO_X11_CPPFLAGS) $(DIR_VIDEO_X11_CFLAGS) -c ../src/video/x11/SDL_x11dyn.c -o objs/VIDEO_X11/SDL_x11dyn.o
+
+objs/VIDEO_X11/SDL_x11events.o: ../src/video/x11/SDL_x11events.c
+	@mkdir -p objs/VIDEO_X11
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video/x11  $(DIR_VIDEO_X11_CPPFLAGS) $(DIR_VIDEO_X11_CFLAGS) -c ../src/video/x11/SDL_x11events.c -o objs/VIDEO_X11/SDL_x11events.o
+
+objs/VIDEO_X11/SDL_x11framebuffer.o: ../src/video/x11/SDL_x11framebuffer.c
+	@mkdir -p objs/VIDEO_X11
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video/x11  $(DIR_VIDEO_X11_CPPFLAGS) $(DIR_VIDEO_X11_CFLAGS) -c ../src/video/x11/SDL_x11framebuffer.c -o objs/VIDEO_X11/SDL_x11framebuffer.o
+
+objs/VIDEO_X11/SDL_x11keyboard.o: ../src/video/x11/SDL_x11keyboard.c
+	@mkdir -p objs/VIDEO_X11
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video/x11  $(DIR_VIDEO_X11_CPPFLAGS) $(DIR_VIDEO_X11_CFLAGS) -c ../src/video/x11/SDL_x11keyboard.c -o objs/VIDEO_X11/SDL_x11keyboard.o
+
+objs/VIDEO_X11/SDL_x11messagebox.o: ../src/video/x11/SDL_x11messagebox.c
+	@mkdir -p objs/VIDEO_X11
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video/x11  $(DIR_VIDEO_X11_CPPFLAGS) $(DIR_VIDEO_X11_CFLAGS) -c ../src/video/x11/SDL_x11messagebox.c -o objs/VIDEO_X11/SDL_x11messagebox.o
+
+objs/VIDEO_X11/SDL_x11modes.o: ../src/video/x11/SDL_x11modes.c
+	@mkdir -p objs/VIDEO_X11
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video/x11  $(DIR_VIDEO_X11_CPPFLAGS) $(DIR_VIDEO_X11_CFLAGS) -c ../src/video/x11/SDL_x11modes.c -o objs/VIDEO_X11/SDL_x11modes.o
+
+objs/VIDEO_X11/SDL_x11mouse.o: ../src/video/x11/SDL_x11mouse.c
+	@mkdir -p objs/VIDEO_X11
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video/x11  $(DIR_VIDEO_X11_CPPFLAGS) $(DIR_VIDEO_X11_CFLAGS) -c ../src/video/x11/SDL_x11mouse.c -o objs/VIDEO_X11/SDL_x11mouse.o
+
+objs/VIDEO_X11/SDL_x11opengl.o: ../src/video/x11/SDL_x11opengl.c
+	@mkdir -p objs/VIDEO_X11
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video/x11  $(DIR_VIDEO_X11_CPPFLAGS) $(DIR_VIDEO_X11_CFLAGS) -c ../src/video/x11/SDL_x11opengl.c -o objs/VIDEO_X11/SDL_x11opengl.o
+
+objs/VIDEO_X11/SDL_x11opengles.o: ../src/video/x11/SDL_x11opengles.c
+	@mkdir -p objs/VIDEO_X11
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video/x11  $(DIR_VIDEO_X11_CPPFLAGS) $(DIR_VIDEO_X11_CFLAGS) -c ../src/video/x11/SDL_x11opengles.c -o objs/VIDEO_X11/SDL_x11opengles.o
+
+objs/VIDEO_X11/SDL_x11shape.o: ../src/video/x11/SDL_x11shape.c
+	@mkdir -p objs/VIDEO_X11
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video/x11  $(DIR_VIDEO_X11_CPPFLAGS) $(DIR_VIDEO_X11_CFLAGS) -c ../src/video/x11/SDL_x11shape.c -o objs/VIDEO_X11/SDL_x11shape.o
+
+objs/VIDEO_X11/SDL_x11touch.o: ../src/video/x11/SDL_x11touch.c
+	@mkdir -p objs/VIDEO_X11
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video/x11  $(DIR_VIDEO_X11_CPPFLAGS) $(DIR_VIDEO_X11_CFLAGS) -c ../src/video/x11/SDL_x11touch.c -o objs/VIDEO_X11/SDL_x11touch.o
+
+objs/VIDEO_X11/SDL_x11video.o: ../src/video/x11/SDL_x11video.c
+	@mkdir -p objs/VIDEO_X11
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video/x11  $(DIR_VIDEO_X11_CPPFLAGS) $(DIR_VIDEO_X11_CFLAGS) -c ../src/video/x11/SDL_x11video.c -o objs/VIDEO_X11/SDL_x11video.o
+
+objs/VIDEO_X11/SDL_x11vulkan.o: ../src/video/x11/SDL_x11vulkan.c
+	@mkdir -p objs/VIDEO_X11
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video/x11  $(DIR_VIDEO_X11_CPPFLAGS) $(DIR_VIDEO_X11_CFLAGS) -c ../src/video/x11/SDL_x11vulkan.c -o objs/VIDEO_X11/SDL_x11vulkan.o
+
+objs/VIDEO_X11/SDL_x11window.o: ../src/video/x11/SDL_x11window.c
+	@mkdir -p objs/VIDEO_X11
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video/x11  $(DIR_VIDEO_X11_CPPFLAGS) $(DIR_VIDEO_X11_CFLAGS) -c ../src/video/x11/SDL_x11window.c -o objs/VIDEO_X11/SDL_x11window.o
+
+objs/VIDEO_X11/SDL_x11xfixes.o: ../src/video/x11/SDL_x11xfixes.c
+	@mkdir -p objs/VIDEO_X11
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video/x11  $(DIR_VIDEO_X11_CPPFLAGS) $(DIR_VIDEO_X11_CFLAGS) -c ../src/video/x11/SDL_x11xfixes.c -o objs/VIDEO_X11/SDL_x11xfixes.o
+
+objs/VIDEO_X11/SDL_x11xinput2.o: ../src/video/x11/SDL_x11xinput2.c
+	@mkdir -p objs/VIDEO_X11
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/video/x11  $(DIR_VIDEO_X11_CPPFLAGS) $(DIR_VIDEO_X11_CFLAGS) -c ../src/video/x11/SDL_x11xinput2.c -o objs/VIDEO_X11/SDL_x11xinput2.o
+
+DIR_VIDEO_X11_OBJS = \
+    objs/VIDEO_X11/edid-parse.o \
+    objs/VIDEO_X11/SDL_x11clipboard.o \
+    objs/VIDEO_X11/SDL_x11dyn.o \
+    objs/VIDEO_X11/SDL_x11events.o \
+    objs/VIDEO_X11/SDL_x11framebuffer.o \
+    objs/VIDEO_X11/SDL_x11keyboard.o \
+    objs/VIDEO_X11/SDL_x11messagebox.o \
+    objs/VIDEO_X11/SDL_x11modes.o \
+    objs/VIDEO_X11/SDL_x11mouse.o \
+    objs/VIDEO_X11/SDL_x11opengl.o \
+    objs/VIDEO_X11/SDL_x11opengles.o \
+    objs/VIDEO_X11/SDL_x11shape.o \
+    objs/VIDEO_X11/SDL_x11touch.o \
+    objs/VIDEO_X11/SDL_x11video.o \
+    objs/VIDEO_X11/SDL_x11vulkan.o \
+    objs/VIDEO_X11/SDL_x11window.o \
+    objs/VIDEO_X11/SDL_x11xfixes.o \
+    objs/VIDEO_X11/SDL_x11xinput2.o
+
+# --- Directory: TESTAUTOMATION (../test) ---
+objs/TESTAUTOMATION/testautomation_audio.o: ../test/testautomation_audio.c
+	@mkdir -p objs/TESTAUTOMATION
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_TESTAUTOMATION_CPPFLAGS) $(DIR_TESTAUTOMATION_CFLAGS) -c ../test/testautomation_audio.c -o objs/TESTAUTOMATION/testautomation_audio.o
+
+objs/TESTAUTOMATION/testautomation.o: ../test/testautomation.c
+	@mkdir -p objs/TESTAUTOMATION
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_TESTAUTOMATION_CPPFLAGS) $(DIR_TESTAUTOMATION_CFLAGS) -c ../test/testautomation.c -o objs/TESTAUTOMATION/testautomation.o
+
+objs/TESTAUTOMATION/testautomation_clipboard.o: ../test/testautomation_clipboard.c
+	@mkdir -p objs/TESTAUTOMATION
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_TESTAUTOMATION_CPPFLAGS) $(DIR_TESTAUTOMATION_CFLAGS) -c ../test/testautomation_clipboard.c -o objs/TESTAUTOMATION/testautomation_clipboard.o
+
+objs/TESTAUTOMATION/testautomation_events.o: ../test/testautomation_events.c
+	@mkdir -p objs/TESTAUTOMATION
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_TESTAUTOMATION_CPPFLAGS) $(DIR_TESTAUTOMATION_CFLAGS) -c ../test/testautomation_events.c -o objs/TESTAUTOMATION/testautomation_events.o
+
+objs/TESTAUTOMATION/testautomation_guid.o: ../test/testautomation_guid.c
+	@mkdir -p objs/TESTAUTOMATION
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_TESTAUTOMATION_CPPFLAGS) $(DIR_TESTAUTOMATION_CFLAGS) -c ../test/testautomation_guid.c -o objs/TESTAUTOMATION/testautomation_guid.o
+
+objs/TESTAUTOMATION/testautomation_hints.o: ../test/testautomation_hints.c
+	@mkdir -p objs/TESTAUTOMATION
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_TESTAUTOMATION_CPPFLAGS) $(DIR_TESTAUTOMATION_CFLAGS) -c ../test/testautomation_hints.c -o objs/TESTAUTOMATION/testautomation_hints.o
+
+objs/TESTAUTOMATION/testautomation_joystick.o: ../test/testautomation_joystick.c
+	@mkdir -p objs/TESTAUTOMATION
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_TESTAUTOMATION_CPPFLAGS) $(DIR_TESTAUTOMATION_CFLAGS) -c ../test/testautomation_joystick.c -o objs/TESTAUTOMATION/testautomation_joystick.o
+
+objs/TESTAUTOMATION/testautomation_keyboard.o: ../test/testautomation_keyboard.c
+	@mkdir -p objs/TESTAUTOMATION
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_TESTAUTOMATION_CPPFLAGS) $(DIR_TESTAUTOMATION_CFLAGS) -c ../test/testautomation_keyboard.c -o objs/TESTAUTOMATION/testautomation_keyboard.o
+
+objs/TESTAUTOMATION/testautomation_log.o: ../test/testautomation_log.c
+	@mkdir -p objs/TESTAUTOMATION
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_TESTAUTOMATION_CPPFLAGS) $(DIR_TESTAUTOMATION_CFLAGS) -c ../test/testautomation_log.c -o objs/TESTAUTOMATION/testautomation_log.o
+
+objs/TESTAUTOMATION/testautomation_main.o: ../test/testautomation_main.c
+	@mkdir -p objs/TESTAUTOMATION
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_TESTAUTOMATION_CPPFLAGS) $(DIR_TESTAUTOMATION_CFLAGS) -c ../test/testautomation_main.c -o objs/TESTAUTOMATION/testautomation_main.o
+
+objs/TESTAUTOMATION/testautomation_math.o: ../test/testautomation_math.c
+	@mkdir -p objs/TESTAUTOMATION
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_TESTAUTOMATION_CPPFLAGS) $(DIR_TESTAUTOMATION_CFLAGS) -c ../test/testautomation_math.c -o objs/TESTAUTOMATION/testautomation_math.o
+
+objs/TESTAUTOMATION/testautomation_mouse.o: ../test/testautomation_mouse.c
+	@mkdir -p objs/TESTAUTOMATION
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_TESTAUTOMATION_CPPFLAGS) $(DIR_TESTAUTOMATION_CFLAGS) -c ../test/testautomation_mouse.c -o objs/TESTAUTOMATION/testautomation_mouse.o
+
+objs/TESTAUTOMATION/testautomation_pixels.o: ../test/testautomation_pixels.c
+	@mkdir -p objs/TESTAUTOMATION
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_TESTAUTOMATION_CPPFLAGS) $(DIR_TESTAUTOMATION_CFLAGS) -c ../test/testautomation_pixels.c -o objs/TESTAUTOMATION/testautomation_pixels.o
+
+objs/TESTAUTOMATION/testautomation_platform.o: ../test/testautomation_platform.c
+	@mkdir -p objs/TESTAUTOMATION
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_TESTAUTOMATION_CPPFLAGS) $(DIR_TESTAUTOMATION_CFLAGS) -c ../test/testautomation_platform.c -o objs/TESTAUTOMATION/testautomation_platform.o
+
+objs/TESTAUTOMATION/testautomation_rect.o: ../test/testautomation_rect.c
+	@mkdir -p objs/TESTAUTOMATION
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_TESTAUTOMATION_CPPFLAGS) $(DIR_TESTAUTOMATION_CFLAGS) -c ../test/testautomation_rect.c -o objs/TESTAUTOMATION/testautomation_rect.o
+
+objs/TESTAUTOMATION/testautomation_render.o: ../test/testautomation_render.c
+	@mkdir -p objs/TESTAUTOMATION
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_TESTAUTOMATION_CPPFLAGS) $(DIR_TESTAUTOMATION_CFLAGS) -c ../test/testautomation_render.c -o objs/TESTAUTOMATION/testautomation_render.o
+
+objs/TESTAUTOMATION/testautomation_rwops.o: ../test/testautomation_rwops.c
+	@mkdir -p objs/TESTAUTOMATION
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_TESTAUTOMATION_CPPFLAGS) $(DIR_TESTAUTOMATION_CFLAGS) -c ../test/testautomation_rwops.c -o objs/TESTAUTOMATION/testautomation_rwops.o
+
+objs/TESTAUTOMATION/testautomation_sdltest.o: ../test/testautomation_sdltest.c
+	@mkdir -p objs/TESTAUTOMATION
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_TESTAUTOMATION_CPPFLAGS) $(DIR_TESTAUTOMATION_CFLAGS) -c ../test/testautomation_sdltest.c -o objs/TESTAUTOMATION/testautomation_sdltest.o
+
+objs/TESTAUTOMATION/testautomation_stdlib.o: ../test/testautomation_stdlib.c
+	@mkdir -p objs/TESTAUTOMATION
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_TESTAUTOMATION_CPPFLAGS) $(DIR_TESTAUTOMATION_CFLAGS) -c ../test/testautomation_stdlib.c -o objs/TESTAUTOMATION/testautomation_stdlib.o
+
+objs/TESTAUTOMATION/testautomation_subsystems.o: ../test/testautomation_subsystems.c
+	@mkdir -p objs/TESTAUTOMATION
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_TESTAUTOMATION_CPPFLAGS) $(DIR_TESTAUTOMATION_CFLAGS) -c ../test/testautomation_subsystems.c -o objs/TESTAUTOMATION/testautomation_subsystems.o
+
+objs/TESTAUTOMATION/testautomation_surface.o: ../test/testautomation_surface.c
+	@mkdir -p objs/TESTAUTOMATION
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_TESTAUTOMATION_CPPFLAGS) $(DIR_TESTAUTOMATION_CFLAGS) -c ../test/testautomation_surface.c -o objs/TESTAUTOMATION/testautomation_surface.o
+
+objs/TESTAUTOMATION/testautomation_syswm.o: ../test/testautomation_syswm.c
+	@mkdir -p objs/TESTAUTOMATION
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_TESTAUTOMATION_CPPFLAGS) $(DIR_TESTAUTOMATION_CFLAGS) -c ../test/testautomation_syswm.c -o objs/TESTAUTOMATION/testautomation_syswm.o
+
+objs/TESTAUTOMATION/testautomation_timer.o: ../test/testautomation_timer.c
+	@mkdir -p objs/TESTAUTOMATION
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_TESTAUTOMATION_CPPFLAGS) $(DIR_TESTAUTOMATION_CFLAGS) -c ../test/testautomation_timer.c -o objs/TESTAUTOMATION/testautomation_timer.o
+
+objs/TESTAUTOMATION/testautomation_video.o: ../test/testautomation_video.c
+	@mkdir -p objs/TESTAUTOMATION
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_TESTAUTOMATION_CPPFLAGS) $(DIR_TESTAUTOMATION_CFLAGS) -c ../test/testautomation_video.c -o objs/TESTAUTOMATION/testautomation_video.o
+
+DIR_TESTAUTOMATION_OBJS = \
+    objs/TESTAUTOMATION/testautomation_audio.o \
+    objs/TESTAUTOMATION/testautomation.o \
+    objs/TESTAUTOMATION/testautomation_clipboard.o \
+    objs/TESTAUTOMATION/testautomation_events.o \
+    objs/TESTAUTOMATION/testautomation_guid.o \
+    objs/TESTAUTOMATION/testautomation_hints.o \
+    objs/TESTAUTOMATION/testautomation_joystick.o \
+    objs/TESTAUTOMATION/testautomation_keyboard.o \
+    objs/TESTAUTOMATION/testautomation_log.o \
+    objs/TESTAUTOMATION/testautomation_main.o \
+    objs/TESTAUTOMATION/testautomation_math.o \
+    objs/TESTAUTOMATION/testautomation_mouse.o \
+    objs/TESTAUTOMATION/testautomation_pixels.o \
+    objs/TESTAUTOMATION/testautomation_platform.o \
+    objs/TESTAUTOMATION/testautomation_rect.o \
+    objs/TESTAUTOMATION/testautomation_render.o \
+    objs/TESTAUTOMATION/testautomation_rwops.o \
+    objs/TESTAUTOMATION/testautomation_sdltest.o \
+    objs/TESTAUTOMATION/testautomation_stdlib.o \
+    objs/TESTAUTOMATION/testautomation_subsystems.o \
+    objs/TESTAUTOMATION/testautomation_surface.o \
+    objs/TESTAUTOMATION/testautomation_syswm.o \
+    objs/TESTAUTOMATION/testautomation_timer.o \
+    objs/TESTAUTOMATION/testautomation_video.o
+
+# --- Directory: TEST (../src/test) ---
+objs/TEST/SDL_test_assert.o: ../src/test/SDL_test_assert.c
+	@mkdir -p objs/TEST
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/test  $(DIR_TEST_CPPFLAGS) $(DIR_TEST_CFLAGS) -c ../src/test/SDL_test_assert.c -o objs/TEST/SDL_test_assert.o
+
+objs/TEST/SDL_test_common.o: ../src/test/SDL_test_common.c
+	@mkdir -p objs/TEST
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/test  $(DIR_TEST_CPPFLAGS) $(DIR_TEST_CFLAGS) -c ../src/test/SDL_test_common.c -o objs/TEST/SDL_test_common.o
+
+objs/TEST/SDL_test_compare.o: ../src/test/SDL_test_compare.c
+	@mkdir -p objs/TEST
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/test  $(DIR_TEST_CPPFLAGS) $(DIR_TEST_CFLAGS) -c ../src/test/SDL_test_compare.c -o objs/TEST/SDL_test_compare.o
+
+objs/TEST/SDL_test_crc32.o: ../src/test/SDL_test_crc32.c
+	@mkdir -p objs/TEST
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/test  $(DIR_TEST_CPPFLAGS) $(DIR_TEST_CFLAGS) -c ../src/test/SDL_test_crc32.c -o objs/TEST/SDL_test_crc32.o
+
+objs/TEST/SDL_test_font.o: ../src/test/SDL_test_font.c
+	@mkdir -p objs/TEST
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/test  $(DIR_TEST_CPPFLAGS) $(DIR_TEST_CFLAGS) -c ../src/test/SDL_test_font.c -o objs/TEST/SDL_test_font.o
+
+objs/TEST/SDL_test_fuzzer.o: ../src/test/SDL_test_fuzzer.c
+	@mkdir -p objs/TEST
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/test  $(DIR_TEST_CPPFLAGS) $(DIR_TEST_CFLAGS) -c ../src/test/SDL_test_fuzzer.c -o objs/TEST/SDL_test_fuzzer.o
+
+objs/TEST/SDL_test_harness.o: ../src/test/SDL_test_harness.c
+	@mkdir -p objs/TEST
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/test  $(DIR_TEST_CPPFLAGS) $(DIR_TEST_CFLAGS) -c ../src/test/SDL_test_harness.c -o objs/TEST/SDL_test_harness.o
+
+objs/TEST/SDL_test_imageBlitBlend.o: ../src/test/SDL_test_imageBlitBlend.c
+	@mkdir -p objs/TEST
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/test  $(DIR_TEST_CPPFLAGS) $(DIR_TEST_CFLAGS) -c ../src/test/SDL_test_imageBlitBlend.c -o objs/TEST/SDL_test_imageBlitBlend.o
+
+objs/TEST/SDL_test_imageBlit.o: ../src/test/SDL_test_imageBlit.c
+	@mkdir -p objs/TEST
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/test  $(DIR_TEST_CPPFLAGS) $(DIR_TEST_CFLAGS) -c ../src/test/SDL_test_imageBlit.c -o objs/TEST/SDL_test_imageBlit.o
+
+objs/TEST/SDL_test_imageFace.o: ../src/test/SDL_test_imageFace.c
+	@mkdir -p objs/TEST
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/test  $(DIR_TEST_CPPFLAGS) $(DIR_TEST_CFLAGS) -c ../src/test/SDL_test_imageFace.c -o objs/TEST/SDL_test_imageFace.o
+
+objs/TEST/SDL_test_imagePrimitivesBlend.o: ../src/test/SDL_test_imagePrimitivesBlend.c
+	@mkdir -p objs/TEST
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/test  $(DIR_TEST_CPPFLAGS) $(DIR_TEST_CFLAGS) -c ../src/test/SDL_test_imagePrimitivesBlend.c -o objs/TEST/SDL_test_imagePrimitivesBlend.o
+
+objs/TEST/SDL_test_imagePrimitives.o: ../src/test/SDL_test_imagePrimitives.c
+	@mkdir -p objs/TEST
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/test  $(DIR_TEST_CPPFLAGS) $(DIR_TEST_CFLAGS) -c ../src/test/SDL_test_imagePrimitives.c -o objs/TEST/SDL_test_imagePrimitives.o
+
+objs/TEST/SDL_test_log.o: ../src/test/SDL_test_log.c
+	@mkdir -p objs/TEST
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/test  $(DIR_TEST_CPPFLAGS) $(DIR_TEST_CFLAGS) -c ../src/test/SDL_test_log.c -o objs/TEST/SDL_test_log.o
+
+objs/TEST/SDL_test_md5.o: ../src/test/SDL_test_md5.c
+	@mkdir -p objs/TEST
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/test  $(DIR_TEST_CPPFLAGS) $(DIR_TEST_CFLAGS) -c ../src/test/SDL_test_md5.c -o objs/TEST/SDL_test_md5.o
+
+objs/TEST/SDL_test_memory.o: ../src/test/SDL_test_memory.c
+	@mkdir -p objs/TEST
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/test  $(DIR_TEST_CPPFLAGS) $(DIR_TEST_CFLAGS) -c ../src/test/SDL_test_memory.c -o objs/TEST/SDL_test_memory.o
+
+objs/TEST/SDL_test_random.o: ../src/test/SDL_test_random.c
+	@mkdir -p objs/TEST
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../src/test  $(DIR_TEST_CPPFLAGS) $(DIR_TEST_CFLAGS) -c ../src/test/SDL_test_random.c -o objs/TEST/SDL_test_random.o
+
+DIR_TEST_OBJS = \
+    objs/TEST/SDL_test_assert.o \
+    objs/TEST/SDL_test_common.o \
+    objs/TEST/SDL_test_compare.o \
+    objs/TEST/SDL_test_crc32.o \
+    objs/TEST/SDL_test_font.o \
+    objs/TEST/SDL_test_fuzzer.o \
+    objs/TEST/SDL_test_harness.o \
+    objs/TEST/SDL_test_imageBlitBlend.o \
+    objs/TEST/SDL_test_imageBlit.o \
+    objs/TEST/SDL_test_imageFace.o \
+    objs/TEST/SDL_test_imagePrimitivesBlend.o \
+    objs/TEST/SDL_test_imagePrimitives.o \
+    objs/TEST/SDL_test_log.o \
+    objs/TEST/SDL_test_md5.o \
+    objs/TEST/SDL_test_memory.o \
+    objs/TEST/SDL_test_random.o
+
+# --- Directory: checkkeys (../test) ---
+objs/checkkeys/checkkeys.o: ../test/checkkeys.c
+	@mkdir -p objs/checkkeys
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_checkkeys_CPPFLAGS) $(DIR_checkkeys_CFLAGS) -c ../test/checkkeys.c -o objs/checkkeys/checkkeys.o
+
+DIR_checkkeys_OBJS = \
+    objs/checkkeys/checkkeys.o
+
+# --- Directory: checkkeysthreads (../test) ---
+objs/checkkeysthreads/checkkeysthreads.o: ../test/checkkeysthreads.c
+	@mkdir -p objs/checkkeysthreads
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_checkkeysthreads_CPPFLAGS) $(DIR_checkkeysthreads_CFLAGS) -c ../test/checkkeysthreads.c -o objs/checkkeysthreads/checkkeysthreads.o
+
+DIR_checkkeysthreads_OBJS = \
+    objs/checkkeysthreads/checkkeysthreads.o
+
+# --- Directory: controllermap (../test) ---
+objs/controllermap/controllermap.o: ../test/controllermap.c
+	@mkdir -p objs/controllermap
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_controllermap_CPPFLAGS) $(DIR_controllermap_CFLAGS) -c ../test/controllermap.c -o objs/controllermap/controllermap.o
+
+DIR_controllermap_OBJS = \
+    objs/controllermap/controllermap.o
+
+# --- Directory: loopwave (../test) ---
+objs/loopwave/loopwave.o: ../test/loopwave.c
+	@mkdir -p objs/loopwave
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_loopwave_CPPFLAGS) $(DIR_loopwave_CFLAGS) -c ../test/loopwave.c -o objs/loopwave/loopwave.o
+
+objs/loopwave/testutils.o: ../test/testutils.c
+	@mkdir -p objs/loopwave
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_loopwave_CPPFLAGS) $(DIR_loopwave_CFLAGS) -c ../test/testutils.c -o objs/loopwave/testutils.o
+
+DIR_loopwave_OBJS = \
+    objs/loopwave/loopwave.o \
+    objs/loopwave/testutils.o
+
+# --- Directory: loopwavequeue (../test) ---
+objs/loopwavequeue/loopwavequeue.o: ../test/loopwavequeue.c
+	@mkdir -p objs/loopwavequeue
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_loopwavequeue_CPPFLAGS) $(DIR_loopwavequeue_CFLAGS) -c ../test/loopwavequeue.c -o objs/loopwavequeue/loopwavequeue.o
+
+objs/loopwavequeue/testutils.o: ../test/testutils.c
+	@mkdir -p objs/loopwavequeue
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_loopwavequeue_CPPFLAGS) $(DIR_loopwavequeue_CFLAGS) -c ../test/testutils.c -o objs/loopwavequeue/testutils.o
+
+DIR_loopwavequeue_OBJS = \
+    objs/loopwavequeue/loopwavequeue.o \
+    objs/loopwavequeue/testutils.o
+
+# --- Directory: testatomic (../test) ---
+objs/testatomic/testatomic.o: ../test/testatomic.c
+	@mkdir -p objs/testatomic
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testatomic_CPPFLAGS) $(DIR_testatomic_CFLAGS) -c ../test/testatomic.c -o objs/testatomic/testatomic.o
+
+DIR_testatomic_OBJS = \
+    objs/testatomic/testatomic.o
+
+# --- Directory: testaudiocapture (../test) ---
+objs/testaudiocapture/testaudiocapture.o: ../test/testaudiocapture.c
+	@mkdir -p objs/testaudiocapture
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testaudiocapture_CPPFLAGS) $(DIR_testaudiocapture_CFLAGS) -c ../test/testaudiocapture.c -o objs/testaudiocapture/testaudiocapture.o
+
+DIR_testaudiocapture_OBJS = \
+    objs/testaudiocapture/testaudiocapture.o
+
+# --- Directory: testaudiohotplug (../test) ---
+objs/testaudiohotplug/testaudiohotplug.o: ../test/testaudiohotplug.c
+	@mkdir -p objs/testaudiohotplug
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testaudiohotplug_CPPFLAGS) $(DIR_testaudiohotplug_CFLAGS) -c ../test/testaudiohotplug.c -o objs/testaudiohotplug/testaudiohotplug.o
+
+objs/testaudiohotplug/testutils.o: ../test/testutils.c
+	@mkdir -p objs/testaudiohotplug
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testaudiohotplug_CPPFLAGS) $(DIR_testaudiohotplug_CFLAGS) -c ../test/testutils.c -o objs/testaudiohotplug/testutils.o
+
+DIR_testaudiohotplug_OBJS = \
+    objs/testaudiohotplug/testaudiohotplug.o \
+    objs/testaudiohotplug/testutils.o
+
+# --- Directory: testbounds (../test) ---
+objs/testbounds/testbounds.o: ../test/testbounds.c
+	@mkdir -p objs/testbounds
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testbounds_CPPFLAGS) $(DIR_testbounds_CFLAGS) -c ../test/testbounds.c -o objs/testbounds/testbounds.o
+
+DIR_testbounds_OBJS = \
+    objs/testbounds/testbounds.o
+
+# --- Directory: testcustomcursor (../test) ---
+objs/testcustomcursor/testcustomcursor.o: ../test/testcustomcursor.c
+	@mkdir -p objs/testcustomcursor
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testcustomcursor_CPPFLAGS) $(DIR_testcustomcursor_CFLAGS) -c ../test/testcustomcursor.c -o objs/testcustomcursor/testcustomcursor.o
+
+DIR_testcustomcursor_OBJS = \
+    objs/testcustomcursor/testcustomcursor.o
+
+# --- Directory: testdisplayinfo (../test) ---
+objs/testdisplayinfo/testdisplayinfo.o: ../test/testdisplayinfo.c
+	@mkdir -p objs/testdisplayinfo
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testdisplayinfo_CPPFLAGS) $(DIR_testdisplayinfo_CFLAGS) -c ../test/testdisplayinfo.c -o objs/testdisplayinfo/testdisplayinfo.o
+
+DIR_testdisplayinfo_OBJS = \
+    objs/testdisplayinfo/testdisplayinfo.o
+
+# --- Directory: testdraw2 (../test) ---
+objs/testdraw2/testdraw2.o: ../test/testdraw2.c
+	@mkdir -p objs/testdraw2
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testdraw2_CPPFLAGS) $(DIR_testdraw2_CFLAGS) -c ../test/testdraw2.c -o objs/testdraw2/testdraw2.o
+
+DIR_testdraw2_OBJS = \
+    objs/testdraw2/testdraw2.o
+
+# --- Directory: testdrawchessboard (../test) ---
+objs/testdrawchessboard/testdrawchessboard.o: ../test/testdrawchessboard.c
+	@mkdir -p objs/testdrawchessboard
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testdrawchessboard_CPPFLAGS) $(DIR_testdrawchessboard_CFLAGS) -c ../test/testdrawchessboard.c -o objs/testdrawchessboard/testdrawchessboard.o
+
+DIR_testdrawchessboard_OBJS = \
+    objs/testdrawchessboard/testdrawchessboard.o
+
+# --- Directory: testdropfile (../test) ---
+objs/testdropfile/testdropfile.o: ../test/testdropfile.c
+	@mkdir -p objs/testdropfile
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testdropfile_CPPFLAGS) $(DIR_testdropfile_CFLAGS) -c ../test/testdropfile.c -o objs/testdropfile/testdropfile.o
+
+DIR_testdropfile_OBJS = \
+    objs/testdropfile/testdropfile.o
+
+# --- Directory: testerror (../test) ---
+objs/testerror/testerror.o: ../test/testerror.c
+	@mkdir -p objs/testerror
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testerror_CPPFLAGS) $(DIR_testerror_CFLAGS) -c ../test/testerror.c -o objs/testerror/testerror.o
+
+DIR_testerror_OBJS = \
+    objs/testerror/testerror.o
+
+# --- Directory: testevdev (../test) ---
+objs/testevdev/testevdev.o: ../test/testevdev.c
+	@mkdir -p objs/testevdev
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testevdev_CPPFLAGS) $(DIR_testevdev_CFLAGS) -c ../test/testevdev.c -o objs/testevdev/testevdev.o
+
+DIR_testevdev_OBJS = \
+    objs/testevdev/testevdev.o
+
+# --- Directory: testfile (../test) ---
+objs/testfile/testfile.o: ../test/testfile.c
+	@mkdir -p objs/testfile
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testfile_CPPFLAGS) $(DIR_testfile_CFLAGS) -c ../test/testfile.c -o objs/testfile/testfile.o
+
+DIR_testfile_OBJS = \
+    objs/testfile/testfile.o
+
+# --- Directory: testfilesystem (../test) ---
+objs/testfilesystem/testfilesystem.o: ../test/testfilesystem.c
+	@mkdir -p objs/testfilesystem
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testfilesystem_CPPFLAGS) $(DIR_testfilesystem_CFLAGS) -c ../test/testfilesystem.c -o objs/testfilesystem/testfilesystem.o
+
+DIR_testfilesystem_OBJS = \
+    objs/testfilesystem/testfilesystem.o
+
+# --- Directory: testfilesystem_pre (../test) ---
+objs/testfilesystem_pre/testfilesystem_pre.o: ../test/testfilesystem_pre.c
+	@mkdir -p objs/testfilesystem_pre
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testfilesystem_pre_CPPFLAGS) $(DIR_testfilesystem_pre_CFLAGS) -c ../test/testfilesystem_pre.c -o objs/testfilesystem_pre/testfilesystem_pre.o
+
+DIR_testfilesystem_pre_OBJS = \
+    objs/testfilesystem_pre/testfilesystem_pre.o
+
+# --- Directory: testgamecontroller (../test) ---
+objs/testgamecontroller/testgamecontroller.o: ../test/testgamecontroller.c
+	@mkdir -p objs/testgamecontroller
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testgamecontroller_CPPFLAGS) $(DIR_testgamecontroller_CFLAGS) -c ../test/testgamecontroller.c -o objs/testgamecontroller/testgamecontroller.o
+
+DIR_testgamecontroller_OBJS = \
+    objs/testgamecontroller/testgamecontroller.o
+
+# --- Directory: testgeometry (../test) ---
+objs/testgeometry/testgeometry.o: ../test/testgeometry.c
+	@mkdir -p objs/testgeometry
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testgeometry_CPPFLAGS) $(DIR_testgeometry_CFLAGS) -c ../test/testgeometry.c -o objs/testgeometry/testgeometry.o
+
+objs/testgeometry/testutils.o: ../test/testutils.c
+	@mkdir -p objs/testgeometry
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testgeometry_CPPFLAGS) $(DIR_testgeometry_CFLAGS) -c ../test/testutils.c -o objs/testgeometry/testutils.o
+
+DIR_testgeometry_OBJS = \
+    objs/testgeometry/testgeometry.o \
+    objs/testgeometry/testutils.o
+
+# --- Directory: testgesture (../test) ---
+objs/testgesture/testgesture.o: ../test/testgesture.c
+	@mkdir -p objs/testgesture
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testgesture_CPPFLAGS) $(DIR_testgesture_CFLAGS) -c ../test/testgesture.c -o objs/testgesture/testgesture.o
+
+DIR_testgesture_OBJS = \
+    objs/testgesture/testgesture.o
+
+# --- Directory: testgl2 (../test) ---
+objs/testgl2/testgl2.o: ../test/testgl2.c
+	@mkdir -p objs/testgl2
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testgl2_CPPFLAGS) $(DIR_testgl2_CFLAGS) -c ../test/testgl2.c -o objs/testgl2/testgl2.o
+
+DIR_testgl2_OBJS = \
+    objs/testgl2/testgl2.o
+
+# --- Directory: testhaptic (../test) ---
+objs/testhaptic/testhaptic.o: ../test/testhaptic.c
+	@mkdir -p objs/testhaptic
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testhaptic_CPPFLAGS) $(DIR_testhaptic_CFLAGS) -c ../test/testhaptic.c -o objs/testhaptic/testhaptic.o
+
+DIR_testhaptic_OBJS = \
+    objs/testhaptic/testhaptic.o
+
+# --- Directory: testhittesting (../test) ---
+objs/testhittesting/testhittesting.o: ../test/testhittesting.c
+	@mkdir -p objs/testhittesting
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testhittesting_CPPFLAGS) $(DIR_testhittesting_CFLAGS) -c ../test/testhittesting.c -o objs/testhittesting/testhittesting.o
+
+DIR_testhittesting_OBJS = \
+    objs/testhittesting/testhittesting.o
+
+# --- Directory: testhotplug (../test) ---
+objs/testhotplug/testhotplug.o: ../test/testhotplug.c
+	@mkdir -p objs/testhotplug
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testhotplug_CPPFLAGS) $(DIR_testhotplug_CFLAGS) -c ../test/testhotplug.c -o objs/testhotplug/testhotplug.o
+
+DIR_testhotplug_OBJS = \
+    objs/testhotplug/testhotplug.o
+
+# --- Directory: testiconv (../test) ---
+objs/testiconv/testiconv.o: ../test/testiconv.c
+	@mkdir -p objs/testiconv
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testiconv_CPPFLAGS) $(DIR_testiconv_CFLAGS) -c ../test/testiconv.c -o objs/testiconv/testiconv.o
+
+objs/testiconv/testutils.o: ../test/testutils.c
+	@mkdir -p objs/testiconv
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testiconv_CPPFLAGS) $(DIR_testiconv_CFLAGS) -c ../test/testutils.c -o objs/testiconv/testutils.o
+
+DIR_testiconv_OBJS = \
+    objs/testiconv/testiconv.o \
+    objs/testiconv/testutils.o
+
+# --- Directory: testime (../test) ---
+objs/testime/testime.o: ../test/testime.c
+	@mkdir -p objs/testime
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testime_CPPFLAGS) $(DIR_testime_CFLAGS) -c ../test/testime.c -o objs/testime/testime.o
+
+objs/testime/testutils.o: ../test/testutils.c
+	@mkdir -p objs/testime
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testime_CPPFLAGS) $(DIR_testime_CFLAGS) -c ../test/testutils.c -o objs/testime/testutils.o
+
+DIR_testime_OBJS = \
+    objs/testime/testime.o \
+    objs/testime/testutils.o
+
+# --- Directory: testintersections (../test) ---
+objs/testintersections/testintersections.o: ../test/testintersections.c
+	@mkdir -p objs/testintersections
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testintersections_CPPFLAGS) $(DIR_testintersections_CFLAGS) -c ../test/testintersections.c -o objs/testintersections/testintersections.o
+
+DIR_testintersections_OBJS = \
+    objs/testintersections/testintersections.o
+
+# --- Directory: testjoystick (../test) ---
+objs/testjoystick/testjoystick.o: ../test/testjoystick.c
+	@mkdir -p objs/testjoystick
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testjoystick_CPPFLAGS) $(DIR_testjoystick_CFLAGS) -c ../test/testjoystick.c -o objs/testjoystick/testjoystick.o
+
+DIR_testjoystick_OBJS = \
+    objs/testjoystick/testjoystick.o
+
+# --- Directory: testkeys (../test) ---
+objs/testkeys/testkeys.o: ../test/testkeys.c
+	@mkdir -p objs/testkeys
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testkeys_CPPFLAGS) $(DIR_testkeys_CFLAGS) -c ../test/testkeys.c -o objs/testkeys/testkeys.o
+
+DIR_testkeys_OBJS = \
+    objs/testkeys/testkeys.o
+
+# --- Directory: testloadso (../test) ---
+objs/testloadso/testloadso.o: ../test/testloadso.c
+	@mkdir -p objs/testloadso
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testloadso_CPPFLAGS) $(DIR_testloadso_CFLAGS) -c ../test/testloadso.c -o objs/testloadso/testloadso.o
+
+DIR_testloadso_OBJS = \
+    objs/testloadso/testloadso.o
+
+# --- Directory: testlocale (../test) ---
+objs/testlocale/testlocale.o: ../test/testlocale.c
+	@mkdir -p objs/testlocale
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testlocale_CPPFLAGS) $(DIR_testlocale_CFLAGS) -c ../test/testlocale.c -o objs/testlocale/testlocale.o
+
+DIR_testlocale_OBJS = \
+    objs/testlocale/testlocale.o
+
+# --- Directory: testlock (../test) ---
+objs/testlock/testlock.o: ../test/testlock.c
+	@mkdir -p objs/testlock
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testlock_CPPFLAGS) $(DIR_testlock_CFLAGS) -c ../test/testlock.c -o objs/testlock/testlock.o
+
+DIR_testlock_OBJS = \
+    objs/testlock/testlock.o
+
+# --- Directory: testmessage (../test) ---
+objs/testmessage/testmessage.o: ../test/testmessage.c
+	@mkdir -p objs/testmessage
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testmessage_CPPFLAGS) $(DIR_testmessage_CFLAGS) -c ../test/testmessage.c -o objs/testmessage/testmessage.o
+
+DIR_testmessage_OBJS = \
+    objs/testmessage/testmessage.o
+
+# --- Directory: testmouse (../test) ---
+objs/testmouse/testmouse.o: ../test/testmouse.c
+	@mkdir -p objs/testmouse
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testmouse_CPPFLAGS) $(DIR_testmouse_CFLAGS) -c ../test/testmouse.c -o objs/testmouse/testmouse.o
+
+DIR_testmouse_OBJS = \
+    objs/testmouse/testmouse.o
+
+# --- Directory: testmultiaudio (../test) ---
+objs/testmultiaudio/testmultiaudio.o: ../test/testmultiaudio.c
+	@mkdir -p objs/testmultiaudio
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testmultiaudio_CPPFLAGS) $(DIR_testmultiaudio_CFLAGS) -c ../test/testmultiaudio.c -o objs/testmultiaudio/testmultiaudio.o
+
+objs/testmultiaudio/testutils.o: ../test/testutils.c
+	@mkdir -p objs/testmultiaudio
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testmultiaudio_CPPFLAGS) $(DIR_testmultiaudio_CFLAGS) -c ../test/testutils.c -o objs/testmultiaudio/testutils.o
+
+DIR_testmultiaudio_OBJS = \
+    objs/testmultiaudio/testmultiaudio.o \
+    objs/testmultiaudio/testutils.o
+
+# --- Directory: testnative (../test) ---
+objs/testnative/testnative.o: ../test/testnative.c
+	@mkdir -p objs/testnative
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test -DTEST_NATIVE_X11  $(DIR_testnative_CPPFLAGS) $(DIR_testnative_CFLAGS) -c ../test/testnative.c -o objs/testnative/testnative.o
+
+objs/testnative/testnativex11.o: ../test/testnativex11.c
+	@mkdir -p objs/testnative
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test -DTEST_NATIVE_X11  $(DIR_testnative_CPPFLAGS) $(DIR_testnative_CFLAGS) -c ../test/testnativex11.c -o objs/testnative/testnativex11.o
+
+objs/testnative/testutils.o: ../test/testutils.c
+	@mkdir -p objs/testnative
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test -DTEST_NATIVE_X11  $(DIR_testnative_CPPFLAGS) $(DIR_testnative_CFLAGS) -c ../test/testutils.c -o objs/testnative/testutils.o
+
+DIR_testnative_OBJS = \
+    objs/testnative/testnative.o \
+    objs/testnative/testnativex11.o \
+    objs/testnative/testutils.o
+
+# --- Directory: testoffscreen (../test) ---
+objs/testoffscreen/testoffscreen.o: ../test/testoffscreen.c
+	@mkdir -p objs/testoffscreen
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testoffscreen_CPPFLAGS) $(DIR_testoffscreen_CFLAGS) -c ../test/testoffscreen.c -o objs/testoffscreen/testoffscreen.o
+
+DIR_testoffscreen_OBJS = \
+    objs/testoffscreen/testoffscreen.o
+
+# --- Directory: testplatform (../test) ---
+objs/testplatform/testplatform.o: ../test/testplatform.c
+	@mkdir -p objs/testplatform
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testplatform_CPPFLAGS) $(DIR_testplatform_CFLAGS) -c ../test/testplatform.c -o objs/testplatform/testplatform.o
+
+DIR_testplatform_OBJS = \
+    objs/testplatform/testplatform.o
+
+# --- Directory: testpower (../test) ---
+objs/testpower/testpower.o: ../test/testpower.c
+	@mkdir -p objs/testpower
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testpower_CPPFLAGS) $(DIR_testpower_CFLAGS) -c ../test/testpower.c -o objs/testpower/testpower.o
+
+DIR_testpower_OBJS = \
+    objs/testpower/testpower.o
+
+# --- Directory: testqsort (../test) ---
+objs/testqsort/testqsort.o: ../test/testqsort.c
+	@mkdir -p objs/testqsort
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testqsort_CPPFLAGS) $(DIR_testqsort_CFLAGS) -c ../test/testqsort.c -o objs/testqsort/testqsort.o
+
+DIR_testqsort_OBJS = \
+    objs/testqsort/testqsort.o
+
+# --- Directory: testrelative (../test) ---
+objs/testrelative/testrelative.o: ../test/testrelative.c
+	@mkdir -p objs/testrelative
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testrelative_CPPFLAGS) $(DIR_testrelative_CFLAGS) -c ../test/testrelative.c -o objs/testrelative/testrelative.o
+
+DIR_testrelative_OBJS = \
+    objs/testrelative/testrelative.o
+
+# --- Directory: testrendercopyex (../test) ---
+objs/testrendercopyex/testrendercopyex.o: ../test/testrendercopyex.c
+	@mkdir -p objs/testrendercopyex
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testrendercopyex_CPPFLAGS) $(DIR_testrendercopyex_CFLAGS) -c ../test/testrendercopyex.c -o objs/testrendercopyex/testrendercopyex.o
+
+objs/testrendercopyex/testutils.o: ../test/testutils.c
+	@mkdir -p objs/testrendercopyex
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testrendercopyex_CPPFLAGS) $(DIR_testrendercopyex_CFLAGS) -c ../test/testutils.c -o objs/testrendercopyex/testutils.o
+
+DIR_testrendercopyex_OBJS = \
+    objs/testrendercopyex/testrendercopyex.o \
+    objs/testrendercopyex/testutils.o
+
+# --- Directory: testrendertarget (../test) ---
+objs/testrendertarget/testrendertarget.o: ../test/testrendertarget.c
+	@mkdir -p objs/testrendertarget
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testrendertarget_CPPFLAGS) $(DIR_testrendertarget_CFLAGS) -c ../test/testrendertarget.c -o objs/testrendertarget/testrendertarget.o
+
+objs/testrendertarget/testutils.o: ../test/testutils.c
+	@mkdir -p objs/testrendertarget
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testrendertarget_CPPFLAGS) $(DIR_testrendertarget_CFLAGS) -c ../test/testutils.c -o objs/testrendertarget/testutils.o
+
+DIR_testrendertarget_OBJS = \
+    objs/testrendertarget/testrendertarget.o \
+    objs/testrendertarget/testutils.o
+
+# --- Directory: testresample (../test) ---
+objs/testresample/testresample.o: ../test/testresample.c
+	@mkdir -p objs/testresample
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testresample_CPPFLAGS) $(DIR_testresample_CFLAGS) -c ../test/testresample.c -o objs/testresample/testresample.o
+
+DIR_testresample_OBJS = \
+    objs/testresample/testresample.o
+
+# --- Directory: testrumble (../test) ---
+objs/testrumble/testrumble.o: ../test/testrumble.c
+	@mkdir -p objs/testrumble
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testrumble_CPPFLAGS) $(DIR_testrumble_CFLAGS) -c ../test/testrumble.c -o objs/testrumble/testrumble.o
+
+DIR_testrumble_OBJS = \
+    objs/testrumble/testrumble.o
+
+# --- Directory: testscale (../test) ---
+objs/testscale/testscale.o: ../test/testscale.c
+	@mkdir -p objs/testscale
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testscale_CPPFLAGS) $(DIR_testscale_CFLAGS) -c ../test/testscale.c -o objs/testscale/testscale.o
+
+objs/testscale/testutils.o: ../test/testutils.c
+	@mkdir -p objs/testscale
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testscale_CPPFLAGS) $(DIR_testscale_CFLAGS) -c ../test/testutils.c -o objs/testscale/testutils.o
+
+DIR_testscale_OBJS = \
+    objs/testscale/testscale.o \
+    objs/testscale/testutils.o
+
+# --- Directory: testsem (../test) ---
+objs/testsem/testsem.o: ../test/testsem.c
+	@mkdir -p objs/testsem
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testsem_CPPFLAGS) $(DIR_testsem_CFLAGS) -c ../test/testsem.c -o objs/testsem/testsem.o
+
+DIR_testsem_OBJS = \
+    objs/testsem/testsem.o
+
+# --- Directory: testsensor (../test) ---
+objs/testsensor/testsensor.o: ../test/testsensor.c
+	@mkdir -p objs/testsensor
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testsensor_CPPFLAGS) $(DIR_testsensor_CFLAGS) -c ../test/testsensor.c -o objs/testsensor/testsensor.o
+
+DIR_testsensor_OBJS = \
+    objs/testsensor/testsensor.o
+
+# --- Directory: testshape (../test) ---
+objs/testshape/testshape.o: ../test/testshape.c
+	@mkdir -p objs/testshape
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testshape_CPPFLAGS) $(DIR_testshape_CFLAGS) -c ../test/testshape.c -o objs/testshape/testshape.o
+
+DIR_testshape_OBJS = \
+    objs/testshape/testshape.o
+
+# --- Directory: testsprite2 (../test) ---
+objs/testsprite2/testsprite2.o: ../test/testsprite2.c
+	@mkdir -p objs/testsprite2
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testsprite2_CPPFLAGS) $(DIR_testsprite2_CFLAGS) -c ../test/testsprite2.c -o objs/testsprite2/testsprite2.o
+
+objs/testsprite2/testutils.o: ../test/testutils.c
+	@mkdir -p objs/testsprite2
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testsprite2_CPPFLAGS) $(DIR_testsprite2_CFLAGS) -c ../test/testutils.c -o objs/testsprite2/testutils.o
+
+DIR_testsprite2_OBJS = \
+    objs/testsprite2/testsprite2.o \
+    objs/testsprite2/testutils.o
+
+# --- Directory: testspriteminimal (../test) ---
+objs/testspriteminimal/testspriteminimal.o: ../test/testspriteminimal.c
+	@mkdir -p objs/testspriteminimal
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testspriteminimal_CPPFLAGS) $(DIR_testspriteminimal_CFLAGS) -c ../test/testspriteminimal.c -o objs/testspriteminimal/testspriteminimal.o
+
+objs/testspriteminimal/testutils.o: ../test/testutils.c
+	@mkdir -p objs/testspriteminimal
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testspriteminimal_CPPFLAGS) $(DIR_testspriteminimal_CFLAGS) -c ../test/testutils.c -o objs/testspriteminimal/testutils.o
+
+DIR_testspriteminimal_OBJS = \
+    objs/testspriteminimal/testspriteminimal.o \
+    objs/testspriteminimal/testutils.o
+
+# --- Directory: teststreaming (../test) ---
+objs/teststreaming/teststreaming.o: ../test/teststreaming.c
+	@mkdir -p objs/teststreaming
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_teststreaming_CPPFLAGS) $(DIR_teststreaming_CFLAGS) -c ../test/teststreaming.c -o objs/teststreaming/teststreaming.o
+
+objs/teststreaming/testutils.o: ../test/testutils.c
+	@mkdir -p objs/teststreaming
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_teststreaming_CPPFLAGS) $(DIR_teststreaming_CFLAGS) -c ../test/testutils.c -o objs/teststreaming/testutils.o
+
+DIR_teststreaming_OBJS = \
+    objs/teststreaming/teststreaming.o \
+    objs/teststreaming/testutils.o
+
+# --- Directory: testsurround (../test) ---
+objs/testsurround/testsurround.o: ../test/testsurround.c
+	@mkdir -p objs/testsurround
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testsurround_CPPFLAGS) $(DIR_testsurround_CFLAGS) -c ../test/testsurround.c -o objs/testsurround/testsurround.o
+
+DIR_testsurround_OBJS = \
+    objs/testsurround/testsurround.o
+
+# --- Directory: testthread (../test) ---
+objs/testthread/testthread.o: ../test/testthread.c
+	@mkdir -p objs/testthread
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testthread_CPPFLAGS) $(DIR_testthread_CFLAGS) -c ../test/testthread.c -o objs/testthread/testthread.o
+
+DIR_testthread_OBJS = \
+    objs/testthread/testthread.o
+
+# --- Directory: testtimer (../test) ---
+objs/testtimer/testtimer.o: ../test/testtimer.c
+	@mkdir -p objs/testtimer
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testtimer_CPPFLAGS) $(DIR_testtimer_CFLAGS) -c ../test/testtimer.c -o objs/testtimer/testtimer.o
+
+DIR_testtimer_OBJS = \
+    objs/testtimer/testtimer.o
+
+# --- Directory: testurl (../test) ---
+objs/testurl/testurl.o: ../test/testurl.c
+	@mkdir -p objs/testurl
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testurl_CPPFLAGS) $(DIR_testurl_CFLAGS) -c ../test/testurl.c -o objs/testurl/testurl.o
+
+DIR_testurl_OBJS = \
+    objs/testurl/testurl.o
+
+# --- Directory: testver (../test) ---
+objs/testver/testver.o: ../test/testver.c
+	@mkdir -p objs/testver
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testver_CPPFLAGS) $(DIR_testver_CFLAGS) -c ../test/testver.c -o objs/testver/testver.o
+
+DIR_testver_OBJS = \
+    objs/testver/testver.o
+
+# --- Directory: testviewport (../test) ---
+objs/testviewport/testutils.o: ../test/testutils.c
+	@mkdir -p objs/testviewport
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testviewport_CPPFLAGS) $(DIR_testviewport_CFLAGS) -c ../test/testutils.c -o objs/testviewport/testutils.o
+
+objs/testviewport/testviewport.o: ../test/testviewport.c
+	@mkdir -p objs/testviewport
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testviewport_CPPFLAGS) $(DIR_testviewport_CFLAGS) -c ../test/testviewport.c -o objs/testviewport/testviewport.o
+
+DIR_testviewport_OBJS = \
+    objs/testviewport/testutils.o \
+    objs/testviewport/testviewport.o
+
+# --- Directory: testwm2 (../test) ---
+objs/testwm2/testwm2.o: ../test/testwm2.c
+	@mkdir -p objs/testwm2
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testwm2_CPPFLAGS) $(DIR_testwm2_CFLAGS) -c ../test/testwm2.c -o objs/testwm2/testwm2.o
+
+DIR_testwm2_OBJS = \
+    objs/testwm2/testwm2.o
+
+# --- Directory: testyuv (../test) ---
+objs/testyuv/testyuv.o: ../test/testyuv.c
+	@mkdir -p objs/testyuv
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testyuv_CPPFLAGS) $(DIR_testyuv_CFLAGS) -c ../test/testyuv.c -o objs/testyuv/testyuv.o
+
+objs/testyuv/testyuv_cvt.o: ../test/testyuv_cvt.c
+	@mkdir -p objs/testyuv
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_testyuv_CPPFLAGS) $(DIR_testyuv_CFLAGS) -c ../test/testyuv_cvt.c -o objs/testyuv/testyuv_cvt.o
+
+DIR_testyuv_OBJS = \
+    objs/testyuv/testyuv.o \
+    objs/testyuv/testyuv_cvt.o
+
+# --- Directory: torturethread (../test) ---
+objs/torturethread/torturethread.o: ../test/torturethread.c
+	@mkdir -p objs/torturethread
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I../test  $(DIR_torturethread_CPPFLAGS) $(DIR_torturethread_CFLAGS) -c ../test/torturethread.c -o objs/torturethread/torturethread.o
+
+DIR_torturethread_OBJS = \
+    objs/torturethread/torturethread.o
+
+TGT_SDL2_OBJS = \
+    $(DIR_SRC_OBJS) \
+    $(DIR_ATOMIC_OBJS) \
+    $(DIR_AUDIO_OBJS) \
+    $(DIR_AUDIO_DISK_OBJS) \
+    $(DIR_AUDIO_DMEDIA_OBJS) \
+    $(DIR_AUDIO_DM_OBJS) \
+    $(DIR_UNIX_OBJS) \
+    $(DIR_CPUINFO_OBJS) \
+    $(DIR_DYNAPI_OBJS) \
+    $(DIR_EVENTS_OBJS) \
+    $(DIR_FILE_OBJS) \
+    $(DIR_FS_OBJS) \
+    $(DIR_HAPTIC_OBJS) \
+    $(DIR_HAPTIC_DM_OBJS) \
+    $(DIR_HIDAPI_OBJS) \
+    $(DIR_JOY_OBJS) \
+    $(DIR_JOY_DM_OBJS) \
+    $(DIR_LOADSO_OBJS) \
+    $(DIR_LOCALE_OBJS) \
+    $(DIR_LOCALE_UX_OBJS) \
+    $(DIR_MISC_OBJS) \
+    $(DIR_MISC_UX_OBJS) \
+    $(DIR_POWER_OBJS) \
+    $(DIR_RENDER_OBJS) \
+    $(DIR_RENDER_OGL_OBJS) \
+    $(DIR_RENDER_SW_OBJS) \
+    $(DIR_SENSOR_OBJS) \
+    $(DIR_SENSOR_DM_OBJS) \
+    $(DIR_STDLIB_OBJS) \
+    $(DIR_THREAD_OBJS) \
+    $(DIR_PTHREAD_OBJS) \
+    $(DIR_TIMER_OBJS) \
+    $(DIR_TIMER_IRIX_OBJS) \
+    $(DIR_VIDEO_OBJS) \
+    $(DIR_VIDEO_YUV_OBJS) \
+    $(DIR_VIDEO_DM_OBJS) \
+    $(DIR_VIDEO_X11_OBJS)
+
+libSDL2.a: $(TGT_SDL2_OBJS)
+	$(AR) cr libSDL2.a $(TGT_SDL2_OBJS)
+
+TGT_TEST_OBJS = \
+    $(DIR_TEST_OBJS)
+
+libTEST.a: $(TGT_TEST_OBJS)
+	$(AR) cr libTEST.a $(TGT_TEST_OBJS)
+
+TGT_testautomation_OBJS = \
+    $(DIR_TESTAUTOMATION_OBJS)
+
+testautomation: $(TGT_testautomation_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testautomation_LDFLAGS)  -o testautomation $(TGT_testautomation_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_checkkeys_OBJS = \
+    $(DIR_checkkeys_OBJS)
+
+checkkeys: $(TGT_checkkeys_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_checkkeys_LDFLAGS)  -o checkkeys $(TGT_checkkeys_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_checkkeysthreads_OBJS = \
+    $(DIR_checkkeysthreads_OBJS)
+
+checkkeysthreads: $(TGT_checkkeysthreads_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_checkkeysthreads_LDFLAGS)  -o checkkeysthreads $(TGT_checkkeysthreads_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_controllermap_OBJS = \
+    $(DIR_controllermap_OBJS)
+
+controllermap: $(TGT_controllermap_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_controllermap_LDFLAGS)  -o controllermap $(TGT_controllermap_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_loopwave_OBJS = \
+    $(DIR_loopwave_OBJS)
+
+loopwave: $(TGT_loopwave_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_loopwave_LDFLAGS)  -o loopwave $(TGT_loopwave_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_loopwavequeue_OBJS = \
+    $(DIR_loopwavequeue_OBJS)
+
+loopwavequeue: $(TGT_loopwavequeue_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_loopwavequeue_LDFLAGS)  -o loopwavequeue $(TGT_loopwavequeue_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testatomic_OBJS = \
+    $(DIR_testatomic_OBJS)
+
+testatomic: $(TGT_testatomic_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testatomic_LDFLAGS)  -o testatomic $(TGT_testatomic_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testaudiocapture_OBJS = \
+    $(DIR_testaudiocapture_OBJS)
+
+testaudiocapture: $(TGT_testaudiocapture_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testaudiocapture_LDFLAGS)  -o testaudiocapture $(TGT_testaudiocapture_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testaudiohotplug_OBJS = \
+    $(DIR_testaudiohotplug_OBJS)
+
+testaudiohotplug: $(TGT_testaudiohotplug_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testaudiohotplug_LDFLAGS)  -o testaudiohotplug $(TGT_testaudiohotplug_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testbounds_OBJS = \
+    $(DIR_testbounds_OBJS)
+
+testbounds: $(TGT_testbounds_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testbounds_LDFLAGS)  -o testbounds $(TGT_testbounds_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testcustomcursor_OBJS = \
+    $(DIR_testcustomcursor_OBJS)
+
+testcustomcursor: $(TGT_testcustomcursor_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testcustomcursor_LDFLAGS)  -o testcustomcursor $(TGT_testcustomcursor_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testdisplayinfo_OBJS = \
+    $(DIR_testdisplayinfo_OBJS)
+
+testdisplayinfo: $(TGT_testdisplayinfo_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testdisplayinfo_LDFLAGS)  -o testdisplayinfo $(TGT_testdisplayinfo_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testdraw2_OBJS = \
+    $(DIR_testdraw2_OBJS)
+
+testdraw2: $(TGT_testdraw2_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testdraw2_LDFLAGS)  -o testdraw2 $(TGT_testdraw2_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testdrawchessboard_OBJS = \
+    $(DIR_testdrawchessboard_OBJS)
+
+testdrawchessboard: $(TGT_testdrawchessboard_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testdrawchessboard_LDFLAGS)  -o testdrawchessboard $(TGT_testdrawchessboard_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testdropfile_OBJS = \
+    $(DIR_testdropfile_OBJS)
+
+testdropfile: $(TGT_testdropfile_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testdropfile_LDFLAGS)  -o testdropfile $(TGT_testdropfile_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testerror_OBJS = \
+    $(DIR_testerror_OBJS)
+
+testerror: $(TGT_testerror_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testerror_LDFLAGS)  -o testerror $(TGT_testerror_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testevdev_OBJS = \
+    $(DIR_testevdev_OBJS)
+
+testevdev: $(TGT_testevdev_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testevdev_LDFLAGS)  -o testevdev $(TGT_testevdev_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testfile_OBJS = \
+    $(DIR_testfile_OBJS)
+
+testfile: $(TGT_testfile_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testfile_LDFLAGS)  -o testfile $(TGT_testfile_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testfilesystem_OBJS = \
+    $(DIR_testfilesystem_OBJS)
+
+testfilesystem: $(TGT_testfilesystem_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testfilesystem_LDFLAGS)  -o testfilesystem $(TGT_testfilesystem_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testfilesystem_pre_OBJS = \
+    $(DIR_testfilesystem_pre_OBJS)
+
+testfilesystem_pre: $(TGT_testfilesystem_pre_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testfilesystem_pre_LDFLAGS)  -o testfilesystem_pre $(TGT_testfilesystem_pre_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testgamecontroller_OBJS = \
+    $(DIR_testgamecontroller_OBJS)
+
+testgamecontroller: $(TGT_testgamecontroller_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testgamecontroller_LDFLAGS)  -o testgamecontroller $(TGT_testgamecontroller_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testgeometry_OBJS = \
+    $(DIR_testgeometry_OBJS)
+
+testgeometry: $(TGT_testgeometry_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testgeometry_LDFLAGS)  -o testgeometry $(TGT_testgeometry_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testgesture_OBJS = \
+    $(DIR_testgesture_OBJS)
+
+testgesture: $(TGT_testgesture_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testgesture_LDFLAGS)  -o testgesture $(TGT_testgesture_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testgl2_OBJS = \
+    $(DIR_testgl2_OBJS)
+
+testgl2: $(TGT_testgl2_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testgl2_LDFLAGS)  -o testgl2 $(TGT_testgl2_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testhaptic_OBJS = \
+    $(DIR_testhaptic_OBJS)
+
+testhaptic: $(TGT_testhaptic_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testhaptic_LDFLAGS)  -o testhaptic $(TGT_testhaptic_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testhittesting_OBJS = \
+    $(DIR_testhittesting_OBJS)
+
+testhittesting: $(TGT_testhittesting_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testhittesting_LDFLAGS)  -o testhittesting $(TGT_testhittesting_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testhotplug_OBJS = \
+    $(DIR_testhotplug_OBJS)
+
+testhotplug: $(TGT_testhotplug_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testhotplug_LDFLAGS)  -o testhotplug $(TGT_testhotplug_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testiconv_OBJS = \
+    $(DIR_testiconv_OBJS)
+
+testiconv: $(TGT_testiconv_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testiconv_LDFLAGS)  -o testiconv $(TGT_testiconv_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testime_OBJS = \
+    $(DIR_testime_OBJS)
+
+testime: $(TGT_testime_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testime_LDFLAGS)  -o testime $(TGT_testime_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testintersections_OBJS = \
+    $(DIR_testintersections_OBJS)
+
+testintersections: $(TGT_testintersections_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testintersections_LDFLAGS)  -o testintersections $(TGT_testintersections_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testjoystick_OBJS = \
+    $(DIR_testjoystick_OBJS)
+
+testjoystick: $(TGT_testjoystick_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testjoystick_LDFLAGS)  -o testjoystick $(TGT_testjoystick_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testkeys_OBJS = \
+    $(DIR_testkeys_OBJS)
+
+testkeys: $(TGT_testkeys_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testkeys_LDFLAGS)  -o testkeys $(TGT_testkeys_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testloadso_OBJS = \
+    $(DIR_testloadso_OBJS)
+
+testloadso: $(TGT_testloadso_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testloadso_LDFLAGS)  -o testloadso $(TGT_testloadso_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testlocale_OBJS = \
+    $(DIR_testlocale_OBJS)
+
+testlocale: $(TGT_testlocale_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testlocale_LDFLAGS)  -o testlocale $(TGT_testlocale_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testlock_OBJS = \
+    $(DIR_testlock_OBJS)
+
+testlock: $(TGT_testlock_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testlock_LDFLAGS)  -o testlock $(TGT_testlock_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testmessage_OBJS = \
+    $(DIR_testmessage_OBJS)
+
+testmessage: $(TGT_testmessage_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testmessage_LDFLAGS)  -o testmessage $(TGT_testmessage_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testmouse_OBJS = \
+    $(DIR_testmouse_OBJS)
+
+testmouse: $(TGT_testmouse_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testmouse_LDFLAGS)  -o testmouse $(TGT_testmouse_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testmultiaudio_OBJS = \
+    $(DIR_testmultiaudio_OBJS)
+
+testmultiaudio: $(TGT_testmultiaudio_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testmultiaudio_LDFLAGS)  -o testmultiaudio $(TGT_testmultiaudio_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testnative_OBJS = \
+    $(DIR_testnative_OBJS)
+
+testnative: $(TGT_testnative_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testnative_LDFLAGS)  -o testnative $(TGT_testnative_OBJS)  libSDL2.a libTEST.a -lX11  $(LIBS)
+
+TGT_testoffscreen_OBJS = \
+    $(DIR_testoffscreen_OBJS)
+
+testoffscreen: $(TGT_testoffscreen_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testoffscreen_LDFLAGS)  -o testoffscreen $(TGT_testoffscreen_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testplatform_OBJS = \
+    $(DIR_testplatform_OBJS)
+
+testplatform: $(TGT_testplatform_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testplatform_LDFLAGS)  -o testplatform $(TGT_testplatform_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testpower_OBJS = \
+    $(DIR_testpower_OBJS)
+
+testpower: $(TGT_testpower_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testpower_LDFLAGS)  -o testpower $(TGT_testpower_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testqsort_OBJS = \
+    $(DIR_testqsort_OBJS)
+
+testqsort: $(TGT_testqsort_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testqsort_LDFLAGS)  -o testqsort $(TGT_testqsort_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testrelative_OBJS = \
+    $(DIR_testrelative_OBJS)
+
+testrelative: $(TGT_testrelative_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testrelative_LDFLAGS)  -o testrelative $(TGT_testrelative_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testrendercopyex_OBJS = \
+    $(DIR_testrendercopyex_OBJS)
+
+testrendercopyex: $(TGT_testrendercopyex_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testrendercopyex_LDFLAGS)  -o testrendercopyex $(TGT_testrendercopyex_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testrendertarget_OBJS = \
+    $(DIR_testrendertarget_OBJS)
+
+testrendertarget: $(TGT_testrendertarget_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testrendertarget_LDFLAGS)  -o testrendertarget $(TGT_testrendertarget_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testresample_OBJS = \
+    $(DIR_testresample_OBJS)
+
+testresample: $(TGT_testresample_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testresample_LDFLAGS)  -o testresample $(TGT_testresample_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testrumble_OBJS = \
+    $(DIR_testrumble_OBJS)
+
+testrumble: $(TGT_testrumble_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testrumble_LDFLAGS)  -o testrumble $(TGT_testrumble_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testscale_OBJS = \
+    $(DIR_testscale_OBJS)
+
+testscale: $(TGT_testscale_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testscale_LDFLAGS)  -o testscale $(TGT_testscale_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testsem_OBJS = \
+    $(DIR_testsem_OBJS)
+
+testsem: $(TGT_testsem_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testsem_LDFLAGS)  -o testsem $(TGT_testsem_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testsensor_OBJS = \
+    $(DIR_testsensor_OBJS)
+
+testsensor: $(TGT_testsensor_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testsensor_LDFLAGS)  -o testsensor $(TGT_testsensor_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testshape_OBJS = \
+    $(DIR_testshape_OBJS)
+
+testshape: $(TGT_testshape_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testshape_LDFLAGS)  -o testshape $(TGT_testshape_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testsprite2_OBJS = \
+    $(DIR_testsprite2_OBJS)
+
+testsprite2: $(TGT_testsprite2_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testsprite2_LDFLAGS)  -o testsprite2 $(TGT_testsprite2_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testspriteminimal_OBJS = \
+    $(DIR_testspriteminimal_OBJS)
+
+testspriteminimal: $(TGT_testspriteminimal_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testspriteminimal_LDFLAGS)  -o testspriteminimal $(TGT_testspriteminimal_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_teststreaming_OBJS = \
+    $(DIR_teststreaming_OBJS)
+
+teststreaming: $(TGT_teststreaming_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_teststreaming_LDFLAGS)  -o teststreaming $(TGT_teststreaming_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testsurround_OBJS = \
+    $(DIR_testsurround_OBJS)
+
+testsurround: $(TGT_testsurround_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testsurround_LDFLAGS)  -o testsurround $(TGT_testsurround_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testthread_OBJS = \
+    $(DIR_testthread_OBJS)
+
+testthread: $(TGT_testthread_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testthread_LDFLAGS)  -o testthread $(TGT_testthread_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testtimer_OBJS = \
+    $(DIR_testtimer_OBJS)
+
+testtimer: $(TGT_testtimer_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testtimer_LDFLAGS)  -o testtimer $(TGT_testtimer_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testurl_OBJS = \
+    $(DIR_testurl_OBJS)
+
+testurl: $(TGT_testurl_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testurl_LDFLAGS)  -o testurl $(TGT_testurl_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testver_OBJS = \
+    $(DIR_testver_OBJS)
+
+testver: $(TGT_testver_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testver_LDFLAGS)  -o testver $(TGT_testver_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testviewport_OBJS = \
+    $(DIR_testviewport_OBJS)
+
+testviewport: $(TGT_testviewport_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testviewport_LDFLAGS)  -o testviewport $(TGT_testviewport_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testwm2_OBJS = \
+    $(DIR_testwm2_OBJS)
+
+testwm2: $(TGT_testwm2_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testwm2_LDFLAGS)  -o testwm2 $(TGT_testwm2_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_testyuv_OBJS = \
+    $(DIR_testyuv_OBJS)
+
+testyuv: $(TGT_testyuv_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_testyuv_LDFLAGS)  -o testyuv $(TGT_testyuv_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+TGT_torturethread_OBJS = \
+    $(DIR_torturethread_OBJS)
+
+torturethread: $(TGT_torturethread_OBJS)  libSDL2.a libTEST.a
+	$(LD) $(LDFLAGS) $(TGT_torturethread_LDFLAGS)  -o torturethread $(TGT_torturethread_OBJS)  libSDL2.a libTEST.a  $(LIBS)
+
+ALL_TARGETS =  libSDL2.a libTEST.a testautomation checkkeys checkkeysthreads controllermap loopwave loopwavequeue testatomic testaudiocapture testaudiohotplug testbounds testcustomcursor testdisplayinfo testdraw2 testdrawchessboard testdropfile testerror testevdev testfile testfilesystem testfilesystem_pre testgamecontroller testgeometry testgesture testgl2 testhaptic testhittesting testhotplug testiconv testime testintersections testjoystick testkeys testloadso testlocale testlock testmessage testmouse testmultiaudio testnative testoffscreen testplatform testpower testqsort testrelative testrendercopyex testrendertarget testresample testrumble testscale testsem testsensor testshape testsprite2 testspriteminimal teststreaming testsurround testthread testtimer testurl testver testviewport testwm2 testyuv torturethread
 

@@ -1,0 +1,241 @@
+
+dir SRC=../src *.c
+dir ATOMIC=../src/atomic *.c
+dir AUDIO=../src/audio *.c
+dir AUDIO_DISK=../src/audio/disk *.c
+dir AUDIO_DMEDIA=../src/audio/dmedia *.c
+dir AUDIO_DM=../src/audio/dummy *.c
+dir UNIX=../src/core/unix SDL_poll.c
+dir CPUINFO=../src/cpuinfo SDL_cpuinfo_irix.c
+dir DYNAPI=../src/dynapi SDL_dynapi.c
+dir EVENTS=../src/events *.c
+dir FILE=../src/file SDL_rwops.c
+dir FS=../src/filesystem/unix SDL_sysfilesystem.c
+dir HAPTIC=../src/haptic *.c
+dir HAPTIC_DM=../src/haptic/dummy *.c
+dir HIDAPI=../src/hidapi *.c
+dir JOY=../src/joystick *.c
+dir JOY_DM=../src/joystick/dummy *.c
+dir LOADSO=../src/loadso/dlopen SDL_sysloadso.c
+dir LOCALE=../src/locale SDL_locale.c
+dir LOCALE_UX=../src/locale/unix SDL_syslocale.c
+dir MISC=../src/misc *.c
+dir MISC_UX=../src/misc/unix *.c
+dir POWER=../src/power *.c
+dir RENDER=../src/render *.c
+dir RENDER_OGL=../src/render/opengl *.c
+dir RENDER_SW=../src/render/software *.c
+dir SENSOR=../src/sensor *.c
+dir SENSOR_DM=../src/sensor/dummy *.c
+dir STDLIB=../src/stdlib *.c
+dir THREAD=../src/thread SDL_thread.c
+dir PTHREAD=../src/thread/pthread *.c
+dir TIMER=../src/timer SDL_timer.c
+dir TIMER_IRIX=../src/timer/irix SDL_systimer.c
+dir VIDEO=../src/video *.c
+dir VIDEO_YUV=../src/video/yuv2rgb yuv_rgb_std.c
+dir VIDEO_DM=../src/video/dummy *.c
+dir VIDEO_X11=../src/video/x11 *.c
+
+dir TESTAUTOMATION=../test testautomation.c testautomation*.c
+
+lib SDL2 SRC ATOMIC AUDIO AUDIO_DISK AUDIO_DMEDIA AUDIO_DM UNIX CPUINFO DYNAPI EVENTS FILE FS HAPTIC HAPTIC_DM HIDAPI JOY JOY_DM LOADSO LOCALE LOCALE_UX MISC MISC_UX POWER RENDER RENDER_OGL RENDER_SW SENSOR SENSOR_DM STDLIB THREAD PTHREAD TIMER TIMER_IRIX VIDEO VIDEO_YUV VIDEO_DM VIDEO_X11
+
+dir TEST=../src/test *.c
+lib TEST
+
+exe testautomation TESTAUTOMATION
+   dep SDL2 TEST
+
+dir checkkeys=../test checkkeys.c
+dir checkkeysthreads=../test checkkeysthreads.c
+dir controllermap=../test controllermap.c
+dir loopwave=../test loopwave.c testutils.c
+dir loopwavequeue=../test loopwavequeue.c testutils.c
+dir testatomic=../test testatomic.c
+dir testaudiocapture=../test testaudiocapture.c
+dir testaudiohotplug=../test testaudiohotplug.c testutils.c
+dir testbounds=../test testbounds.c
+dir testcustomcursor=../test testcustomcursor.c
+dir testdisplayinfo=../test testdisplayinfo.c
+dir testdraw2=../test testdraw2.c
+dir testdrawchessboard=../test testdrawchessboard.c
+dir testdropfile=../test testdropfile.c
+dir testerror=../test testerror.c
+dir testevdev=../test testevdev.c
+dir testfile=../test testfile.c
+dir testfilesystem=../test testfilesystem.c
+dir testfilesystem_pre=../test testfilesystem_pre.c
+dir testgamecontroller=../test testgamecontroller.c
+dir testgeometry=../test testgeometry.c testutils.c
+dir testgesture=../test testgesture.c
+dir testgl2=../test testgl2.c
+dir testhaptic=../test testhaptic.c
+dir testhittesting=../test testhittesting.c
+dir testhotplug=../test testhotplug.c
+dir testiconv=../test testiconv.c testutils.c
+dir testime=../test testime.c testutils.c
+dir testintersections=../test testintersections.c
+dir testjoystick=../test testjoystick.c
+dir testkeys=../test testkeys.c
+dir testloadso=../test testloadso.c
+dir testlocale=../test testlocale.c
+dir testlock=../test testlock.c
+dir testmessage=../test testmessage.c
+dir testmouse=../test testmouse.c
+dir testmultiaudio=../test testmultiaudio.c testutils.c
+dir testnative=../test testnative.c testnativex11.c testutils.c
+  flags -DTEST_NATIVE_X11
+dir testoffscreen=../test testoffscreen.c
+dir testplatform=../test testplatform.c
+dir testpower=../test testpower.c
+dir testqsort=../test testqsort.c
+dir testrelative=../test testrelative.c
+dir testrendercopyex=../test testrendercopyex.c testutils.c
+dir testrendertarget=../test testrendertarget.c testutils.c
+dir testresample=../test testresample.c
+dir testrumble=../test testrumble.c
+dir testscale=../test testscale.c testutils.c
+dir testsem=../test testsem.c
+dir testsensor=../test testsensor.c
+dir testshape=../test testshape.c
+dir testsprite2=../test testsprite2.c testutils.c
+dir testspriteminimal=../test testspriteminimal.c testutils.c
+dir teststreaming=../test teststreaming.c testutils.c
+dir testsurround=../test testsurround.c
+dir testthread=../test testthread.c
+dir testtimer=../test testtimer.c
+dir testurl=../test testurl.c
+dir testver=../test testver.c
+dir testviewport=../test testviewport.c testutils.c
+dir testwm2=../test testwm2.c
+dir testyuv=../test testyuv.c testyuv_cvt.c
+dir torturethread=../test torturethread.c
+
+exe checkkeys
+    dep SDL2 TEST
+exe checkkeysthreads
+    dep SDL2 TEST
+exe controllermap
+    dep SDL2 TEST
+exe loopwave
+    dep SDL2 TEST
+exe loopwavequeue
+    dep SDL2 TEST
+exe testatomic
+    dep SDL2 TEST
+exe testaudiocapture
+    dep SDL2 TEST
+exe testaudiohotplug
+    dep SDL2 TEST
+exe testbounds
+    dep SDL2 TEST
+exe testcustomcursor
+    dep SDL2 TEST
+exe testdisplayinfo
+    dep SDL2 TEST
+exe testdraw2
+    dep SDL2 TEST
+exe testdrawchessboard
+    dep SDL2 TEST
+exe testdropfile
+    dep SDL2 TEST
+exe testerror
+    dep SDL2 TEST
+exe testevdev
+    dep SDL2 TEST
+exe testfile
+    dep SDL2 TEST
+exe testfilesystem
+    dep SDL2 TEST
+exe testfilesystem_pre
+    dep SDL2 TEST
+exe testgamecontroller
+    dep SDL2 TEST
+exe testgeometry
+    dep SDL2 TEST
+exe testgesture
+    dep SDL2 TEST
+exe testgl2
+    dep SDL2 TEST
+exe testhaptic
+    dep SDL2 TEST
+exe testhittesting
+    dep SDL2 TEST
+exe testhotplug
+    dep SDL2 TEST
+exe testiconv
+    dep SDL2 TEST
+exe testime
+    dep SDL2 TEST
+exe testintersections
+    dep SDL2 TEST
+exe testjoystick
+    dep SDL2 TEST
+exe testkeys
+    dep SDL2 TEST
+exe testloadso
+    dep SDL2 TEST
+exe testlocale
+    dep SDL2 TEST
+exe testlock
+    dep SDL2 TEST
+exe testmessage
+    dep SDL2 TEST
+exe testmouse
+    dep SDL2 TEST
+exe testmultiaudio
+    dep SDL2 TEST
+exe testnative
+    dep SDL2 TEST
+    libs -lX11
+exe testoffscreen
+    dep SDL2 TEST
+exe testplatform
+    dep SDL2 TEST
+exe testpower
+    dep SDL2 TEST
+exe testqsort
+    dep SDL2 TEST
+exe testrelative
+    dep SDL2 TEST
+exe testrendercopyex
+    dep SDL2 TEST
+exe testrendertarget
+    dep SDL2 TEST
+exe testresample
+    dep SDL2 TEST
+exe testrumble
+    dep SDL2 TEST
+exe testscale
+    dep SDL2 TEST
+exe testsem
+    dep SDL2 TEST
+exe testsensor
+    dep SDL2 TEST
+exe testshape
+    dep SDL2 TEST
+exe testsprite2
+    dep SDL2 TEST
+exe testspriteminimal
+    dep SDL2 TEST
+exe teststreaming
+    dep SDL2 TEST
+exe testsurround
+    dep SDL2 TEST
+exe testthread
+    dep SDL2 TEST
+exe testtimer
+    dep SDL2 TEST
+exe testurl
+    dep SDL2 TEST
+exe testver
+    dep SDL2 TEST
+exe testviewport
+    dep SDL2 TEST
+exe testwm2
+    dep SDL2 TEST
+exe testyuv
+    dep SDL2 TEST
+exe torturethread
+    dep SDL2 TEST
