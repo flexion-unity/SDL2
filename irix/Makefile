@@ -58,8 +58,10 @@ all: ../include/SDL_revision.h $(ALL_TARGETS) libSDL2.so
 
 # Shared library built from the same objects as libSDL2.a
 # (MIPSpro n32 code is PIC by default)
+# SONAME can be overridden, e.g. SONAME=libSDL2-2.0.so.0 for packaging
+SONAME   = libSDL2.so
 libSDL2.so: $(TGT_SDL2_OBJS)
-	$(LD) -shared $(LDFLAGS) -soname libSDL2.so -no_unresolved -o libSDL2.so $(TGT_SDL2_OBJS) $(LIBS)
+	$(LD) -shared $(LDFLAGS) -soname $(SONAME) -no_unresolved -o libSDL2.so $(TGT_SDL2_OBJS) $(LIBS)
 
 clean:
 	rm -f $(ALL_TARGETS) $(ALL_CLEAN_OBJS) libSDL2.so
