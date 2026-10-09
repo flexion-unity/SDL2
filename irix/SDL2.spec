@@ -20,7 +20,7 @@
 
 Name:           SDL2
 Version:        2.33.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Cross-platform multimedia library
 
 License:        zlib and MIT
