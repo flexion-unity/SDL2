@@ -24,8 +24,10 @@ ABI_FLAGS = -mips3 -n32
     OPT_FLAGS = -O2 -DNDEBUG
 #endif
 
-CFLAGS   = $(ABI_FLAGS) $(OPT_FLAGS) -c99 -woff 1185,1209,3968,3970
-CXXFLAGS = $(ABI_FLAGS) $(OPT_FLAGS)
+# -G0: no gp-relative small data; the static libSDL2.a otherwise overflows
+# the 64KB small-data section when linked into applications
+CFLAGS   = $(ABI_FLAGS) $(OPT_FLAGS) -G0 -c99 -woff 1185,1209,3968,3970
+CXXFLAGS = $(ABI_FLAGS) $(OPT_FLAGS) -G0
 LDFLAGS  = $(ABI_FLAGS)
 LIBS     = -lm -laudio -lpthread
 
